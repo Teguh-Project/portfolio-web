@@ -246,3 +246,26 @@ body {
         display: none; /* Bisa diimprove dengan hamburger menu nanti */
     }
 }
+/* State awal elemen sebelum muncul */
+.reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* State setelah elemen masuk ke viewport */
+.reveal-hidden.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Khusus untuk teks reveal agar lebih dramatis */
+.reveal-text.is-visible {
+    transition-delay: 0.2s;
+}
+
+/* Memastikan transisi navbar smooth */
+.navbar {
+    transition: transform 0.4s ease;
+}
