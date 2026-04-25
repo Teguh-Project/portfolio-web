@@ -58,11 +58,11 @@ function init3DHero() {
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Batasi pixel ratio agar tidak berat
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 0, 5); // Mundurkan kamera sedikit agar objek terlihat penuh
+    camera.position.set(0, 0, 5);
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
     scene.add(ambientLight);
@@ -71,20 +71,20 @@ function init3DHero() {
     directionalLight.position.set(2, 2, 5);
     scene.add(directionalLight);
 
-    const loader = new THREE.GLTFLoader();
+    // PERBAIKAN DI SINI: Gunakan THREE.GLTFLoader()
+    const loader = new THREE.GLTFLoader(); 
     let model3d;
 
-    // Pastikan Path ini benar sesuai struktur folder di GitHub
     loader.load(
-        'assets/images/abstract_aquarium.glb', 
+        './assets/images/abstract_aquarium.glb', // Tambahkan ./ di depan
         (gltf) => {
             model3d = gltf.scene;
             model3d.scale.set(1.5, 1.5, 1.5);
             scene.add(model3d);
-            console.log("Model 3D Loaded!");
+            console.log("Model 3D Muncul!");
         },
         undefined,
-        (error) => { console.error('Error load model:', error); }
+        (error) => { console.error('Error detail:', error); }
     );
 
     let mouseX = 0, mouseY = 0;
