@@ -72,19 +72,24 @@ function init3DHero() {
     scene.add(directionalLight);
 
     // PERBAIKAN DI SINI: Gunakan THREE.GLTFLoader()
+    // Pastikan library sudah terload sempurna
+    if (typeof THREE.GLTFLoader === 'undefined') {
+        console.error("GLTFLoader belum terisi! Mencoba inisialisasi ulang...");
+    }
+
     const loader = new THREE.GLTFLoader(); 
     let model3d;
 
     loader.load(
-        './assets/images/abstract_aquarium.glb', // Tambahkan ./ di depan
+        './assets/images/abstract_aquarium.glb', 
         (gltf) => {
             model3d = gltf.scene;
             model3d.scale.set(1.5, 1.5, 1.5);
             scene.add(model3d);
-            console.log("Model 3D Muncul!");
+            console.log("3D Berhasil!");
         },
         undefined,
-        (error) => { console.error('Error detail:', error); }
+        (error) => { console.error('Error saat load model:', error); }
     );
 
     let mouseX = 0, mouseY = 0;
