@@ -60,3 +60,107 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
 });
+// --- KONFIGURASI 3D HERO (GLTF) ---
+
+function init3DHero() {
+    const container = document.getElementById('canvas-3d-container');
+    if (!container) return; // Jika elemen tidak ada, jangan jalankan
+
+    // 1. Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    
+    // Alpha: true membuat background canvas transparan (agar gambar JPG terlihat)
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); 
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio); // Agar tajam di layar Retina
+    container.appendChild(renderer.domElement);
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    // Atur posisi kamera agar objek terlihat
+    camera.position.z = 4; 
+    camera.position.y = 1;
+
+    // 2. Pencahayaan (Lighting) - Sangat penting untuk GLTF
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Cahaya merata
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 2); // Cahaya fokus
+    directionalLight.position.set(1, 2, 3);
+    scene.add(directionalLight);
+
+    // 3. Load Model GLTF
+    const loader = new THREE.GLTFLoader();
+    let model3d;
+
+    loader.load(
+        // DI SINI KAMU MEMANGGIL FILE GLTF/GLB-MU
+        'assets/images/abstract_aquarium.glb', 
+        
+        function (gltf) {
+            model3d = gltf.scene;
+            
+            // Atur skala dan posisi agar pas di tengah layar
+            model3d.scale.set(1.5, 1.5, 1.5); 
+            model3d.position.y = 0;
+            
+            scene.add(model3d);
+            console.log("Model 3D berhasil dimuat");
+        },
+        // Fungsi saat loading proses (opsional)
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        // Fungsi jika terjadi error
+        function (error) {
+            console.error('Terjadi kesalahan saat memuat model 3D', error);
+        }
+    );
+
+    // 4. Animasi & Interaksi Mouse
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    document.addEventListener('mousemove', (event) => {
+        // Tangkap posisi mouse relatif terhadap tengah layar
+        mouseX = (event.clientX - windowHalfX);
+        mouseY = (event.clientY - windowHalfY);
+    });
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Membuat gerakan mengikuti mouse menjadi halus (smoothing)
+        targetX = mouseX * 0.001;
+        targetY = mouseY * 0.001;
+
+        if (model3d) {
+            // Animasi rotasi otomatis pelan
+            model3d.rotation.y += 0.002;
+
+            // Rotasi tambahan berdasarkan gerakan mouse (interaktif)
+            model3d.rotation.y += 0.5 * (targetX - model3d.rotation.y);
+            model3d.rotation.x += 0.5 * (targetY - model3d.rotation.x);
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // 5. Menangani Perubahan Ukuran Layar (Responsive)
+    window.addEventListener('resize', onWindowResize, false);
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+}
+
+// Jalankan fungsi setelah halaman dimuat
+document.addEventListener('DOMContentLoaded', init3DHero);
