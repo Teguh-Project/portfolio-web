@@ -1,15 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. REAL-TIME CLOCK (Malang, ID) ---
+    // --- 1. REAL-TIME CLOCK ---
     const updateTime = () => {
         const timeElement = document.getElementById('local-time');
         if (!timeElement) return;
-        
         const options = { 
             timeZone: 'Asia/Jakarta', 
-            hour: '2-digit', 
-            minute: '2-digit', 
-            second: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
             hour12: false 
         };
         const now = new Intl.DateTimeFormat('en-GB', options).format(new Date());
@@ -18,11 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateTime, 1000);
     updateTime();
 
-    // --- 2. CUSTOM CURSOR LOGIC ---
-    const cursor = document.querySelector('.custom-cursor');
-    // Jika elemen tidak ada di HTML, kita buat otomatis agar tidak error
-    const cursorEl = cursor || document.createElement('div');
-    if (!cursor) {
+    // --- 2. CUSTOM CURSOR ---
+    const cursorEl = document.querySelector('.custom-cursor') || document.createElement('div');
+    if (!document.querySelector('.custom-cursor')) {
         cursorEl.className = 'custom-cursor';
         document.body.appendChild(cursorEl);
     }
@@ -32,9 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cursorEl.style.top = `${e.clientY}px`;
     });
 
-    // Menambahkan efek hover ke semua elemen interaktif secara dinamis
     const applyCursorHover = () => {
-        const targets = document.querySelectorAll('a, button, .work-card, .tool-item, .nav-item');
+        const targets = document.querySelectorAll('a, button, .work-card, .contact-item, .nav-item');
         targets.forEach(el => {
             el.addEventListener('mouseenter', () => cursorEl.classList.add('cursor-active'));
             el.addEventListener('mouseleave', () => cursorEl.classList.remove('cursor-active'));
@@ -42,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     applyCursorHover();
 
-    // --- 3. SMART NAVBAR & ACTIVE LINK INDICATOR ---
+    // --- 3. SMART NAVBAR ---
     let lastScroll = 0;
     const nav = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-item');
@@ -50,90 +44,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         const current = window.pageYOffset;
-        
-        // Hide/Show Nav
         if (current > lastScroll && current > 150) {
             nav.style.transform = 'translateY(-100%)';
         } else {
             nav.style.transform = 'translateY(0)';
         }
         
-        // Background Opacity
-        if (current > 50) {
-            nav.style.background = document.documentElement.getAttribute('data-theme') === 'light' 
-                ? 'rgba(245, 245, 245, 0.95)' 
-                : 'rgba(5, 5, 5, 0.95)';
-        }
-
-        // Active Link Indicator
+        // Active Link
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
-            const sectionTop = section.offsetTop - 100;
+            const sectionTop = section.offsetTop - 150;
             const sectionId = section.getAttribute('id');
-
             if (current > sectionTop && current <= sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
+                    if (link.getAttribute('href') === `#${sectionId}`) link.classList.add('active');
                 });
             }
         });
-
         lastScroll = current;
     });
 
-    // --- 4. THEME TOGGLE (Dark/Light) ---
+    // --- 4. THEME TOGGLE ---
     const themeToggle = document.getElementById('themeToggle');
     const modeText = themeToggle?.querySelector('.mode-text');
-
     const setTheme = (theme) => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         if (modeText) modeText.textContent = theme === 'light' ? 'DARK' : 'LIGHT';
     };
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            setTheme(current === 'light' ? 'dark' : 'light');
-        });
-    }
-
-    // --- 5. BACK TO TOP ---
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 600) {
-            backToTopBtn?.classList.add('show');
-        } else {
-            backToTopBtn?.classList.remove('show');
-        }
+    setTheme(localStorage.getItem('theme') || 'dark');
+    themeToggle?.addEventListener('click', () => {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        setTheme(isLight ? 'dark' : 'light');
     });
 
-    backToTopBtn?.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // --- 6. SMOOTH SCROLL FOR ANCHORS ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // --- 7. SCROLL REVEAL ---
+    // --- 5. SCROLL REVEAL (THE FIX) ---
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -142,31 +88,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal-text, .work-card, .tool-item, .section-title').forEach(el => {
-        el.classList.add('reveal-hidden');
+    // PENTING: Cari SEMUA elemen yang punya class reveal-hidden atau reveal-text
+    document.querySelectorAll('.reveal-hidden, .reveal-text, .work-card, .contact-item, .footer-cta').forEach(el => {
         revealObserver.observe(el);
     });
 
-    // --- 8. 3D INITIALIZATION ---
+    // --- 6. 3D INITIALIZATION ---
     if (typeof THREE !== 'undefined') {
-        const init3D = () => {
-            const container = document.getElementById('canvas-3d-container');
-            if (!container) return;
-
+        const container = document.getElementById('canvas-3d-container');
+        if (container) {
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             container.appendChild(renderer.domElement);
-
             camera.position.z = 7;
             scene.add(new THREE.AmbientLight(0xffffff, 2));
 
             const loader = new THREE.GLTFLoader();
             let model;
-
             loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
                 model = gltf.scene;
                 model.scale.set(0.35, 0.35, 0.35);
@@ -189,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderer.render(scene, camera);
             };
             animate();
-        };
-        init3D();
+        }
     }
 });
