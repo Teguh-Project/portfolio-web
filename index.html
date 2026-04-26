@@ -13,13 +13,13 @@
     
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
 </head>
-<body data-theme="dark"> <div class="custom-cursor"></div>
+<body data-theme="dark">
+    <div class="custom-cursor"></div>
 
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
                 <a href="#" class="logo">TEGUH P.</a>
-                <span class="location">MALANG, ID</span>
             </div>
             <div class="nav-links">
                 <a href="#about" class="nav-item">ABOUT</a>
@@ -30,9 +30,7 @@
         </div>
     </nav>
 
-    <button id="backToTop" class="back-to-top">
-        <span>UP ↑</span>
-    </button>
+    <button id="backToTop" class="back-to-top">UP ↑</button>
 
     <div class="theme-switch-wrapper">
         <button id="themeToggle" class="theme-toggle">
@@ -42,7 +40,8 @@
 
     <main>
         <section id="home" class="hero">
-            <div id="canvas-3d-container"></div> <div class="hero-grid">
+            <div id="canvas-3d-container"></div>
+            <div class="hero-grid">
                 <div class="hero-left">
                     <span class="badge reveal-hidden">AVAILABLE FOR FREELANCE — 2026</span>
                     <h1 class="reveal-hidden">VISUAL<br>DESIGNER</h1>
@@ -50,8 +49,8 @@
                 <div class="hero-right">
                     <div class="hero-description reveal-hidden">
                         <p>Independent designer specializing in Branding, Content Creation, and Digital Strategy. Transitioning Fine Arts into functional digital experiences.</p>
-                        <div class="hero-cta-group">
-                            <a href="#work" class="btn-main">SCROLL TO EXPLORE</a>
+                        <div class="hero-cta-group" style="margin-top: 2rem;">
+                            <a href="#work" class="nav-item" style="border: 1px solid var(--border-color); padding: 10px 20px;">EXPLORE PROJECTS</a>
                         </div>
                     </div>
                 </div>
@@ -59,26 +58,26 @@
         </section>
 
         <section id="about" class="section">
-            <div class="about-grid">
+            <div class="about-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
                 <div class="about-left">
                     <div class="section-title">
                         <span class="index reveal-hidden">01 — PROFIL</span>
-                        <h2 class="reveal-hidden">MENJEMBATANI<br>SENI & FUNGSI</h2>
+                        <h2 class="reveal-hidden" style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1;">MENJEMBATANI<br>SENI & FUNGSI</h2>
                     </div>
                 </div>
                 <div class="about-right">
                     <div class="about-desc reveal-hidden">
-                        <p>Lulusan Seni Rupa Murni yang bertransformasi ke dunia digital. Saya membantu brand membangun identitas visual yang strategis.</p>
-                        <p class="sub-desc" style="color: var(--text-dim); margin-top: 1rem; font-size: 0.9rem;">Berbasis di Malang, bekerja secara global. Fokus pada estetika minimalis dan fungsionalitas digital.</p>
+                        <p style="font-size: 1.2rem;">Lulusan Seni Rupa Murni yang bertransformasi ke dunia digital. Saya membantu brand membangun identitas visual yang strategis.</p>
+                        <p class="sub-desc" style="color: var(--text-dim); margin-top: 1.5rem; font-size: 0.9rem;">Berbasis di Malang, bekerja secara global. Fokus pada estetika minimalis dan fungsionalitas digital.</p>
                     </div>
-                    <div class="about-stats reveal-hidden">
+                    <div class="about-stats reveal-hidden" style="display: flex; gap: 3rem; margin-top: 3rem;">
                         <div class="stat-item">
-                            <span class="stat-num" style="font-size: 2rem; font-weight: 800; display: block;">02</span>
-                            <span class="stat-label" style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim);">TAHUN<br>PENGALAMAN</span>
+                            <span class="stat-num" style="font-size: 2.5rem; font-weight: 800; display: block;">02</span>
+                            <span class="stat-label" style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Tahun<br>Pengalaman</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num" style="font-size: 2rem; font-weight: 800; display: block;">50+</span>
-                            <span class="stat-label" style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim);">PROYEK<br>SELESAI</span>
+                            <span class="stat-num" style="font-size: 2.5rem; font-weight: 800; display: block;">50+</span>
+                            <span class="stat-label" style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase;">Proyek<br>Selesai</span>
                         </div>
                     </div>
                 </div>
@@ -90,19 +89,19 @@
                 <span class="index reveal-hidden">02 — SKILLS & TOOLS</span>
             </div>
             <div class="tools-grid reveal-hidden" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;">
-                <span class="tool-item badge">ADOBE SUITE</span>
-                <span class="tool-item badge">CAPCUT</span>
-                <span class="tool-item badge">CANVA PRO</span>
-                <span class="tool-item badge">FIGMA / UIUX</span>
-                <span class="tool-item badge">STRATEGI KONTEN</span>
-                <span class="tool-item badge">FINE ARTS</span>
+                <span class="badge">ADOBE SUITE</span>
+                <span class="badge">CAPCUT</span>
+                <span class="badge">CANVA PRO</span>
+                <span class="badge">FIGMA / UIUX</span>
+                <span class="badge">STRATEGI KONTEN</span>
+                <span class="badge">FINE ARTS</span>
             </div>
         </section>
 
         <section id="work" class="section">
             <div class="section-title">
                 <span class="index reveal-hidden">03 — KARYA</span>
-                <h2 class="reveal-hidden">PROJECTS<br>TERPILIH</h2>
+                <h2 class="reveal-hidden" style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1;">PROJECTS<br>TERPILIH</h2>
             </div>
 
             <div class="work-grid" style="margin-top: 4rem;">
@@ -111,8 +110,8 @@
                         <img src="./assets/images/project1.webp" alt="Branding Identity">
                     </div>
                     <div class="work-info" style="margin-top: 1.5rem;">
-                        <h3 style="font-size: 1rem; text-transform: uppercase;">BRANDING IDENTITY</h3>
-                        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);">VISUAL STORYTELLING — 2025</p>
+                        <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">BRANDING IDENTITY</h3>
+                        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-top: 0.5rem;">VISUAL STORYTELLING — 2025</p>
                     </div>
                 </div>
                 <div class="work-card reveal-hidden">
@@ -120,8 +119,8 @@
                         <img src="./assets/images/project2.webp" alt="Social Media Rebrand">
                     </div>
                     <div class="work-info" style="margin-top: 1.5rem;">
-                        <h3 style="font-size: 1rem; text-transform: uppercase;">SOCIAL MEDIA REBRAND</h3>
-                        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);">CONTENT SPECIALIST — 2024</p>
+                        <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">SOCIAL MEDIA REBRAND</h3>
+                        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-top: 0.5rem;">CONTENT SPECIALIST — 2024</p>
                     </div>
                 </div>
             </div>
@@ -130,19 +129,19 @@
         <section id="experience" class="section">
             <div class="section-title">
                 <span class="index reveal-hidden">04 — KARIR</span>
-                <h2 class="reveal-hidden">JEJAK PROFESIONAL</h2>
+                <h2 class="reveal-hidden" style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1;">JEJAK PROFESIONAL</h2>
             </div>
             <div class="experience-list" style="margin-top: 4rem;">
-                <div class="exp-item contact-item reveal-hidden" style="cursor: default;">
+                <div class="contact-item reveal-hidden" style="cursor: default;">
                     <div class="contact-label">2024 — SEKARANG</div>
                     <div class="contact-main">
-                        <h3 style="font-size: 1.5rem;">GRAPHIC DESIGNER & CONTENT SPECIALIST</h3>
+                        <h3 style="font-size: clamp(1.2rem, 3vw, 2rem);">GRAPHIC DESIGNER & CONTENT SPECIALIST</h3>
                     </div>
                 </div>
-                <div class="exp-item contact-item reveal-hidden" style="cursor: default;">
+                <div class="contact-item reveal-hidden" style="cursor: default;">
                     <div class="contact-label">2022 — 2024</div>
                     <div class="contact-main">
-                        <h3 style="font-size: 1.5rem;">JUNIOR CREATIVE DESIGNER</h3>
+                        <h3 style="font-size: clamp(1.2rem, 3vw, 2rem);">JUNIOR CREATIVE DESIGNER</h3>
                     </div>
                 </div>
             </div>
@@ -151,7 +150,7 @@
         <section id="contact" class="section">
             <div class="section-title">
                 <span class="index reveal-hidden">05 — HUBUNGI</span>
-                <h2 class="reveal-hidden">LET'S CONNECT</h2>
+                <h2 class="reveal-hidden" style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1;">LET'S CONNECT</h2>
             </div>
 
             <div class="contact-list">
@@ -177,9 +176,8 @@
         <div class="footer-container">
             <div class="footer-cta reveal-hidden">
                 <h2 class="massive-text">MARI BUAT SESUATU<br>YANG BERDAMPAK.</h2>
-                <div class="footer-cta-action">
+                <div class="footer-cta-action" style="margin-top: 2rem;">
                     <a href="mailto:halo@teguh.com" class="footer-email-link">
-                        <span>GET IN TOUCH</span>
                         <span class="email-display">HALO@TEGUH.COM</span>
                     </a>
                 </div>
@@ -188,7 +186,7 @@
             <div class="footer-info-grid">
                 <div class="info-col reveal-hidden">
                     <span class="info-label">SOCIALS</span>
-                    <div class="footer-socials" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div class="footer-socials" style="display: flex; flex-direction: column; gap: 0.8rem;">
                         <a href="#" class="nav-item">INSTAGRAM</a>
                         <a href="#" class="nav-item">LINKEDIN</a>
                         <a href="#" class="nav-item">DRIBBBLE</a>
@@ -198,23 +196,19 @@
                 <div class="info-col reveal-hidden">
                     <span class="info-label">LOCATION & TIME</span>
                     <div class="footer-time">
-                        <span id="local-time" style="font-family: var(--font-mono); font-size: 0.8rem;">00:00:00 MALANG, ID</span>
+                        <span id="local-time" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-main);">00:00:00 MALANG, ID</span>
                     </div>
                 </div>
 
                 <div class="info-col reveal-hidden">
                     <span class="info-label">SAY HELLO</span>
-                    <p class="footer-address">AVAILABLE FOR FREELANCE WORK WORLDWIDE</p>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); font-family: var(--font-mono);">AVAILABLE FOR FREELANCE WORK WORLDWIDE</p>
                 </div>
             </div>
 
-            <div class="footer-credits">
-                <div class="credits-left">
-                    <span class="logo">TEGUH PRATOMO</span>
-                </div>
-                <div class="credits-right">
-                    <span>© 2026 DIGITAL PORTFOLIO</span>
-                </div>
+            <div class="footer-credits" style="display: flex; justify-content: space-between; margin-top: 6rem; padding-top: 2rem; border-top: 1px solid var(--border-color); font-size: 0.65rem; font-family: var(--font-mono); color: var(--text-dim);">
+                <span>TEGUH PRATOMO</span>
+                <span>© 2026 DIGITAL PORTFOLIO</span>
             </div>
         </div>
     </footer>
