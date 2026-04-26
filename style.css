@@ -1,17 +1,15 @@
 /* ==========================================================================
-   1. CORE SETTINGS (REDSTONE VIBE)
+   1. CORE & VARIABLES (REDSTONE VIBE)
    ========================================================================== */
 :root {
     --bg-color: #0a0a0a;
     --text-main: #ffffff;
     --text-dim: #888888;
-    --accent: #ff3e3e; /* Warna merah khas Redstone */
+    --accent: #ff3e3e; 
     --border-color: rgba(255, 255, 255, 0.08);
     --padding-x: 6%;
-    --font-sans: 'Inter', sans-serif; /* Redstone pakai font yang sangat bersih */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --z-canvas: -1;
-    --z-ui: 1000;
 }
 
 [data-theme="light"] {
@@ -21,7 +19,13 @@
     --border-color: rgba(0, 0, 0, 0.08);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* GLOBAL RESET - MEMATIKAN WARNA BIRU DEFAULT */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -29,182 +33,119 @@ body {
     color: var(--text-main);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    line-height: 1.2; /* Redstone identik dengan tight line-height */
+    line-height: 1.2;
     cursor: none;
     transition: background-color 0.4s ease;
 }
 
-/* FIX CANVAS BACKGROUND */
+/* FIX SEMUA LINK (BIRU) DISINI */
+a {
+    color: inherit; /* Memaksa link pakai warna teks kita, bukan biru browser */
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+/* 3D BACKGROUND */
 #canvas-3d-container {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: var(--z-canvas);
+    z-index: -1;
     pointer-events: none;
     opacity: 0.4;
 }
 
 /* ==========================================================================
-   2. NAVBAR (MINIMALIST GRID)
+   2. LAYOUT & SECTIONS (ANTI-TUMPANG TINDIH)
    ========================================================================== */
+.section {
+    position: relative;
+    padding: 10rem var(--padding-x);
+    background-color: var(--bg-color); /* Memberi background agar tidak tembus */
+    border-bottom: 1px solid var(--border-color);
+    z-index: 5;
+}
+
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0; width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 2rem var(--padding-x);
     z-index: 100;
-    background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+    backdrop-filter: blur(10px);
 }
 
-.logo { 
-    font-weight: 900; 
-    font-size: 1.2rem; 
-    text-decoration: none; 
-    color: var(--text-main);
-    letter-spacing: -0.02em;
-}
-
-.nav-links { display: flex; gap: 3rem; }
 .nav-item { 
-    text-decoration: none; 
-    color: var(--text-dim); 
     font-family: var(--font-mono); 
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    transition: 0.3s;
+    font-size: 0.7rem; 
+    text-transform: uppercase; 
+    color: var(--text-dim);
 }
-.nav-item:hover { color: var(--text-main); }
 
-/* ==========================================================================
-   3. HERO SECTION (REDSTONE STYLE)
-   ========================================================================== */
+/* Hero Section */
 .hero {
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: flex; flex-direction: column; justify-content: center;
     padding: 0 var(--padding-x);
-    border-bottom: 1px solid var(--border-color);
+    background: transparent; /* Khusus hero agar 3D terlihat */
 }
 
 .hero-main-title h1 {
     font-size: clamp(3rem, 12vw, 10rem);
     font-weight: 900;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
+    line-height: 0.85;
     text-transform: uppercase;
+    letter-spacing: -0.05em;
 }
 
 .hero-bottom-grid {
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Split rata ala Redstone */
+    grid-template-columns: 1fr 1fr;
     border-top: 1px solid var(--border-color);
     padding-top: 2rem;
 }
 
-.hero-desc-box p {
-    font-size: 1.1rem;
-    max-width: 400px;
-    color: var(--text-dim);
-    line-height: 1.5;
-}
-
-.hero-cta-group {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-.hero-cta {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-main);
-    text-decoration: none;
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--accent); /* Aksen Merah */
-    transition: 0.3s;
-}
-
-.hero-cta:hover { letter-spacing: 2px; }
-
 /* ==========================================================================
-   4. FLOATING UI (FIXED & DISCIPLINED)
+   3. FLOATING UI & CURSOR
    ========================================================================== */
+.custom-cursor {
+    width: 8px; height: 8px; background: var(--accent);
+    position: fixed; border-radius: 50%; pointer-events: none;
+    z-index: 10000; transition: transform 0.15s ease;
+}
+
 .theme-switch-wrapper {
-    position: fixed;
-    bottom: 2.5rem;
-    left: var(--padding-x);
-    z-index: var(--z-ui);
+    position: fixed; bottom: 2.5rem; left: var(--padding-x); z-index: 1000;
 }
-
-.theme-toggle {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-dim);
-    padding: 10px 20px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    cursor: none;
-    transition: 0.3s;
-}
-
-.theme-toggle:hover { border-color: var(--text-main); color: var(--text-main); }
 
 .back-to-top {
-    position: fixed;
-    bottom: 2.5rem;
-    right: var(--padding-x);
-    z-index: var(--z-ui);
-    background: var(--text-main);
-    color: var(--bg-color);
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: fixed; bottom: 2.5rem; right: var(--padding-x); z-index: 1000;
+    background: var(--text-main); color: var(--bg-color);
+    width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden; transition: 0.4s;
+    font-family: var(--font-mono); font-size: 0.7rem;
 }
 
 .back-to-top.show { opacity: 1; visibility: visible; }
 
-/* ==========================================================================
-   5. UTILITIES (CURSOR & REVEAL)
-   ========================================================================== */
-.custom-cursor {
-    width: 8px; height: 8px;
-    background: var(--accent); /* Warna merah roket */
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10000;
-    transition: transform 0.2s;
-}
-
+/* Scroll Reveal */
 .reveal-hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s ease-out;
+    opacity: 0; transform: translateY(20px);
+    transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.is-visible { opacity: 1; transform: translateY(0); }
 
-.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ==========================================================================
-   6. RESPONSIVE
-   ========================================================================== */
+/* Mobile */
 @media (max-width: 768px) {
-    .hero-bottom-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-cta-group { justify-content: flex-start; }
+    .hero-bottom-grid { grid-template-columns: 1fr; }
+    .section { padding: 6rem var(--padding-x); }
     .custom-cursor { display: none; }
     body { cursor: auto; }
 }
