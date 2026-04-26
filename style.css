@@ -1,151 +1,312 @@
 /* ==========================================================================
-   1. CORE & VARIABLES (REDSTONE VIBE)
+   1. VARIABLES & FOUNDATION (2026 TRENDS)
    ========================================================================== */
 :root {
-    --bg-color: #0a0a0a;
+    --bg-color: #080808;
+    --bg-secondary: #0e0e0e;
     --text-main: #ffffff;
-    --text-dim: #888888;
-    --accent: #ff3e3e; 
-    --border-color: rgba(255, 255, 255, 0.08);
-    --padding-x: 6%;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --text-dim: #909090;
+    --accent: #ff3e3e; /* Redstone Red */
+    --border-color: rgba(255, 255, 255, 0.05);
+    --padding-x: 6vw;
+    --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1); /* Ultra Smooth Transition */
 }
 
-[data-theme="light"] {
-    --bg-color: #ffffff;
-    --text-main: #0a0a0a;
-    --text-dim: #666666;
-    --border-color: rgba(0, 0, 0, 0.08);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* GLOBAL RESET - MEMATIKAN WARNA BIRU DEFAULT */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
+html {
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
 }
-
-html { scroll-behavior: smooth; }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    line-height: 1.2;
-    cursor: none;
-    transition: background-color 0.4s ease;
+    line-height: 1.5;
 }
 
-/* FIX SEMUA LINK (BIRU) DISINI */
-a {
-    color: inherit; /* Memaksa link pakai warna teks kita, bukan biru browser */
-    text-decoration: none;
-    transition: 0.3s;
-    display: inline-block;
-}
-
-a:hover {
-    color: var(--accent);
-}
-
-/* 3D BACKGROUND */
-#canvas-3d-container {
+/* Noise Overlay (Efek Tekstur Futuristik) */
+.noise-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: -1;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.03;
+    z-index: 9999;
     pointer-events: none;
-    opacity: 0.4;
+}
+
+/* UI UTILITIES */
+.label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--padding-x);
 }
 
 /* ==========================================================================
-   2. LAYOUT & SECTIONS (ANTI-TUMPANG TINDIH)
+   2. NAVIGATION (MINIMALIST FLOATING)
    ========================================================================== */
-.section {
-    position: relative;
-    padding: 10rem var(--padding-x);
-    background-color: var(--bg-color); /* Memberi background agar tidak tembus */
-    border-bottom: 1px solid var(--border-color);
-    z-index: 5;
-}
-
-/* Navbar */
 .navbar {
     position: fixed;
     top: 0; width: 100%;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 2rem var(--padding-x);
-    z-index: 100;
-    backdrop-filter: blur(10px);
+    z-index: 1000;
+    mix-blend-mode: difference; /* Teks akan berubah warna sesuai background */
 }
 
-.nav-item { 
-    font-family: var(--font-mono); 
-    font-size: 0.7rem; 
-    text-transform: uppercase; 
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem var(--padding-x);
+}
+
+.logo {
+    font-family: var(--font-mono);
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    transition: color 0.3s var(--ease);
+}
+
+.nav-link:hover { color: var(--accent); }
+
+/* ==========================================================================
+   3. HERO SECTION (EDITORIAL STYLE)
+   ========================================================================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 100px;
+}
+
+#canvas-3d-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+.hero-wrapper {
+    width: 100%;
+    padding: 0 var(--padding-x);
+}
+
+.hero-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.hero-title-area {
+    margin: 2rem 0;
+}
+
+.main-title {
+    font-size: clamp(4rem, 15vw, 12rem);
+    line-height: 0.85;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+}
+
+.main-title.outline {
+    -webkit-text-stroke: 1px var(--text-main);
+    color: transparent;
+}
+
+.hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: flex-end;
+    margin-top: 4rem;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    max-width: 450px;
     color: var(--text-dim);
 }
 
-/* Hero Section */
-.hero {
-    height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 0 var(--padding-x);
-    background: transparent; /* Khusus hero agar 3D terlihat */
-}
-
-.hero-main-title h1 {
-    font-size: clamp(3rem, 12vw, 10rem);
-    font-weight: 900;
-    line-height: 0.85;
-    text-transform: uppercase;
-    letter-spacing: -0.05em;
-}
-
-.hero-bottom-grid {
-    margin-top: 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--border-color);
-    padding-top: 2rem;
+.hero-cta-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-end;
 }
 
 /* ==========================================================================
-   3. FLOATING UI & CURSOR
+   4. BENTO WORK GRID
    ========================================================================== */
-.custom-cursor {
-    width: 8px; height: 8px; background: var(--accent);
-    position: fixed; border-radius: 50%; pointer-events: none;
-    z-index: 10000; transition: transform 0.15s ease;
+.section {
+    padding: 10rem 0;
+    border-top: 1px solid var(--border-color);
 }
 
-.theme-switch-wrapper {
-    position: fixed; bottom: 2.5rem; left: var(--padding-x); z-index: 1000;
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 5rem;
 }
 
-.back-to-top {
-    position: fixed; bottom: 2.5rem; right: var(--padding-x); z-index: 1000;
-    background: var(--text-main); color: var(--bg-color);
-    width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;
-    opacity: 0; visibility: hidden; transition: 0.4s;
-    font-family: var(--font-mono); font-size: 0.7rem;
+.section-index { font-family: var(--font-mono); color: var(--accent); }
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-transform: uppercase;
+    font-weight: 800;
 }
 
-.back-to-top.show { opacity: 1; visibility: visible; }
-
-/* Scroll Reveal */
-.reveal-hidden {
-    opacity: 0; transform: translateY(20px);
-    transition: 1s cubic-bezier(0.16, 1, 0.3, 1);
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
 }
-.is-visible { opacity: 1; transform: translateY(0); }
 
-/* Mobile */
+.project-card {
+    background: var(--bg-secondary);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.6s var(--ease);
+}
+
+.project-card.featured {
+    grid-column: span 2;
+}
+
+.work-img-wrapper {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    transition: 0.6s var(--ease);
+}
+
+.project-card:hover img {
+    filter: grayscale(0);
+    transform: scale(1.05);
+}
+
+.project-meta {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ==========================================================================
+   5. SERVICES & EXPERTISE (THE MODERN LIST)
+   ========================================================================== */
+.service-item {
+    border-top: 1px solid var(--border-color);
+    padding: 3rem 0;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    align-items: center;
+    transition: 0.4s var(--ease);
+}
+
+.service-item:hover {
+    padding-left: 1.5rem;
+    color: var(--accent);
+}
+
+.service-num { font-family: var(--font-mono); font-size: 0.8rem; }
+.service-item h3 { font-size: 2rem; text-transform: uppercase; }
+.service-item p { color: var(--text-dim); }
+
+/* ==========================================================================
+   6. CONTACT & FOOTER (MASSIVE TYPE)
+   ========================================================================== */
+.footer-cta {
+    background-color: var(--accent);
+    color: var(--bg-color);
+    text-align: center;
+}
+
+.massive-type {
+    font-size: clamp(3rem, 10vw, 8rem);
+    line-height: 0.9;
+    font-weight: 800;
+    margin-bottom: 3rem;
+}
+
+.email-link {
+    font-size: 2rem;
+    color: var(--bg-color);
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.footer {
+    padding: 5rem 0 2.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   7. MOBILE RESPONSIVE
+   ========================================================================== */
+@media (max-width: 992px) {
+    .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-cta-group { justify-content: flex-start; }
+    .service-item { grid-template-columns: 1fr; gap: 1rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .nav-menu { display: none; } /* Simpelkan navbar mobile */
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
 @media (max-width: 768px) {
-    .hero-bottom-grid { grid-template-columns: 1fr; }
-    .section { padding: 6rem var(--padding-x); }
-    .custom-cursor { display: none; }
-    body { cursor: auto; }
+    .grid-2 { grid-template-columns: 1fr; }
 }
