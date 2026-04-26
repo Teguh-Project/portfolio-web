@@ -92,21 +92,6 @@ a:hover {
     mix-blend-mode: difference;
 }
 
-/* Floating Actions (Toggle & Back to Top) */
-.theme-toggle, .back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    padding: 0.8rem 1.2rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    background: var(--text-main);
-    color: var(--bg-color);
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-    transition: 0.3s var(--ease);
-}
-
 .theme-toggle { left: var(--padding-x); }
 .back-to-top { 
     right: var(--padding-x); 
@@ -121,16 +106,19 @@ a:hover {
 }
 
 /* ==========================================================================
-   UPDATED NAVBAR (REFINED)
+   UPDATED NAVBAR (REFINED & FIXED)
    ========================================================================== */
 .navbar {
     position: fixed;
-    top: 0; left: 0; width: 100%;
+    top: 0; 
+    left: 0; 
+    width: 100%;
     z-index: 1000;
     height: 80px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
+    background-color: transparent; /* Pastikan awal transparan */
     transition: background-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
 }
 
@@ -149,6 +137,7 @@ a:hover {
     padding: 0 var(--padding-x);
     max-width: 1400px;
     margin: 0 auto;
+    position: relative; /* Penting untuk posisi absolute menu */
 }
 
 /* Nav Menu (Icomat Style: Absolute Center) */
@@ -160,10 +149,67 @@ a:hover {
     transform: translateX(-50%);
 }
 
-/* Responsif Fix: Pastikan noise overlay tidak menghalangi klik */
-.noise-overlay {
-    z-index: 999; /* Turunkan 1 level di bawah Navbar (1000) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Beri jarak antar elemen di kanan */
 }
+
+/* Theme Toggle Button */
+.theme-toggle-nav {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: 0.3s var(--ease);
+}
+
+.theme-toggle-nav:hover {
+    background: var(--text-main);
+    color: var(--bg-color);
+    border-color: var(--text-main);
+}
+
+/* Mobile Toggle */
+.mobile-menu-toggle {
+    display: none; /* Sembunyikan di desktop */
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.mobile-menu-toggle .line {
+    width: 22px;
+    height: 1px;
+    background: var(--text-main);
+    transition: 0.3s var(--ease);
+}
+
+/* Responsif Fix */
+.noise-overlay {
+    z-index: 999; /* Di bawah navbar */
+}
+
+/* --- MEDIA QUERIES (FIXED BRACKETS) --- */
+@media (max-width: 992px) {
+    .nav-menu { 
+        display: none; 
+    }
+    .mobile-menu-toggle { 
+        display: flex; 
+    }
+    .nav-status { 
+        display: none; 
+    }
+} /* <--- Kurung penutup ini tadi hilang */
 
 /* ==========================================================================
    4. HERO SECTION
