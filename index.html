@@ -3,97 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teguh — Creative Portfolio</title>
+    <title>Teguh — Graphic Designer & Content Specialist</title>
+    
     <link rel="stylesheet" href="style.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
-    <link rel="icon" href=".assets/favicon/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="./assets/icons/favicon.png" type="image/png">
 </head>
-<body class="dark-theme">
+<body>
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="logo">TEGUH<span>.</span></a>
+            <a href="#" class="logo">TEGUH<span>_</span></a>
             <div class="nav-links">
-                <a href="#work" class="nav-item">Work</a>
-                <a href="#about" class="nav-item">About</a>
-                <a href="mailto:halo@teguh.com" class="nav-item contact-link">Get in touch</a>
+                <a href="#about">Tentang</a>
+                <a href="#work">Karya</a>
+                <a href="#experience">Pengalaman</a>
+                <a href="mailto:halo@teguh.com" class="btn-contact">Hubungi Saya</a>
             </div>
         </div>
     </nav>
 
     <main>
         <section class="hero">
-            <div class="hero-bg-image"></div>
-            
-            <div id="canvas-3d-container"></div>
-    
-            <div class="hero-content">
-                <p class="hero-tagline">Graphic Designer & Content Specialist</p>
-                <h1 class="reveal-text">
-                    Elevating brands through <br>
-                    <span class="italic-text">visual storytelling</span> and <br>
-                    strategic design.
-                </h1>
-                <div class="hero-footer">
-                    <p>Based in Malang, ID.</p>
-                    <a href="#work" class="scroll-indicator">Scroll to explore ↓</a>
+            <div id="canvas-3d-container"></div> <div class="hero-content">
+                <span class="badge">Tersedia untuk Project Baru</span>
+                <h1 class="reveal-text">Designing the <span>Future</span> of Visual Storytelling.</h1>
+                <p>Graphic Designer & Content Specialist berbasis di Malang. Menggabungkan seni rupa murni dengan strategi digital.</p>
+                <div class="hero-btns">
+                    <a href="#work" class="btn-primary">Lihat Portfolio</a>
+                    <a href="#about" class="btn-secondary">Kenali Lebih Jauh</a>
                 </div>
             </div>
         </section>
 
-        <section id="work" class="work-section">
-            <div class="section-header">
-                <h2>Selected Works</h2>
-                <span class="year">2024 — 2026</span>
-            </div>
-            
-            <div class="work-grid">
-                <div class="project-item">
-                    <div class="image-container">
-                        <img src="./assets/images/project1.webp" alt="Visual Identity Project">
-                    </div>
-                    <div class="project-details">
-                        <h3>Project Name One</h3>
-                        <p>Art Direction / Motion</p>
-                    </div>
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="section-title">
+                    <span>01. Profil</span>
+                    <h2>Menjembatani Seni & Fungsi</h2>
                 </div>
-
-                <div class="project-item">
-                    <div class="image-container">
-                        <img src="./assets/images/project2.webp" alt="Digital Content Creation">
+                <div class="about-grid">
+                    <div class="about-desc">
+                        <p>Lulusan Seni Rupa Murni yang bertransformasi ke dunia digital. Saya membantu brand membangun identitas visual yang tidak hanya cantik, tapi juga strategis di media sosial.</p>
                     </div>
-                    <div class="project-details">
-                        <h3>Project Name Two</h3>
-                        <p>Graphic Design / Social Media</p>
+                    <div class="about-stats">
+                        <div class="stat-card"><h3>2+</h3><p>Tahun Pengalaman</p></div>
+                        <div class="stat-card"><h3>50+</h3><p>Project Selesai</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about-section">
-            <div class="about-grid">
-                <div class="about-label">
-                    <span>(About Me)</span>
+        <section class="section tools-section">
+            <div class="container">
+                <div class="tools-grid">
+                    <div class="tool-item">Adobe Suite</div>
+                    <div class="tool-item">CapCut</div>
+                    <div class="tool-item">Canva Pro</div>
+                    <div class="tool-item">Three.js</div>
+                    <div class="tool-item">UI/UX Design</div>
                 </div>
-                <div class="about-text">
-                    <h2>I bridge the gap between traditional fine arts and digital interfaces, creating experiences that are visually poetic.</h2>
-                    <p>Dengan latar belakang Seni Rupa Murni, saya fokus pada estetika minimalis yang membantu brand berkomunikasi lebih jernih.</p>
+            </div>
+        </section>
+
+        <section id="work" class="section work-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Karya Terpilih</h2>
+                    <a href="#">Lihat Semua →</a>
+                </div>
+                <div class="work-grid">
+                    <div class="work-card">
+                        <div class="work-img">
+                            <img src="./assets/images/project1.webp" alt="Project 1">
+                        </div>
+                        <div class="work-info">
+                            <h3>Branding Identity</h3>
+                            <p>Visual Storytelling / 2025</p>
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="work-img">
+                            <img src="./assets/images/project2.webp" alt="Project 2">
+                        </div>
+                        <div class="work-info">
+                            <h3>Social Media Rebrand</h3>
+                            <p>Content Specialist / 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section experience-section">
+            <div class="container">
+                <div class="section-title">
+                    <span>02. Karir</span>
+                    <h2>Jejak Profesional</h2>
+                </div>
+                <div class="experience-list">
+                    <div class="exp-item">
+                        <span class="exp-date">2024 — Sekarang</span>
+                        <div class="exp-content">
+                            <h3>Graphic Designer & Content Specialist</h3>
+                            <p>Malang, Indonesia — Membangun visual branding dan mengelola konten digital secara end-to-end.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-content">
-            <h2>Let's create something <br>remarkable together.</h2>
-            <div class="footer-links">
+        <div class="container">
+            <h2>Siap Berkolaborasi?</h2>
+            <p>Mari bangun narasi visual yang kuat untuk brand Anda.</p>
+            <a href="mailto:halo@teguh.com" class="footer-email">halo@teguh.com</a>
+            <div class="footer-socials">
                 <a href="#">Instagram</a>
                 <a href="#">LinkedIn</a>
                 <a href="#">Dribbble</a>
             </div>
-            <p class="copyright">© 2026 Teguh. All rights reserved.</p>
+            <p class="copy">© 2026 Teguh. Digital Portfolio.</p>
         </div>
     </footer>
 
