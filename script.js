@@ -2,70 +2,58 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- 1. INISIALISASI 3D HERO ---
     const init3DHero = () => {
-        const container = document.getElementById('canvas-3d-container');
-        if (!container) return;
+    const container = document.getElementById('canvas-3d-container');
+    if (!container) return;
 
-        // Inisialisasi Dasar
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const scene = new THREE.Scene();
+    
+    // 1. KAMERA: Mundurkan lebih jauh (z=10) agar objek tidak raksasa
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 0, 10); 
+
+    const renderer = new THREE.WebGLRenderer({ 
+        antialias: true, 
+        alpha: true, // WAJIB untuk transparansi
+        preserveDrawingBuffer: true 
+    });
+    
+    // WAJIB: Memastikan background canvas tidak punya warna (0)
+    renderer.setClearColor(0x000000, 0); 
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    // 2. CAHAYA: Dibikin sangat terang agar objek tidak hitam (siluet)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 2); // Cahaya dari segala arah
+    scene.add(ambientLight);
+    
+    const pointLight = new THREE.PointLight(0xffffff, 5); // Cahaya seperti bohlam
+    pointLight.position.set(10, 10, 10);
+    scene.add(pointLight);
+
+    const loader = new THREE.GLTFLoader();
+    let model;
+
+    loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
+        model = gltf.scene;
         
-        // Alpha: true agar background transparan dan gambar hero.jpg terlihat
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setClearColor(0x000000, 0); // Transparansi penuh
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-
-        // Posisi Kamera (Mundur sedikit agar objek tidak terlalu besar)
-        camera.position.z = 6;
-
-        // Pencahayaan
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
-        scene.add(ambientLight);
+        // SKALA: Perkecil ke 0.2 jika objeknya aslinya besar banget
+        model.scale.set(0.25, 0.25, 0.25); 
         
-        const dirLight = new THREE.DirectionalLight(0xffffff, 2);
-        dirLight.position.set(5, 5, 5);
-        scene.add(dirLight);
+        model.position.set(0, -1, 0); // Turunkan sedikit agar tidak menabrak teks
+        scene.add(model);
+    }, undefined, (err) => console.error(err));
 
-        // Memuat Model GLTF
-        const loader = new THREE.GLTFLoader();
-        let model;
-
-        loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
-            model = gltf.scene;
-            
-            // --- PENGATURAN UKURAN (SCALE) ---
-            // Ubah angka ini (0.4) jika ingin lebih kecil lagi atau lebih besar
-            model.scale.set(0.4, 0.4, 0.4); 
-            
-            model.position.set(0, 0, 0);
-            scene.add(model);
-            console.log("3D Berhasil Muncul!");
-        }, undefined, (err) => {
-            console.error("Gagal memuat file 3D. Cek path file kamu.", err);
-        });
-
-        // Logika Mouse Movement
-        let mouseX = 0, mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX - window.innerWidth / 2) * 0.0005;
-            mouseY = (e.clientY - window.innerHeight / 2) * 0.0005;
-        });
-
-        // Loop Animasi
-        const animate = () => {
-            requestAnimationFrame(animate);
-            if (model) {
-                // Rotasi otomatis pelan
-                model.rotation.y += 0.002;
-                
-                // Efek mengikuti mouse (smoothing)
-                model.rotation.y += (mouseX - model.rotation.y) * 0.05;
-                model.rotation.x += (mouseY - model.rotation.x) * 0.05;
-            }
-            renderer.render(scene, camera);
-        };
-        animate();
+    // Animasi tetap sama...
+    const animate = () => {
+        requestAnimationFrame(animate);
+        if (model) {
+            model.rotation.y += 0.003;
+        }
+        renderer.render(scene, camera);
+    };
+    animate();
+};
 
         // Handle Resize Layar
         window.addEventListener('resize', () => {
