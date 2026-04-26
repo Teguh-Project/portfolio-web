@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         animateCursor();
 
-        // Hover Detection
+        // Hover Detection (Gunakan event delegation agar lebih ringan)
         const interactables = document.querySelectorAll('a, button, .project-card, .service-item');
         interactables.forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -73,26 +73,51 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    // --- 4. SMART SCROLL & BLUR REVEAL ---
+    // --- 4. SMART SCROLL & NAVBAR LOGIC ---
     let lastScroll = 0;
     const nav = document.querySelector('.navbar');
+    const backToTop = document.getElementById('backToTop');
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
+
+        // Sticky & Hide Navbar on Scroll
         if (currentScroll > lastScroll && currentScroll > 150) {
             nav.style.transform = 'translateY(-100%)';
         } else {
             nav.style.transform = 'translateY(0)';
         }
+        
+        // Glassmorphism effect on scroll
+        if (currentScroll > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+
+        // Back to Top Button visibility
+        if (backToTop) {
+            if (currentScroll > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        }
+
         lastScroll = currentScroll;
     });
 
+    backToTop?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // --- 5. BLUR REVEAL ANIMATION ---
     const observerOptions = { threshold: 0.15 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = "1";
-                entry.target.style.filter = "blur(0px)"; // Efek blur hilang saat muncul
+                entry.target.style.filter = "blur(0px)";
                 entry.target.style.transform = "translateY(0)";
                 observer.unobserve(entry.target);
             }
@@ -107,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // --- 5. MAGNETIC EFFECT ---
-    const magneticElements = document.querySelectorAll('.nav-link, .theme-toggle, .btn-primary, .logo');
+    // --- 6. MAGNETIC EFFECT ---
+    const magneticElements = document.querySelectorAll('.nav-link, .theme-toggle, .btn-primary, .logo, .back-to-top');
     magneticElements.forEach(el => {
         el.addEventListener('mousemove', (e) => {
             const { left, top, width, height } = el.getBoundingClientRect();
@@ -121,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. THREE.JS INTEGRATION ---
+    // --- 7. THREE.JS INTEGRATION ---
     if (typeof THREE !== 'undefined' && document.getElementById('canvas-3d-container')) {
         const container = document.getElementById('canvas-3d-container');
         const scene = new THREE.Scene();
@@ -133,9 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(renderer.domElement);
 
         camera.position.z = 5;
-        const light = new THREE.DirectionalLight(0xffffff, 1);
+        const light = new THREE.DirectionalLight(0xffffff, 1.5); // Boost light sedikit
         light.position.set(1, 1, 2);
-        scene.add(light, new THREE.AmbientLight(0xffffff, 0.5));
+        scene.add(light, new THREE.AmbientLight(0xffffff, 0.7));
 
         let model;
         const loader = new THREE.GLTFLoader();
@@ -143,6 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
             model = gltf.scene;
             model.scale.set(0.5, 0.5, 0.5); 
             scene.add(model);
+        }, undefined, (error) => {
+            console.error('Error loading GLB:', error);
         });
 
         let mouseX = 0, mouseY = 0;
@@ -155,8 +182,9 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(animate);
             if (model) {
                 model.rotation.y += 0.002;
-                model.rotation.x += (mouseY * 0.5 - model.rotation.x) * 0.05;
-                model.rotation.y += (mouseX * 0.5 - model.rotation.y) * 0.05;
+                // Smooth follow mouse
+                model.rotation.x += (mouseY * 0.2 - model.rotation.x) * 0.05;
+                model.rotation.y += (mouseX * 0.2 - model.rotation.y) * 0.05;
             }
             renderer.render(scene, camera);
         };
@@ -167,27 +195,5 @@ document.addEventListener('DOMContentLoaded', () => {
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
-    }
-});
-
-const backToTop = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) { // Muncul setelah scroll 500px
-        backToTop.classList.add('show');
-    } else {
-        backToTop.classList.remove('show');
-    }
-});
-
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
     }
 });
