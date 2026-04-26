@@ -154,14 +154,72 @@ body {
 /* ==========================================================================
    7. UTILITY & RESPONSIVE
    ========================================================================== */
-.back-to-top { position: fixed; bottom: 40px; right: 40px; z-index: 999; opacity: 0; visibility: hidden; transition: 0.4s; cursor: pointer; }
-.back-to-top.show { opacity: 1; visibility: visible; }
-.theme-switch-wrapper { position: fixed; bottom: 40px; left: 40px; z-index: 999; }
 
+/* Back To Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    cursor: none; /* Biar tetap pakai custom cursor */
+    
+    /* Styling agar terlihat */
+    background: var(--bg-color);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Theme Toggle Button */
+.theme-switch-wrapper {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    z-index: 999;
+}
+
+.theme-toggle {
+    background: var(--bg-color);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 12px 20px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: none;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect untuk kedua tombol */
+.theme-toggle:hover, .back-to-top:hover {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
     body { cursor: auto; }
     .custom-cursor { display: none; }
     .section { padding: 6rem var(--padding-x); }
+    
     .work-grid, .contact-item, .footer-info-grid { grid-template-columns: 1fr; }
     .contact-item { padding: 2rem 0; }
+    
+    /* Pindahkan tombol sedikit ke atas di mobile agar tidak tertutup bar browser */
+    .back-to-top, .theme-switch-wrapper {
+        bottom: 20px;
+    }
 }
