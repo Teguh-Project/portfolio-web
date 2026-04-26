@@ -342,3 +342,30 @@ a:hover {
     .section { padding: 6rem var(--padding-x); }
     .main-title { font-size: 4rem; }
 }
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: var(--padding-x); /* Mengikuti padding layar yang kamu buat */
+    padding: 0.8rem 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: var(--text-main);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    opacity: 0; /* Awalnya tidak terlihat */
+    pointer-events: none;
+    transition: 0.3s var(--ease);
+}
+
+/* Class ini akan dipicu oleh JavaScript saat user scroll ke bawah */
+.back-to-top.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-to-top:hover {
+    background: var(--accent);
+    color: white;
+}
