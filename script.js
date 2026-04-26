@@ -1,37 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- 1. INISIALISASI 3D HERO ---
-    const init3DHero = () => {
-        const container = document.getElementById('canvas-3d-container');
-        if (!container) return;
+    // --- DI DALAM FUNGSI init3DHero() ---
 
-        const scene = new THREE.Scene();
-        
-        // Alpha: true wajib ada agar background canvas transparan
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setClearColor(0x000000, 0); // Angka 0 berarti transparansi 100%
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
+const loader = new THREE.GLTFLoader();
+let model;
 
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
+    model = gltf.scene;
+    
+    // 1. MEMPERKECIL UKURAN (SCALE)
+    // Sebelumnya (mungkin): model.scale.set(1.5, 1.5, 1.5);
+    // Ubah menjadi lebih kecil, misalnya 0.5 (atau 50% dari ukuran asli)
+    model.scale.set(0.5, 0.5, 0.5); 
+    
+    // 2. MENGATUR POSISI (Optional)
+    // Jika objeknya dirasa terlalu tinggi, turunkan sedikit (posisi Y negatif)
+    // model.position.y = -0.5; 
 
-        // Pencahayaan
-        scene.add(new THREE.AmbientLight(0xffffff, 1.5));
-        const dirLight = new THREE.DirectionalLight(0xffffff, 2);
-        dirLight.position.set(5, 5, 5);
-        scene.add(dirLight);
+    // Pastikan objek berada di tengah sumbu X dan Z
+    model.position.x = 0;
+    model.position.z = 0;
 
-        const loader = new THREE.GLTFLoader();
-        let model;
-
-        loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
-            model = gltf.scene;
-            model.scale.set(1.5, 1.5, 1.5);
-            scene.add(model);
-            console.log("3D Berhasil Muncul!");
-        }, undefined, (err) => console.error(err));
+    scene.add(model);
+    console.log("3D Berhasil Muncul!");
+}, undefined, (err) => console.error(err));
 
         // Interaksi Mouse
         let mouseX = 0, mouseY = 0;
