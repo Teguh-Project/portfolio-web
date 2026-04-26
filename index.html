@@ -13,7 +13,7 @@
     
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
 </head>
-<body>
+<body data-theme="dark"> <div class="custom-cursor"></div>
 
     <nav class="navbar">
         <div class="nav-container">
@@ -25,29 +25,30 @@
                 <a href="#about" class="nav-item">ABOUT</a>
                 <a href="#work" class="nav-item">PROJECTS</a>
                 <a href="#experience" class="nav-item">EXPERIENCE</a>
-                <a href="mailto:halo@teguh.com" class="nav-item contact-link">CONTACT</a>
+                <a href="#contact" class="nav-item">CONTACT</a>
             </div>
         </div>
     </nav>
-    <button id="backToTop" class="back-to-top">
-    <span class="index">UP ↑</span>
-</button>
 
-<div class="theme-switch-wrapper">
-    <button id="themeToggle" class="theme-toggle">
-        <span class="mode-text">LIGHT</span>
+    <button id="backToTop" class="back-to-top">
+        <span>UP ↑</span>
     </button>
-</div>
+
+    <div class="theme-switch-wrapper">
+        <button id="themeToggle" class="theme-toggle">
+            <span class="mode-text">LIGHT</span>
+        </button>
+    </div>
 
     <main>
         <section id="home" class="hero">
-            <div class="hero-grid">
+            <div id="canvas-3d-container"></div> <div class="hero-grid">
                 <div class="hero-left">
-                    <span class="badge">AVAILABLE FOR FREELANCE — 2026</span>
-                    <h1 class="reveal-text">VISUAL<br>DESIGNER</h1>
+                    <span class="badge reveal-hidden">AVAILABLE FOR FREELANCE — 2026</span>
+                    <h1 class="reveal-hidden">VISUAL<br>DESIGNER</h1>
                 </div>
                 <div class="hero-right">
-                    <div class="hero-description">
+                    <div class="hero-description reveal-hidden">
                         <p>Independent designer specializing in Branding, Content Creation, and Digital Strategy. Transitioning Fine Arts into functional digital experiences.</p>
                         <div class="hero-cta-group">
                             <a href="#work" class="btn-main">SCROLL TO EXPLORE</a>
@@ -55,209 +56,171 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-line"></div>
         </section>
 
-        <section id="about" class="section about-section">
+        <section id="about" class="section">
             <div class="about-grid">
                 <div class="about-left">
                     <div class="section-title">
-                        <span class="index">01 — PROFIL</span>
-                        <h2 class="reveal-text">MENJEMBATANI<br>SENI & FUNGSI</h2>
+                        <span class="index reveal-hidden">01 — PROFIL</span>
+                        <h2 class="reveal-hidden">MENJEMBATANI<br>SENI & FUNGSI</h2>
                     </div>
                 </div>
                 <div class="about-right">
-                    <div class="about-desc">
+                    <div class="about-desc reveal-hidden">
                         <p>Lulusan Seni Rupa Murni yang bertransformasi ke dunia digital. Saya membantu brand membangun identitas visual yang strategis.</p>
-                        <p class="sub-desc">Berbasis di Malang, bekerja secara global. Fokus pada estetika minimalis dan fungsionalitas digital.</p>
+                        <p class="sub-desc" style="color: var(--text-dim); margin-top: 1rem; font-size: 0.9rem;">Berbasis di Malang, bekerja secara global. Fokus pada estetika minimalis dan fungsionalitas digital.</p>
                     </div>
-                    <div class="about-stats">
+                    <div class="about-stats reveal-hidden">
                         <div class="stat-item">
-                            <span class="stat-num">02</span>
-                            <span class="stat-label">TAHUN<br>PENGALAMAN</span>
+                            <span class="stat-num" style="font-size: 2rem; font-weight: 800; display: block;">02</span>
+                            <span class="stat-label" style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim);">TAHUN<br>PENGALAMAN</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num">50+</span>
-                            <span class="stat-label">PROYEK<br>SELESAI</span>
+                            <span class="stat-num" style="font-size: 2rem; font-weight: 800; display: block;">50+</span>
+                            <span class="stat-label" style="font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-dim);">PROYEK<br>SELESAI</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section tools-section">
+        <section class="section">
             <div class="section-title">
-                <span class="index">02 — SKILLS & TOOLS</span>
+                <span class="index reveal-hidden">02 — SKILLS & TOOLS</span>
             </div>
-            <div class="tools-grid">
-                <div class="tool-item">ADOBE SUITE</div>
-                <div class="tool-item">CAPCUT</div>
-                <div class="tool-item">CANVA PRO</div>
-                <div class="tool-item">FIGMA / UIUX</div>
-                <div class="tool-item">STRATEGI KONTEN</div>
-                <div class="tool-item">FINE ARTS</div>
+            <div class="tools-grid reveal-hidden" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;">
+                <span class="tool-item badge">ADOBE SUITE</span>
+                <span class="tool-item badge">CAPCUT</span>
+                <span class="tool-item badge">CANVA PRO</span>
+                <span class="tool-item badge">FIGMA / UIUX</span>
+                <span class="tool-item badge">STRATEGI KONTEN</span>
+                <span class="tool-item badge">FINE ARTS</span>
             </div>
         </section>
 
-        <section id="work" class="section work-section">
-            <div class="section-header-flex">
-                <div class="section-title">
-                    <span class="index">03 — KARYA</span>
-                    <h2 class="reveal-text">PROJECTS<br>TERPILIH</h2>
-                </div>
-                <a href="#" class="view-all">LIHAT SEMUA →</a>
+        <section id="work" class="section">
+            <div class="section-title">
+                <span class="index reveal-hidden">03 — KARYA</span>
+                <h2 class="reveal-hidden">PROJECTS<br>TERPILIH</h2>
             </div>
 
-            <div class="work-grid">
-                <div class="work-card">
+            <div class="work-grid" style="margin-top: 4rem;">
+                <div class="work-card reveal-hidden">
                     <div class="work-img-wrapper">
                         <img src="./assets/images/project1.webp" alt="Branding Identity">
-                        <div class="work-overlay"><span>VIEW PROJECT</span></div>
                     </div>
-                    <div class="work-info">
-                        <h3>BRANDING IDENTITY</h3>
-                        <p>VISUAL STORYTELLING — 2025</p>
+                    <div class="work-info" style="margin-top: 1.5rem;">
+                        <h3 style="font-size: 1rem; text-transform: uppercase;">BRANDING IDENTITY</h3>
+                        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);">VISUAL STORYTELLING — 2025</p>
                     </div>
                 </div>
-                <div class="work-card">
+                <div class="work-card reveal-hidden">
                     <div class="work-img-wrapper">
                         <img src="./assets/images/project2.webp" alt="Social Media Rebrand">
-                        <div class="work-overlay"><span>VIEW PROJECT</span></div>
                     </div>
-                    <div class="work-info">
-                        <h3>SOCIAL MEDIA REBRAND</h3>
-                        <p>CONTENT SPECIALIST — 2024</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section services-section">
-            <div class="section-title">
-                <span class="index">04 — LAYANAN</span>
-                <h2 class="reveal-text">SOLUSI VISUAL</h2>
-            </div>
-            <div class="services-list">
-                <div class="service-item">
-                    <span class="s-num">01</span>
-                    <div class="s-content">
-                        <h3>BRAND STRATEGY</h3>
-                        <p>Membangun identitas visual yang konsisten dan memiliki daya pikat kuat di pasar digital.</p>
-                    </div>
-                </div>
-                <div class="service-item">
-                    <span class="s-num">02</span>
-                    <div class="s-content">
-                        <h3>CONTENT CREATION</h3>
-                        <p>Produksi video pendek dan desain feed yang strategis untuk engagement tinggi.</p>
+                    <div class="work-info" style="margin-top: 1.5rem;">
+                        <h3 style="font-size: 1rem; text-transform: uppercase;">SOCIAL MEDIA REBRAND</h3>
+                        <p style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);">CONTENT SPECIALIST — 2024</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="section experience-section">
+        <section id="experience" class="section">
             <div class="section-title">
-                <span class="index">05 — KARIR</span>
-                <h2 class="reveal-text">JEJAK PROFESIONAL</h2>
+                <span class="index reveal-hidden">04 — KARIR</span>
+                <h2 class="reveal-hidden">JEJAK PROFESIONAL</h2>
             </div>
-            <div class="experience-list">
-                <div class="exp-item">
-                    <div class="exp-year">2024 — SEKARANG</div>
-                    <div class="exp-main">
-                        <h3>GRAPHIC DESIGNER & CONTENT SPECIALIST</h3>
-                        <p>Malang, ID — Mengelola narasi visual untuk berbagai klien nasional secara remote.</p>
+            <div class="experience-list" style="margin-top: 4rem;">
+                <div class="exp-item contact-item reveal-hidden" style="cursor: default;">
+                    <div class="contact-label">2024 — SEKARANG</div>
+                    <div class="contact-main">
+                        <h3 style="font-size: 1.5rem;">GRAPHIC DESIGNER & CONTENT SPECIALIST</h3>
                     </div>
                 </div>
-                <div class="exp-item">
-                    <div class="exp-year">2022 — 2024</div>
-                    <div class="exp-main">
-                        <h3>JUNIOR CREATIVE DESIGNER</h3>
-                        <p>Fokus pada pengembangan aset visual dan manajemen media sosial harian.</p>
+                <div class="exp-item contact-item reveal-hidden" style="cursor: default;">
+                    <div class="contact-label">2022 — 2024</div>
+                    <div class="contact-main">
+                        <h3 style="font-size: 1.5rem;">JUNIOR CREATIVE DESIGNER</h3>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="section-title">
+                <span class="index reveal-hidden">05 — HUBUNGI</span>
+                <h2 class="reveal-hidden">LET'S CONNECT</h2>
+            </div>
+
+            <div class="contact-list">
+                <a href="mailto:halo@teguh.com" class="contact-item reveal-hidden">
+                    <div class="contact-label">MAIN INQUIRIES</div>
+                    <div class="contact-main">
+                        <h3>EMAIL ME</h3>
+                        <span class="contact-arrow">↗</span>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="contact-item reveal-hidden">
+                    <div class="contact-label">SOCIALS</div>
+                    <div class="contact-main">
+                        <h3>INSTAGRAM</h3>
+                        <span class="contact-arrow">↗</span>
+                    </div>
+                </a>
             </div>
         </section>
     </main>
 
-    <section id="contact" class="section">
-    <div class="section-title reveal-hidden">
-        <span class="index">04</span>
-        <h2>LET'S CONNECT</h2>
-    </div>
-
-    <div class="contact-list">
-        <a href="mailto:halo@teguh.com" class="contact-item reveal-hidden">
-            <div class="contact-label">MAIN INQUIRIES</div>
-            <div class="contact-main">
-                <h3>EMAIL ME</h3>
-                <span class="contact-arrow">↗</span>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="contact-item reveal-hidden">
-            <div class="contact-label">SOCIALS</div>
-            <div class="contact-main">
-                <h3>INSTAGRAM</h3>
-                <span class="contact-arrow">↗</span>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="contact-item reveal-hidden">
-            <div class="contact-label">PROFESSIONAL</div>
-            <div class="contact-main">
-                <h3>LINKEDIN</h3>
-                <span class="contact-arrow">↗</span>
-            </div>
-        </a>
-    </div>
-</section>
-
     <footer class="footer">
-    <div class="footer-container">
-        <div class="footer-cta reveal-hidden">
-            <h2 class="massive-text">MARI BUAT SESUATU<br>YANG BERDAMPAK.</h2>
-            <div class="footer-cta-action">
-                <a href="mailto:halo@teguh.com" class="footer-email-link">
-                    <span>GET IN TOUCH</span>
-                    <span class="email-display">HALO@TEGUH.COM</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="footer-info-grid">
-            <div class="info-col">
-                <span class="info-label">SOCIALS</span>
-                <div class="footer-socials">
-                    <a href="#" class="nav-item">INSTAGRAM</a>
-                    <a href="#" class="nav-item">LINKEDIN</a>
-                    <a href="#" class="nav-item">DRIBBBLE</a>
-                </div>
-            </div>
-            
-            <div class="info-col">
-                <span class="info-label">LOCATION & TIME</span>
-                <div class="footer-time">
-                    <span id="local-time">00:00:00 MALANG, ID</span>
+        <div class="footer-container">
+            <div class="footer-cta reveal-hidden">
+                <h2 class="massive-text">MARI BUAT SESUATU<br>YANG BERDAMPAK.</h2>
+                <div class="footer-cta-action">
+                    <a href="mailto:halo@teguh.com" class="footer-email-link">
+                        <span>GET IN TOUCH</span>
+                        <span class="email-display">HALO@TEGUH.COM</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="info-col">
-                <span class="info-label">SAY HELLO</span>
-                <p class="footer-address">AVAILABLE FOR FREELANCE WORK WORLDWIDE</p>
+            <div class="footer-info-grid">
+                <div class="info-col reveal-hidden">
+                    <span class="info-label">SOCIALS</span>
+                    <div class="footer-socials" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <a href="#" class="nav-item">INSTAGRAM</a>
+                        <a href="#" class="nav-item">LINKEDIN</a>
+                        <a href="#" class="nav-item">DRIBBBLE</a>
+                    </div>
+                </div>
+                
+                <div class="info-col reveal-hidden">
+                    <span class="info-label">LOCATION & TIME</span>
+                    <div class="footer-time">
+                        <span id="local-time" style="font-family: var(--font-mono); font-size: 0.8rem;">00:00:00 MALANG, ID</span>
+                    </div>
+                </div>
+
+                <div class="info-col reveal-hidden">
+                    <span class="info-label">SAY HELLO</span>
+                    <p class="footer-address">AVAILABLE FOR FREELANCE WORK WORLDWIDE</p>
+                </div>
+            </div>
+
+            <div class="footer-credits">
+                <div class="credits-left">
+                    <span class="logo">TEGUH PRATOMO</span>
+                </div>
+                <div class="credits-right">
+                    <span>© 2026 DIGITAL PORTFOLIO</span>
+                </div>
             </div>
         </div>
+    </footer>
 
-        <div class="footer-credits">
-            <div class="credits-left">
-                <span class="logo">TEGUH PRATOMO</span>
-            </div>
-            <div class="credits-right">
-                <span>© 2026 DIGITAL PORTFOLIO</span>
-            </div>
-        </div>
-    </div>
-</footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
