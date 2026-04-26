@@ -15,7 +15,15 @@
 </head>
 <body data-theme="dark">
 
+    <div class="custom-cursor"></div>
     <div class="noise-overlay"></div>
+
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+        <span class="mode-text">LIGHT</span>
+    </button>
+    <button id="backToTop" class="back-to-top" aria-label="Back to Top">
+        UP ↑
+    </button>
 
     <div id="scroll-content">
 
@@ -109,7 +117,7 @@
                 </div>
             </section>
 
-            <section id="services" class="section bg-light">
+            <section id="services" class="section">
                 <div class="container">
                     <div class="section-header">
                         <span class="section-index">02</span>
@@ -189,7 +197,7 @@
                     </div>
                     <div class="footer-col">
                         <span class="label-mono">LOCAL TIME</span>
-                        <p id="local-time" class="mono-text">00:00:00 MALANG, ID</p>
+                        <p id="local-time" class="label-mono" style="color: var(--text-main);">00:00:00 MALANG, ID</p>
                     </div>
                     <div class="footer-col">
                         <span class="label-mono">MENU</span>
@@ -201,7 +209,7 @@
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <span>© 2026 Teguh Pratomo. Built with Code.</span>
+                    <span class="label-mono">© 2026 Teguh Pratomo. Built with Code.</span>
                 </div>
             </div>
         </footer>
