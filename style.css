@@ -106,48 +106,111 @@ body {
 }
 .nav-item:hover, .nav-item.active { color: var(--text-main); }
 
-/* ==========================================================================
-   4. HERO & PROJECTS
-   ========================================================================== */
+/* --- HERO SECTION RE-DESIGN --- */
 .hero {
     height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0 var(--padding-x);
-    border-bottom: 1px solid var(--border-color);
     position: relative;
+    overflow: hidden;
 }
 
-#canvas-3d-container {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    pointer-events: none;
+.hero-content {
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80vh; /* Memberi ruang di atas dan bawah */
 }
 
-.hero-grid { position: relative; z-index: 2; }
-
-.hero-left h1 {
-    font-size: clamp(3.5rem, 12vw, 9rem);
-    line-height: 0.85; font-weight: 800; letter-spacing: -4px;
-    text-transform: uppercase; color: var(--text-main);
+/* Meta info di bagian atas hero */
+.hero-top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
-.badge {
-    display: inline-block;
-    padding: 6px 12px;
-    border: 1px solid var(--border-color);
+.hero-location-tag {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    margin-bottom: 1.5rem;
     color: var(--text-dim);
+    letter-spacing: 1px;
 }
 
-.work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.work-img-wrapper { position: relative; aspect-ratio: 1/1.1; overflow: hidden; background: var(--border-color); }
-.work-img-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.8s ease; }
-.work-card:hover img { filter: grayscale(0); transform: scale(1.05); }
+/* Tipografi Masif Tengah */
+.hero-main-title {
+    margin: auto 0;
+}
 
+.hero-main-title h1 {
+    font-size: clamp(4rem, 15vw, 12rem);
+    line-height: 0.8;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
+    margin: 0;
+}
+
+.outline-text {
+    -webkit-text-stroke: 1px var(--text-main);
+    color: transparent !important;
+}
+
+/* Grid Bagian Bawah */
+.hero-bottom-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: flex-end;
+    gap: 4rem;
+    padding-bottom: 2rem;
+}
+
+.hero-desc-box p {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    max-width: 500px;
+    line-height: 1.4;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.hero-cta:hover {
+    padding-left: 10px;
+    border-top-color: var(--text-main);
+}
+
+/* Responsive Adjustment */
+@media (max-width: 768px) {
+    .hero-bottom-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .hero-main-title h1 {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+    }
+    
+    .hero-top-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
 /* ==========================================================================
    5. CONTACT & LISTS
    ========================================================================== */
