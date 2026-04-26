@@ -224,6 +224,71 @@ body {
     .back-to-top, .theme-switch-wrapper { bottom: 20px; }
 }
 
+/* --- CONTACT SECTION STYLE --- */
+.contact-list {
+    margin-top: 4rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.contact-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding: 4rem 0;
+    border-top: 1px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: none; /* Biar tetap pakai custom cursor */
+}
+
+.contact-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+.contact-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-main h3 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+    transition: transform 0.4s ease;
+}
+
+.contact-arrow {
+    font-size: 2.5rem;
+    font-weight: 300;
+    opacity: 0;
+    transform: translate(-20px, 20px);
+    transition: all 0.4s ease;
+}
+
+/* Hover Effects */
+.contact-item:hover {
+    padding-left: 20px;
+    background: rgba(255, 255, 255, 0.02); /* Sedikit highlight */
+}
+
+[data-theme="light"] .contact-item:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.contact-item:hover .contact-main h3 {
+    transform: translateX(10px);
+}
+
+.contact-item:hover .contact-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
 /* --- FOOTER STUDIO DIALECT STYLE --- */
 .footer {
     padding: 8rem var(--padding-x) 2rem;
