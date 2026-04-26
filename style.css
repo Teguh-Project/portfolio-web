@@ -331,3 +331,28 @@ a:hover {
     background: var(--accent);
     color: var(--bg-color);
 }
+/* Posisi & Bentuk Theme Toggle & Back to Top */
+.theme-toggle, .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    padding: 0.8rem 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: var(--text-main);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    transition: 0.3s var(--ease);
+}
+
+.theme-toggle { left: var(--padding-x); }
+.back-to-top { right: var(--padding-x); opacity: 0; pointer-events: none; }
+
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+
+/* Efek Hover Tombol */
+.theme-toggle:hover, .back-to-top:hover {
+    background: var(--accent);
+    color: white;
+}
