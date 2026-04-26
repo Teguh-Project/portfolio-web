@@ -133,3 +133,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// --- 7. SCROLL REVEAL (ULTRA SAFE) ---
+const revealElements = document.querySelectorAll('.reveal-hidden, .reveal-text, .work-card, .contact-item, .footer-cta, .section-title');
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+        }
+    });
+}, { 
+    threshold: 0.05, // Hanya butuh 5% elemen masuk layar
+    rootMargin: "0px 0px -50px 0px" // Trigger sedikit sebelum elemen muncul
+});
+
+revealElements.forEach(el => {
+    revealObserver.observe(el);
+});
+
+// FORCE REVEAL FALLBACK: Jika dalam 2 detik elemen masih belum muncul (mungkin JS stuck), paksa muncul.
+setTimeout(() => {
+    revealElements.forEach(el => {
+        if (!el.classList.contains('is-visible')) {
+            el.classList.add('is-visible');
+        }
+    });
+}, 2500);
