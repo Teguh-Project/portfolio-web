@@ -16,29 +16,37 @@
 <body>
 
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">TEGUH<span>_</span></a>
-            <div class="nav-links">
-                <a href="#about">Tentang</a>
-                <a href="#work">Karya</a>
-                <a href="#experience">Pengalaman</a>
-                <a href="mailto:halo@teguh.com" class="btn-contact">Hubungi Saya</a>
-            </div>
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="#" class="logo">TEGUH PRATOMO</a>
+            <span class="location">MALANG, ID</span>
         </div>
-    </nav>
+        <div class="nav-links">
+            <a href="#work" class="nav-item">PROJECTS</a>
+            <a href="#about" class="nav-item">ABOUT</a>
+            <a href="mailto:halo@teguh.com" class="nav-item contact-link">CONTACT</a>
+        </div>
+    </div>
+</nav>
 
     <main>
         <section class="hero">
-            <div id="canvas-3d-container"></div> <div class="hero-content">
-                <span class="badge">Tersedia untuk Project Baru</span>
-                <h1 class="reveal-text">Designing the <span>Future</span> of Visual Storytelling.</h1>
-                <p>Graphic Designer & Content Specialist berbasis di Malang. Menggabungkan seni rupa murni dengan strategi digital.</p>
-                <div class="hero-btns">
-                    <a href="#work" class="btn-primary">Lihat Portfolio</a>
-                    <a href="#about" class="btn-secondary">Kenali Lebih Jauh</a>
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <span class="badge">AVAILABLE FOR FREELANCE</span>
+                <h1 class="reveal-text">VISUAL<br>DESIGNER</h1>
+            </div>
+            <div class="hero-right">
+                <div class="hero-description">
+                    <p>Independent designer specializing in Branding, Content Creation, and Digital Strategy. Transitioning Fine Arts into functional digital experiences.</p>
+                    <div class="hero-cta-group">
+                        <a href="#work" class="btn-main">SCROLL TO EXPLORE</a>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+        <div class="hero-line"></div>
+    </section>
 
         <section id="about" class="section about-section">
             <div class="container">
@@ -132,8 +140,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/loaders/GLTFLoader.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
