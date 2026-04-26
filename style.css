@@ -2,15 +2,14 @@
    1. VARIABLES & FOUNDATION
    ========================================================================== */
 :root {
-    /* Colors - Dark (Default) */
     --bg-color: #080808;
     --bg-secondary: #0e0e0e;
     --text-main: #ffffff;
     --text-dim: #909090;
     --accent: #ff3e3e; 
     --border-color: rgba(255, 255, 255, 0.05);
+    --nav-bg: rgba(8, 8, 8, 0.7); /* Tambahan variabel untuk glassmorphism */
 
-    /* Layout & Type */
     --padding-x: 6vw;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -23,6 +22,7 @@
     --text-main: #080808;
     --text-dim: #666666;
     --border-color: rgba(0, 0, 0, 0.08);
+    --nav-bg: rgba(255, 255, 255, 0.7);
 }
 
 /* ==========================================================================
@@ -121,119 +121,48 @@ a:hover {
 }
 
 /* ==========================================================================
-   UPDATED NAVBAR (ICOMAT INSPIRED)
+   UPDATED NAVBAR (REFINED)
    ========================================================================== */
 .navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 0; left: 0; width: 100%;
     z-index: 1000;
-    mix-blend-mode: difference; /* Efek teks berubah warna sesuai bg */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+}
+
+/* Efek saat scroll (Pastikan class 'scrolled' ditambah via JS) */
+.navbar.scrolled {
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 .nav-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem var(--padding-x); /* Lebih ramping dari sebelumnya */
-    height: 80px;
+    width: 100%;
+    padding: 0 var(--padding-x);
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Logo Style */
-.logo {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-}
-
-/* Menu Style */
+/* Nav Menu (Icomat Style: Absolute Center) */
 .nav-menu {
     display: flex;
     gap: 2.5rem;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%); /* Menu tepat di tengah layar */
+    transform: translateX(-50%);
 }
 
-.nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-main);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    opacity: 0.7;
-    transition: opacity 0.3s var(--ease);
-}
-
-.nav-num {
-    font-size: 0.6rem;
-    opacity: 0.5;
-}
-
-.nav-link:hover {
-    opacity: 1;
-    color: var(--accent) !important;
-}
-
-/* Status & Mobile Toggle */
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.nav-status {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.status-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #00ff00; /* Hijau neon untuk status aktif */
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-}
-
-.nav-right .label-mono {
-    font-size: 0.65rem;
-}
-
-/* Mobile Toggle (Minimalist) */
-.mobile-menu-toggle {
-    display: none; /* Muncul di media query */
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.mobile-menu-toggle .line {
-    width: 20px;
-    height: 1px;
-    background: var(--text-main);
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-    .nav-menu {
-        display: none; /* Sembunyikan menu di tablet/mobile */
-    }
-    .mobile-menu-toggle {
-        display: flex;
-    }
-    .nav-status {
-        display: none;
-    }
+/* Responsif Fix: Pastikan noise overlay tidak menghalangi klik */
+.noise-overlay {
+    z-index: 999; /* Turunkan 1 level di bawah Navbar (1000) */
 }
 
 /* ==========================================================================
