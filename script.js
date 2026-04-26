@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // --- 1. REAL-TIME CLOCK (OPTIMIZED) ---
+    // --- 1. REAL-TIME CLOCK ---
     const updateTime = () => {
         const timeElement = document.getElementById('local-time');
         if (!timeElement) return;
@@ -10,18 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
             hour12: false 
         };
         const now = new Intl.DateTimeFormat('en-GB', options).format(new Date());
-        // Style 2026: Menggunakan pemisah titik dua yang konsisten
         timeElement.textContent = `${now} MALANG, ID`;
     };
     setInterval(updateTime, 1000);
     updateTime();
 
-    // --- 2. ADVANCED CUSTOM CURSOR ---
+    // --- 2. ADVANCED CUSTOM CURSOR (LERP EFFECT) ---
     const cursor = document.querySelector('.custom-cursor');
     if (cursor) {
-        // Posisi target kursor
         let targetX = 0, targetY = 0;
-        // Posisi kursor saat ini (untuk efek lerp/smooth)
         let curX = 0, curY = 0;
 
         window.addEventListener('mousemove', (e) => {
@@ -30,10 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const animateCursor = () => {
-            // Lerp (Linear Interpolation) untuk gerakan organik
             curX += (targetX - curX) * 0.15;
             curY += (targetY - curY) * 0.15;
-            
             cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
             requestAnimationFrame(animateCursor);
         };
@@ -59,13 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. THEME LOGIC (REDSTONE VIBE) ---
+    // --- 3. THEME LOGIC ---
     const themeToggle = document.getElementById('themeToggle');
     const updateTheme = (theme) => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('portfolio-theme', theme);
         if (themeToggle) {
-            themeToggle.querySelector('.mode-text').textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
+            const modeText = themeToggle.querySelector('.mode-text');
+            if (modeText) modeText.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
         }
     };
 
@@ -77,14 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTheme(current === 'dark' ? 'light' : 'dark');
     });
 
-    // --- 4. SMART SCROLL (NAVBAR & REVEAL) ---
+    // --- 4. SMART SCROLL & BLUR REVEAL ---
     let lastScroll = 0;
     const nav = document.querySelector('.navbar');
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
-
-        // Hide/Show Nav
         if (currentScroll > lastScroll && currentScroll > 150) {
             nav.style.transform = 'translateY(-100%)';
         } else {
@@ -93,27 +87,41 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
 
-    // Intersection Observer untuk animasi masuk
     const observerOptions = { threshold: 0.15 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = "1";
+                entry.target.style.filter = "blur(0px)"; // Efek blur hilang saat muncul
                 entry.target.style.transform = "translateY(0)";
                 observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Menerapkan reveal ke elemen baru
     document.querySelectorAll('.project-card, .service-item, .section-title').forEach(el => {
         el.style.opacity = "0";
-        el.style.transform = "translateY(30px)";
-        el.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+        el.style.filter = "blur(10px)"; 
+        el.style.transform = "translateY(40px)";
+        el.style.transition = "all 1s cubic-bezier(0.16, 1, 0.3, 1)";
         observer.observe(el);
     });
 
-    // --- 5. THREE.JS (MODERN INTEGRATION) ---
+    // --- 5. MAGNETIC EFFECT ---
+    const magneticElements = document.querySelectorAll('.nav-link, .theme-toggle, .btn-primary, .logo');
+    magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = el.getBoundingClientRect();
+            const x = e.clientX - (left + width / 2);
+            const y = e.clientY - (top + height / 2);
+            el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        });
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = `translate(0, 0)`;
+        });
+    });
+
+    // --- 6. THREE.JS INTEGRATION ---
     if (typeof THREE !== 'undefined' && document.getElementById('canvas-3d-container')) {
         const container = document.getElementById('canvas-3d-container');
         const scene = new THREE.Scene();
@@ -133,12 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const loader = new THREE.GLTFLoader();
         loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
             model = gltf.scene;
-            // Penyesuaian skala agar pas dengan layout editorial baru
             model.scale.set(0.5, 0.5, 0.5); 
             scene.add(model);
         });
 
-        // Mouse Parallax Logic
         let mouseX = 0, mouseY = 0;
         window.addEventListener('mousemove', (e) => {
             mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -148,9 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const animate = () => {
             requestAnimationFrame(animate);
             if (model) {
-                // Rotasi otomatis yang sangat lambat & elegan
                 model.rotation.y += 0.002;
-                // Respon halus terhadap gerakan mouse
                 model.rotation.x += (mouseY * 0.5 - model.rotation.x) * 0.05;
                 model.rotation.y += (mouseX * 0.5 - model.rotation.y) * 0.05;
             }
