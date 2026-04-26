@@ -348,34 +348,71 @@ a:hover {
 .service-item p { color: var(--text-dim); }
 
 /* ==========================================================================
-   7. FOOTER & CTA
+   FOOTER (MINIMALIST REFINEMENT)
    ========================================================================== */
-.footer-cta {
-    background-color: var(--accent);
-    color: #ffffff;
-    text-align: center;
-    padding: 8rem var(--padding-x);
-}
-
-.massive-type {
-    font-size: clamp(3rem, 10vw, 8rem);
-    line-height: 0.9;
-    font-weight: 800;
-    margin-bottom: 3rem;
-}
-
 .footer {
-    padding: 5rem var(--padding-x) 2.5rem;
+    padding: 3rem 0;
+    background-color: var(--bg-color);
+    border-top: 1px solid var(--border-color);
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-nav-minimal {
+    display: flex;
     gap: 2rem;
-    padding-bottom: 4rem;
-    border-bottom: 1px solid var(--border-color);
 }
 
+.footer-nav-minimal a {
+    color: var(--text-dim) !important;
+    transition: color 0.3s var(--ease);
+}
+
+.footer-nav-minimal a:hover {
+    color: var(--text-main) !important;
+}
+
+.hover-underline {
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent);
+    transition: width 0.4s var(--ease);
+}
+
+.hover-underline:hover::after {
+    width: 100%;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+/* Responsive Footer */
+@media (max-width: 992px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-center {
+        display: none; /* Sembunyikan slogan di mobile agar tidak penuh */
+    }
+}
 /* ==========================================================================
    8. UTILITIES & RESPONSIVE
    ========================================================================== */
