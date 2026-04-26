@@ -310,3 +310,24 @@ body {
 @media (max-width: 768px) {
     .grid-2 { grid-template-columns: 1fr; }
 }
+/* FORCE RESET SEMUA LINK & ELEMENT INTERAKTIF */
+a, 
+a:visited, 
+a:active, 
+a:focus {
+    color: inherit !important; /* Memaksa warna mengikuti teks di sekitarnya */
+    text-decoration: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent; /* Menghapus highlight biru di mobile */
+}
+
+/* Pastikan saat di-hover tetap menggunakan warna accent kita */
+a:hover {
+    color: var(--accent) !important;
+}
+
+/* Jika ada teks yang ter-select, jangan biarkan jadi biru standard */
+::selection {
+    background: var(--accent);
+    color: var(--bg-color);
+}
