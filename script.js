@@ -161,3 +161,45 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     init3D();
 });
+
+// --- 7. BACK TO TOP LOGIC ---
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 500) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// --- 8. DARK/LIGHT MODE TOGGLE ---
+const themeToggle = document.getElementById('themeToggle');
+const modeText = themeToggle.querySelector('.mode-text');
+
+// Cek preferensi user di LocalStorage
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'light') {
+        modeText.textContent = 'DARK';
+    }
+}
+
+themeToggle.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    
+    if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        modeText.textContent = 'LIGHT';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+        modeText.textContent = 'DARK';
+    }
+});
