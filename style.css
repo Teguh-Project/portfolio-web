@@ -72,72 +72,57 @@ body {
 }
 
 /* 3. HERO SECTION */
-/* --- REVISI CSS UNTUK HERO SECTION --- */
-
+/* --- BAGIAN HERO YANG DIRAPIKAN --- */
 .hero {
     position: relative;
-    overflow: hidden;
+    width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Pastikan warna teks default di sini putih agar terlihat di BG gelap */
-    color: white; 
+    overflow: hidden;
+    background-color: #050505; /* Hitam pekat agar transisi 3D mulus */
 }
 
-/* Layer 1: Gambar Latar Belakang (JPG/PNG) */
+/* Layer 1: Background Gambar */
 .hero-bg-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
-    background-image: url('assets/images/hero-bg.jpg'); /* Sesuaikan nama filemu */
+    /* PERBAIKAN: Pastikan path benar dan gunakan ./ */
+    background-image: url('./assets/images/hero.jpg'); 
     background-size: cover;
     background-position: center;
-    
-    /* Sofi Health style: Gambar dibuat sangat gelap/redup 
-       agar objek 3D dan teks terlihat jelas */
-    opacity: 0.15; 
-    
-    /* Z-index paling rendah */
-    z-index: 1; 
+    opacity: 0.5; 
+    z-index: 1; /* Paling belakang */
 }
 
-/* Layer 2: Wadah Model 3D (Canvas) */
+/* Layer 2: Wadah 3D */
 #canvas-3d-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* Z-index di atas gambar background, tapi di bawah teks */
-    z-index: 2; 
-    
-    /* PENTING: Matikan event klik agar tidak menghalangi klik pada tombol/teks */
-    pointer-events: none; 
+    z-index: 2; /* Di tengah antara gambar dan teks */
+    pointer-events: none; /* Supaya teks di depan tetap bisa diklik */
 }
 
 /* Layer 3: Konten Teks */
 .hero-content {
-    position: relative; /* Wajib pakai relative agar z-index bekerja */
-    
-    /* Z-index tertinggi agar di paling depan */
-    z-index: 3; 
-    
-    /* Hidupkan kembali event klik agar tombol bisa ditekan */
-    pointer-events: auto; 
-    
+    position: relative;
+    z-index: 10; /* Angka tinggi agar pasti di depan 3D */
     text-align: center;
-    padding: 0 6%;
+    color: white; /* Paksa warna putih agar kontras di BG gelap */
+    pointer-events: auto;
+    max-width: 900px;
 }
 
-/* Sedikit tambahan agar teks visual storytelling-mu terlihat lebih editorial */
 .hero h1 span {
+    color: #999; /* Membuat teks visual storytelling sedikit redup/italic */
     font-style: italic;
-    font-weight: 300; /* Tipis untuk kontras */
 }
 /* 4. WORK SECTION (GRID) */
 .work-section {
