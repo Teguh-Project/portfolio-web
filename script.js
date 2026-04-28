@@ -1,199 +1,193 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- 1. REAL-TIME CLOCK ---
-    const updateTime = () => {
+/**
+ * DETROIT & SSSCRIPT ENGINE v2.0
+ * Developed for: Teguh Perwira Putra
+ * Theme: Modern Editorial & Urban Cinematic
+ */
+
+class PortfolioEngine {
+    constructor() {
+        this.lastScroll = 0;
+        this.cursor = { targetX: 0, targetY: 0, curX: 0, curY: 0 };
+        this.init();
+    }
+
+    init() {
+        this.initClock();
+        this.initTheme();
+        this.initCustomCursor();
+        this.initSmartScroll();
+        this.initIntersectionObserver();
+        this.initMagneticEffect();
+        this.initHeroParallax();
+        this.initEasterEgg();
+        
+        // Handle Resize
+        window.addEventListener('resize', () => this.onResize());
+        console.log("%c DETROIT ENGINE ACTIVATED ", "background: #ff3e3e; color: white; font-weight: bold; padding: 4px 8px;");
+    }
+
+    // --- 1. REAL-TIME CLOCK (OPTIMIZED) ---
+    initClock() {
         const timeElement = document.getElementById('local-time');
         if (!timeElement) return;
-        const options = { 
-            timeZone: 'Asia/Jakarta', 
-            hour: '2-digit', minute: '2-digit', second: '2-digit',
-            hour12: false 
-        };
-        const now = new Intl.DateTimeFormat('en-GB', options).format(new Date());
-        timeElement.textContent = `${now} MALANG, ID`;
-    };
-    setInterval(updateTime, 1000);
-    updateTime();
 
-    // --- 2. ADVANCED CUSTOM CURSOR (LERP EFFECT) ---
-    const cursor = document.querySelector('.custom-cursor');
-    if (cursor) {
-        let targetX = 0, targetY = 0;
-        let curX = 0, curY = 0;
+        const tick = () => {
+            const now = new Date();
+            const options = {
+                timeZone: 'Asia/Jakarta',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: false
+            };
+            const timeString = new Intl.DateTimeFormat('en-GB', options).format(now);
+            timeElement.textContent = `${timeString} MALANG, ID`;
+        };
+        setInterval(tick, 1000);
+        tick();
+    }
+
+    // --- 2. CUSTOM CURSOR (LERP + INTERACTION) ---
+    initCustomCursor() {
+        const cursorEl = document.querySelector('.custom-cursor');
+        if (!cursorEl) return;
 
         window.addEventListener('mousemove', (e) => {
-            targetX = e.clientX;
-            targetY = e.clientY;
+            this.cursor.targetX = e.clientX;
+            this.cursor.targetY = e.clientY;
         });
 
-        const animateCursor = () => {
-            curX += (targetX - curX) * 0.15;
-            curY += (targetY - curY) * 0.15;
-            cursor.style.transform = `translate(${curX}px, ${curY}px) translate(-50%, -50%)`;
-            requestAnimationFrame(animateCursor);
+        const render = () => {
+            this.cursor.curX += (this.cursor.targetX - this.cursor.curX) * 0.12;
+            this.cursor.curY += (this.cursor.targetY - this.cursor.curY) * 0.12;
+            cursorEl.style.transform = `translate3d(${this.cursor.curX}px, ${this.cursor.curY}px, 0) translate(-50%, -50%)`;
+            requestAnimationFrame(render);
         };
-        animateCursor();
+        render();
 
-        // Hover Detection (Gunakan event delegation agar lebih ringan)
-        const interactables = document.querySelectorAll('a, button, .project-card, .service-item');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.width = '60px';
-                cursor.style.height = '60px';
-                cursor.style.backgroundColor = 'transparent';
-                cursor.style.border = '1px solid var(--accent)';
-                cursor.style.mixBlendMode = 'normal';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.width = '8px';
-                cursor.style.height = '8px';
-                cursor.style.backgroundColor = 'var(--accent)';
-                cursor.style.border = 'none';
-                cursor.style.mixBlendMode = 'difference';
-            });
+        // Cursor Hover States
+        document.querySelectorAll('a, button, .project-card, .theme-toggle-nav').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorEl.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursorEl.classList.remove('cursor-hover'));
         });
     }
 
-    // --- 3. THEME LOGIC ---
-    const themeToggle = document.getElementById('themeToggle');
-    const updateTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('portfolio-theme', theme);
-        if (themeToggle) {
-            const modeText = themeToggle.querySelector('.mode-text');
-            if (modeText) modeText.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
-        }
-    };
+    // --- 3. THEME LOGIC (PULL TO LIGHT/DARK) ---
+    initTheme() {
+        const btn = document.getElementById('themeToggle');
+        const update = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('portfolio-theme', theme);
+            if (btn) {
+                const text = btn.querySelector('.mode-text');
+                if (text) text.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
+            }
+        };
 
-    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
-    updateTheme(savedTheme);
+        const current = localStorage.getItem('portfolio-theme') || 'dark';
+        update(current);
 
-    themeToggle?.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme');
-        updateTheme(current === 'dark' ? 'light' : 'dark');
-    });
+        btn?.addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            update(next);
+        });
+    }
 
-    // --- 4. SMART SCROLL & NAVBAR LOGIC ---
-    let lastScroll = 0;
-    const nav = document.querySelector('.navbar');
-    const backToTop = document.getElementById('backToTop');
+    // --- 4. SMART SCROLL (HIDE/SHOW + PROGRESS) ---
+    initSmartScroll() {
+        const nav = document.querySelector('.navbar');
+        const btt = document.getElementById('backToTop');
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        // Sticky & Hide Navbar on Scroll
-        if (currentScroll > lastScroll && currentScroll > 150) {
-            nav.style.transform = 'translateY(-100%)';
-        } else {
-            nav.style.transform = 'translateY(0)';
-        }
-        
-        // Glassmorphism effect on scroll
-        if (currentScroll > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-
-        // Back to Top Button visibility
-        if (backToTop) {
-            if (currentScroll > 500) {
-                backToTop.classList.add('show');
+        window.addEventListener('scroll', () => {
+            const st = window.pageYOffset;
+            
+            // Navbar Hide/Show
+            if (st > this.lastScroll && st > 100) {
+                nav.style.transform = 'translateY(-100%)';
             } else {
-                backToTop.classList.remove('show');
+                nav.style.transform = 'translateY(0)';
             }
-        }
 
-        lastScroll = currentScroll;
-    });
+            // Glassmorphism Trigger
+            nav.classList.toggle('scrolled', st > 50);
+            
+            // Back to Top Logic
+            if (btt) btt.classList.toggle('show', st > 600);
 
-    backToTop?.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+            this.lastScroll = st;
+        }, { passive: true });
 
-    // --- 5. BLUR REVEAL ANIMATION ---
-    const observerOptions = { threshold: 0.15 };
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.filter = "blur(0px)";
-                entry.target.style.transform = "translateY(0)";
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+        btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
 
-    document.querySelectorAll('.project-card, .service-item, .section-title').forEach(el => {
-        el.style.opacity = "0";
-        el.style.filter = "blur(10px)"; 
-        el.style.transform = "translateY(40px)";
-        el.style.transition = "all 1s cubic-bezier(0.16, 1, 0.3, 1)";
-        observer.observe(el);
-    });
+    // --- 5. REVEAL ANIMATION (BLUR + SLIDE) ---
+    initIntersectionObserver() {
+        const options = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
 
-    // --- 6. MAGNETIC EFFECT ---
-    const magneticElements = document.querySelectorAll('.nav-link, .theme-toggle, .btn-primary, .logo, .back-to-top');
-    magneticElements.forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const { left, top, width, height } = el.getBoundingClientRect();
-            const x = e.clientX - (left + width / 2);
-            const y = e.clientY - (top + height / 2);
-            el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = `translate(0, 0)`;
-        });
-    });
-
-    // --- 7. THREE.JS INTEGRATION ---
-    if (typeof THREE !== 'undefined' && document.getElementById('canvas-3d-container')) {
-        const container = document.getElementById('canvas-3d-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
-
-        camera.position.z = 5;
-        const light = new THREE.DirectionalLight(0xffffff, 1.5); // Boost light sedikit
-        light.position.set(1, 1, 2);
-        scene.add(light, new THREE.AmbientLight(0xffffff, 0.7));
-
-        let model;
-        const loader = new THREE.GLTFLoader();
-        loader.load('./assets/images/abstract_aquarium.glb', (gltf) => {
-            model = gltf.scene;
-            model.scale.set(0.5, 0.5, 0.5); 
-            scene.add(model);
-        }, undefined, (error) => {
-            console.error('Error loading GLB:', error);
-        });
-
-        let mouseX = 0, mouseY = 0;
-        window.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
-
-        const animate = () => {
-            requestAnimationFrame(animate);
-            if (model) {
-                model.rotation.y += 0.002;
-                // Smooth follow mouse
-                model.rotation.x += (mouseY * 0.2 - model.rotation.x) * 0.05;
-                model.rotation.y += (mouseX * 0.2 - model.rotation.y) * 0.05;
-            }
-            renderer.render(scene, camera);
-        };
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+        document.querySelectorAll('.project-card, .section-title, .hero-text-side').forEach(el => {
+            el.classList.add('reveal-init');
+            observer.observe(el);
         });
     }
+
+    // --- 6. MAGNETIC & TEXT TILT EFFECT ---
+    initMagneticEffect() {
+        const targets = document.querySelectorAll('.nav-link, .theme-toggle-nav, .back-to-top');
+        
+        targets.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const { left, top, width, height } = el.getBoundingClientRect();
+                const x = (e.clientX - (left + width / 2)) * 0.4;
+                const y = (e.clientY - (top + height / 2)) * 0.4;
+                el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `translate3d(0, 0, 0)`;
+            });
+        });
+    }
+
+    // --- 7. HERO GIF PARALLAX (KEJUTAN 1) ---
+    initHeroParallax() {
+        const heroGif = document.querySelector('.hero-gif');
+        if (!heroGif) return;
+
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20; // Gerak 20px
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            heroGif.style.transform = `scale(1.1) translate3d(${x}px, ${y}px, 0)`;
+        });
+    }
+
+    // --- 8. EASTER EGG (KEJUTAN 2) ---
+    initEasterEgg() {
+        // Jika user mengetik 'TEGUH' di keyboard
+        let keys = "";
+        window.addEventListener('keydown', (e) => {
+            keys += e.key.toUpperCase();
+            if (keys.includes("TEGUH")) {
+                document.body.style.filter = "invert(1) hue-rotate(180deg)";
+                setTimeout(() => document.body.style.filter = "none", 2000);
+                keys = "";
+                console.log("SURPRISE! MODE INVERT AKTIF.");
+            }
+            if (keys.length > 10) keys = "";
+        });
+    }
+
+    onResize() {
+        // Logic tambahan saat layar berubah ukuran jika diperlukan
+    }
+}
+
+// Boot up
+document.addEventListener('DOMContentLoaded', () => {
+    new PortfolioEngine();
 });
