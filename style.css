@@ -160,120 +160,92 @@ a:hover { color: var(--accent); }
 }
 
 /* ==========================================================================
-   HERO DETROIT (FIXED GIF VISIBILITY)
+   HERO SIDE-TEXT STYLE (GIF FOCUS)
    ========================================================================== */
 .hero-detroit {
     height: 100vh;
-    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+    align-items: center; /* Teks di tengah secara vertikal */
     padding: 0 var(--padding-x);
-    /* Pastikan background container utama transparan agar GIF terlihat */
-    background-color: transparent; 
+    position: relative;
+    background-color: var(--bg-color);
 }
 
 .hero-bg-wrapper {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2; /* Sangat rendah agar di bawah semua elemen */
-    background-color: var(--bg-color); /* Warna cadangan jika GIF error */
+    inset: 0;
+    z-index: 1;
 }
 
 .hero-gif {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.5; /* Saya naikkan ke 0.5 agar lebih terlihat jelas */
-    filter: grayscale(1) contrast(110%); /* Tambah kontras agar lebih pop out */
-    display: block;
+    opacity: 0.8; /* NAIKKAN OPACITY agar GIF menonjol */
+    filter: contrast(110%); /* Pertajam visual GIF */
 }
 
 .hero-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Gradasi tiga warna: gelap di atas & bawah, transparan di tengah (area teks) */
+    inset: 0;
+    /* Overlay tipis saja di sisi kiri agar teks terbaca, tengahnya bersih */
     background: linear-gradient(
-        to bottom, 
-        rgba(8, 8, 8, 0.6) 0%, 
-        transparent 40%, 
-        transparent 60%, 
-        var(--bg-color) 100%
+        to right, 
+        rgba(8, 8, 8, 0.8) 0%, 
+        rgba(8, 8, 8, 0.3) 40%, 
+        transparent 100%
     );
-    z-index: -1; /* Di atas GIF, tapi tetap di bawah teks */
+    z-index: 2;
 }
 
-.hero-wrapper {
+.hero-main-content {
     position: relative;
-    z-index: 10; /* Teks harus berada di urutan z paling tinggi */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    pointer-events: none; /* Agar klik tetap tembus ke bawah jika ada link */
+    z-index: 10;
+    width: 100%;
 }
 
-.main-title {
-    font-size: clamp(4rem, 18vw, 18rem);
-    line-height: 0.8;
+.hero-text-side {
+    max-width: 50%; /* Hanya makan setengah layar kiri */
+    text-align: left;
+}
+
+.side-title {
+    font-size: clamp(2.5rem, 8vw, 6rem); /* Ukuran sedang/kecil sesuai permintaan */
+    line-height: 0.9;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: -0.05em;
-    text-align: center;
-    /* Tambahkan drop shadow tipis agar teks "lepas" dari GIF */
-    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.2rem;
 }
 
-.main-title.outline {
+.side-title.outline {
     -webkit-text-stroke: 1px var(--text-main);
     color: transparent;
-    text-shadow: none; /* Outline tidak perlu shadow tebal */
 }
 
-.main-title.italic {
+.side-title.italic {
     font-style: italic;
     font-weight: 300;
 }
 
-.hero-info-footer {
-    position: absolute;
-    bottom: 3rem;
-    left: 0; 
-    width: 100%;
-    padding: 0 var(--padding-x);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    z-index: 20; /* Lebih tinggi dari wrapper teks */
-}
-.scroll-line {
-    width: 1px;
-    height: 40px;
-    background: var(--accent);
-    margin: 10px auto 0;
-    position: relative;
-    overflow: hidden;
+.hero-description {
+    margin-top: 2rem;
+    max-width: 300px;
+    line-height: 1.6;
+    opacity: 0.7;
 }
 
-/* Animasi sederhana biar garisnya "bergerak" turun */
-.scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--text-main);
-    animation: scroll-anim 2s infinite var(--ease);
-}
-
-@keyframes scroll-anim {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
+/* Penyesuaian Mobile */
+@media (max-width: 768px) {
+    .hero-text-side {
+        max-width: 100%;
+    }
+    .side-title {
+        font-size: 3.5rem;
+    }
+    .hero-gif {
+        opacity: 0.6; /* Di mobile sedikit lebih gelap agar teks terbaca */
+    }
 }
 
 /* ==========================================================================
