@@ -1,49 +1,50 @@
 /* 
    ==========================================================================
-   PORTFOLIO - DETROIT & SSSCRIPT THEME (FINAL OPTIMIZED)
+   PORTFOLIO - DETROIT & SSSCRIPT THEME (2026 EDITION)
    Creative: Teguh Perwira Putra
+   Focus: Beyond Smooth Motion & High-End Editorial Aesthetic
    ========================================================================== 
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&family=JetBrains+Mono:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-    /* Mode Gelap (Default) */
-    --bg-color: #080808;
-    --bg-secondary: #0e0e0e;
+    /* Color Palette - Dark Mode (Primary) */
+    --bg-color: #0a0a0a;
+    --bg-secondary: #111111;
     --text-main: #ffffff;
-    --text-dim: #909090;
+    --text-dim: #888888;
     --accent: #ff3e3e; 
-    --nav-bg: rgba(8, 8, 8, 0.7);
+    --nav-bg: rgba(10, 10, 10, 0.75);
     --border-color: rgba(255, 255, 255, 0.08);
-    --overlay-color: rgba(8, 8, 8, 0.8);
+    --overlay-color: rgba(10, 10, 10, 0.85);
 
-    /* Spacing & Motion */
+    /* System Constants */
     --padding-x: 6vw;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --transition: 0.4s var(--ease);
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --transition: 0.6s var(--ease);
 }
 
 [data-theme="light"] {
-    /* Mode Terang */
-    --bg-color: #ffffff;
-    --bg-secondary: #f5f5f5;
-    --text-main: #080808;
+    --bg-color: #fcfcfc;
+    --bg-secondary: #f0f0f0;
+    --text-main: #0a0a0a;
     --text-dim: #666666;
-    --nav-bg: rgba(255, 255, 255, 0.7);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --overlay-color: rgba(255, 255, 255, 0.8);
+    --nav-bg: rgba(252, 252, 252, 0.8);
+    --border-color: rgba(0, 0, 0, 0.08);
+    --overlay-color: rgba(252, 252, 252, 0.7);
 }
 
 /* ==========================================================================
-   BASE STYLES
+   BASE & UTILITIES
    ========================================================================== */
 * {
     margin: 0; padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 html { 
@@ -56,62 +57,69 @@ body {
     color: var(--text-main);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    line-height: 1.4;
+    line-height: 1.5;
     transition: background-color var(--transition), color var(--transition);
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-a:hover { color: var(--accent); }
-
-::selection { background: var(--accent); color: #fff; }
-
-/* ==========================================================================
-   NAVBAR (ULTRA-SMOOTH OPTIMIZED)
-   ========================================================================== */
-.navbar {
-    position: fixed;
-    top: 0; left: 0; width: 100%;
-    /* Gunakan tinggi tetap dari awal agar tidak ada layout shift */
-    height: 80px; 
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    
-    /* Optimasi GPU */
-    will-change: transform, background-color, backdrop-filter;
-    
-    /* Transisi disamakan durasinya agar sinkron */
-    transition: 
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-        background-color 0.6s ease, 
-        backdrop-filter 0.6s ease,
-        height 0.6s cubic-bezier(0.16, 1, 0.3, 1); /* Tambahkan ini jika ingin height berubah halus */
-}
-
-/* Kotak Navbar saat scroll */
-.navbar.scrolled {
-    /* Jika ingin lebih ramping saat scroll, pastikan transisinya ada di .navbar tadi */
-    height: 65px; 
-    background-color: var(--nav-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.nav-container {
+.container {
     width: 100%;
     max-width: 1600px;
     margin: 0 auto;
     padding: 0 var(--padding-x);
+}
+
+.label-mono {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.opacity-50 { opacity: 0.5; }
+
+/* ==========================================================================
+   GLOBAL OVERLAYS
+   ========================================================================== */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04;
+    pointer-events: none;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transition: transform 0.1s ease, width 0.3s var(--ease), height 0.3s var(--ease);
+}
+
+/* ==========================================================================
+   NAVBAR (REFINED GLASSMORPISM)
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    height: 90px; 
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    /* Hilangkan position: relative jika mengganggu centering absolute .nav-menu */
+    z-index: 1000;
+    will-change: transform, backdrop-filter;
+    transition: height 0.5s var(--ease), background-color 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
+}
+
+.navbar.scrolled {
+    height: 70px;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .nav-menu {
@@ -119,51 +127,51 @@ a:hover { color: var(--accent); }
     gap: 3rem;
     position: absolute;
     left: 50%;
-    transform: translate3d(-50%, 0, 0); /* Gunakan translate3d juga di sini */
+    transform: translateX(-50%);
 }
 
 .nav-link {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    opacity: 0.6;
-    transition: opacity 0.3s ease, color 0.3s ease;
+    opacity: 0.5;
+    position: relative;
+    padding: 5px 0;
 }
 
-.nav-link:hover { 
-    opacity: 1; 
-    color: var(--accent); 
+.nav-link:hover { opacity: 1; color: var(--accent); }
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; width: 0%;
+    height: 1px; background: var(--accent);
+    transition: width 0.4s var(--ease);
 }
+.nav-link:hover::after { width: 100%; }
 
 .theme-toggle-nav {
     background: transparent;
     border: 1px solid var(--border-color);
     color: var(--text-main);
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    padding: 0.6rem 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    padding: 0.7rem 1.2rem;
     cursor: pointer;
-    /* Gunakan variabel transisi global atau spesifik */
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s var(--ease);
 }
 
 .theme-toggle-nav:hover {
     background: var(--text-main);
     color: var(--bg-color);
-    transform: scale(1.05); /* Sedikit pop-up biar makin modern */
+    border-color: var(--text-main);
 }
 
 /* ==========================================================================
-   HERO SIDE-TEXT (GIF FOCUS)
+   HERO DETROIT (THE MASTERPIECE)
    ========================================================================== */
 .hero-detroit {
     height: 100vh;
     display: flex;
-    align-items: center; 
-    padding: 0 var(--padding-x);
+    align-items: center;
     position: relative;
     overflow: hidden;
 }
@@ -177,22 +185,18 @@ a:hover { color: var(--accent); }
 .hero-gif {
     width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0.85; /* Ditingkatkan agar GIF menonjol */
-    filter: contrast(110%) grayscale(0.2); 
+    filter: grayscale(0.4) contrast(1.1);
+    transform: scale(1.05); /* Prevent edges on parallax */
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    /* Overlay gradasi kiri ke kanan agar teks di kiri terbaca */
-    background: linear-gradient(
-        to right, 
-        var(--overlay-color) 0%, 
-        rgba(8, 8, 8, 0.2) 50%, 
-        transparent 100%
-    );
+    background: linear-gradient(90deg, 
+        var(--bg-color) 0%, 
+        rgba(10, 10, 10, 0.4) 60%, 
+        transparent 100%);
     z-index: 2;
-    transition: background var(--transition);
 }
 
 .hero-main-content {
@@ -201,18 +205,13 @@ a:hover { color: var(--accent); }
     width: 100%;
 }
 
-.hero-text-side {
-    max-width: 500px;
-    text-align: left;
-}
-
 .side-title {
-    font-size: clamp(2.5rem, 7vw, 5.5rem);
-    line-height: 0.85;
-    font-weight: 800;
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    line-height: 0.8;
+    font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: -0.03em;
-    color: var(--text-main);
+    letter-spacing: -0.05em;
+    margin-bottom: 0.2rem;
 }
 
 .side-title.outline {
@@ -223,149 +222,141 @@ a:hover { color: var(--accent); }
 .side-title.italic {
     font-style: italic;
     font-weight: 300;
+    letter-spacing: -0.02em;
 }
 
-.hero-description {
-    margin-top: 1.5rem;
-    max-width: 350px;
-    line-height: 1.6;
-    color: var(--text-dim);
-    font-size: 0.9rem;
+.hero-info-footer {
+    position: absolute;
+    bottom: 3rem;
+    left: var(--padding-x);
+    right: var(--padding-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 10;
+}
+
+.scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    margin: 10px auto 0;
 }
 
 /* ==========================================================================
-   BENTO GRID & SECTIONS
+   WORK GRID (BENTO STYLE)
    ========================================================================== */
-.section {
-    padding: 8rem var(--padding-x);
-    border-top: 1px solid var(--border-color);
-}
+.section { padding: 10rem 0; border-top: 1px solid var(--border-color); }
 
-.section-header {
-    margin-bottom: 4rem;
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-}
-
-.section-index { color: var(--accent); font-family: var(--font-mono); font-size: 0.8rem; }
-.section-title { font-size: clamp(2rem, 5vw, 4rem); text-transform: uppercase; font-weight: 800; }
+.section-header { margin-bottom: 5rem; }
+.section-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; text-transform: uppercase; line-height: 1; }
 
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
 }
 
 .project-card {
+    grid-column: span 6;
     background: var(--bg-secondary);
-    position: relative;
     border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: var(--transition);
 }
 
-.project-card.featured { grid-column: span 2; }
+.project-card.featured { grid-column: span 12; }
 
 .work-img-wrapper {
-    aspect-ratio: 16/9;
+    position: relative;
+    aspect-ratio: 16/10;
     overflow: hidden;
+    background: #000;
 }
 
 .work-img-wrapper img {
     width: 100%; height: 100%;
     object-fit: cover;
+    opacity: 0.7;
     filter: grayscale(1);
-    transition: 0.8s var(--ease);
+    transition: transform 1.2s var(--ease), filter 0.8s var(--ease), opacity 0.8s var(--ease);
 }
 
-.project-card:hover img {
+.project-card:hover .work-img-wrapper img {
+    transform: scale(1.05);
     filter: grayscale(0);
-    transform: scale(1.03);
+    opacity: 1;
 }
+
+.project-meta { padding: 2rem; }
+.project-meta h3 { font-size: 1.5rem; text-transform: uppercase; margin-bottom: 0.5rem; }
 
 /* ==========================================================================
-   FOOTER & CONTACT
+   EXPERTISE & IDENTITY
    ========================================================================== */
-.contact-section { padding: 10rem var(--padding-x) 5rem; }
+.services-list { border-top: 1px solid var(--border-color); }
+.service-item {
+    display: flex;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: padding 0.4s var(--ease);
+}
 
+.service-item:hover { padding-left: 2rem; border-bottom-color: var(--accent); }
+.service-num { font-family: var(--font-mono); font-size: 0.8rem; width: 100px; color: var(--accent); }
+.service-content h3 { font-size: 2.5rem; text-transform: uppercase; margin-bottom: 1rem; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.large-text { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 500; margin-bottom: 2rem; line-height: 1.3; }
+
+/* ==========================================================================
+   FOOTER & CONTACT (MASSIVE)
+   ========================================================================== */
 .massive-type {
-    font-size: clamp(3rem, 12vw, 10rem);
-    font-weight: 800;
-    line-height: 0.85;
-    text-transform: uppercase;
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
 }
 
 .giant-email-link {
-    display: inline-block;
-    font-size: clamp(1.5rem, 5vw, 5rem);
-    font-weight: 800;
-    margin: 3rem 0;
-    border-bottom: 2px solid var(--border-color);
-}
-
-.giant-email-link:hover { border-bottom-color: var(--accent); }
-
-.back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: var(--padding-x);
-    width: 45px; height: 45px;
-    background: var(--text-main);
-    color: var(--bg-color);
-    border: none;
-    z-index: 1001;
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: var(--transition);
+    justify-content: space-between;
+    font-size: clamp(1.2rem, 4vw, 4rem);
+    font-weight: 800;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.back-to-top.show { opacity: 1; pointer-events: auto; }
+.giant-email-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+.footer { padding: 4rem 0; border-top: 1px solid var(--border-color); }
+.footer-content { display: flex; justify-content: space-between; align-items: center; }
 
 /* ==========================================================================
-   RESPONSIVE
+   ANIMATIONS & RESPONSIVE
    ========================================================================== */
-@media (max-width: 992px) {
-    .nav-menu { display: none; }
-    .work-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: span 1; }
-    .hero-text-side { max-width: 100%; }
-}
-
-@media (max-width: 768px) {
-    :root { --padding-x: 5vw; }
-    .side-title { font-size: 3.5rem; }
-    .section { padding: 5rem var(--padding-x); }
-}
-/* Reveal Initial State */
 .reveal-init {
     opacity: 0;
-    filter: blur(15px);
-    transform: translateY(30px);
-    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(40px);
+    transition: opacity 1.2s var(--ease), transform 1.2s var(--ease);
 }
 
 .reveal-init.is-visible {
     opacity: 1;
-    filter: blur(0px);
     transform: translateY(0);
 }
 
-/* Custom Cursor State */
-.custom-cursor {
-    transition: width 0.3s, height 0.3s, background-color 0.3s, border 0.3s;
+@media (max-width: 992px) {
+    .nav-menu { display: none; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .project-card { grid-column: span 12; }
+    .hero-info-footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    .desktop-only { display: none; }
 }
 
-.cursor-hover {
-    width: 80px !important;
-    height: 80px !important;
-    background-color: rgba(255, 62, 62, 0.1) !important;
-    border: 1px solid var(--accent) !important;
-}
-
-/* GIF Parallax Base */
-.hero-gif {
-    transition: transform 0.1s ease-out; /* Agar halus saat mengikuti mouse */
+@media (max-width: 600px) {
+    .side-title { font-size: 3.5rem; }
+    .massive-type { font-size: 4rem; }
+    .section { padding: 6rem 0; }
 }
