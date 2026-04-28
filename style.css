@@ -323,3 +323,33 @@ a:hover { color: var(--accent); }
     .side-title { font-size: 3.5rem; }
     .section { padding: 5rem var(--padding-x); }
 }
+/* Reveal Initial State */
+.reveal-init {
+    opacity: 0;
+    filter: blur(15px);
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-init.is-visible {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+}
+
+/* Custom Cursor State */
+.custom-cursor {
+    transition: width 0.3s, height 0.3s, background-color 0.3s, border 0.3s;
+}
+
+.cursor-hover {
+    width: 80px !important;
+    height: 80px !important;
+    background-color: rgba(255, 62, 62, 0.1) !important;
+    border: 1px solid var(--accent) !important;
+}
+
+/* GIF Parallax Base */
+.hero-gif {
+    transition: transform 0.1s ease-out; /* Agar halus saat mengikuti mouse */
+}
