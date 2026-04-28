@@ -9,7 +9,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <!-- Tambahkan weight 900 untuk Inter agar teks 'Detroit' makin solid -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     
     <link rel="icon" href="assets/images/favicon.png" type="image/png">
 </head>
@@ -18,9 +19,7 @@
     <div class="custom-cursor"></div>
     <div class="noise-overlay"></div>
 
-    <button id="backToTop" class="back-to-top" aria-label="Back to Top">
-        UP ↑
-    </button>
+    <button id="backToTop" class="back-to-top" aria-label="Back to Top">UP ↑</button>
 
     <div id="scroll-content">
         <nav class="navbar">
@@ -30,10 +29,11 @@
                 </div>
 
                 <div class="nav-menu">
-                    <a href="#work" class="nav-link"><span class="nav-num">01</span> Work</a>
-                    <a href="#services" class="nav-link"><span class="nav-num">02</span> Expertise</a>
-                    <a href="#about" class="nav-link"><span class="nav-num">03</span> Identity</a>
-                    <a href="#contact" class="nav-link"><span class="nav-num">04</span> Connect</a>
+                    <!-- Penomoran tetap ada, tapi dibungkus agar mudah diatur via CSS Detroit Style -->
+                    <a href="#work" class="nav-link"><span>01</span> WORK</a>
+                    <a href="#services" class="nav-link"><span>02</span> EXPERTISE</a>
+                    <a href="#about" class="nav-link"><span>03</span> IDENTITY</a>
+                    <a href="#contact" class="nav-link"><span>04</span> CONNECT</a>
                 </div>
 
                 <div class="nav-right">
@@ -41,11 +41,6 @@
                         <span class="mode-text">LIGHT</span>
                     </button>
                     
-                    <div class="nav-status">
-                        <span class="status-dot"></span>
-                        <span class="label-mono">AVAILABLE</span>
-                    </div>
-
                     <button class="mobile-menu-toggle" aria-label="Toggle Menu">
                         <span class="line"></span>
                         <span class="line"></span>
@@ -55,33 +50,44 @@
         </nav>
 
         <main>
-            <section id="home" class="hero">
+            <!-- Hero Section dengan Struktur Detroit -->
+            <section id="home" class="hero hero-detroit">
                 <div id="canvas-3d-container"></div>
                 
                 <div class="hero-wrapper">
-                    <div class="hero-top">
-                        <span class="label-mono">AVAILABLE FOR 2026 PROJECTS</span>
-                        <span class="label-mono">LOCATED IN MALANG, ID</span>
-                    </div>
-                    
-                    <div class="hero-title-area">
+                    <!-- Baris 1: Bold -->
+                    <div class="hero-line">
                         <h1 class="main-title">FULLSTACK</h1>
-                        <h1 class="main-title outline">CREATIVE</h1>
                     </div>
-
-                    <div class="hero-bottom">
-                        <p class="hero-description">
-                            Melting fine arts into digital architecture. I build high-converting brands through UI/UX design, 3D motion, and visual strategy.
-                        </p>
-                        <div class="hero-cta-group">
-                            <a href="#work" class="btn-primary">View Archives</a>
-                            <a href="#contact" class="btn-secondary">Let's Talk</a>
-                        </div>
+                    <!-- Baris 2: Outline & Italic -->
+                    <div class="hero-line">
+                        <h1 class="main-title outline italic">CREATIVE</h1>
+                    </div>
+                    <!-- Baris 3: Bold -->
+                    <div class="hero-line">
+                        <h1 class="main-title">DESIGNER</h1>
                     </div>
                 </div>
-                
-                <div class="scroll-indicator">
-                    <span class="line"></span>
+
+                <!-- Footer Hero: Menggantikan deskripsi lama yang terlalu padat -->
+                <div class="hero-info-footer">
+                    <div class="info-item">
+                        <span class="label-mono opacity-50">BASED IN</span>
+                        <span class="label-mono">MALANG, INDONESIA</span>
+                    </div>
+                    
+                    <div class="info-item desktop-only">
+                        <span class="label-mono opacity-50">SCROLL TO EXPLORE</span>
+                        <div class="scroll-line"></div>
+                    </div>
+
+                    <div class="info-item text-right">
+                        <span class="label-mono opacity-50">STATUS</span>
+                        <div class="nav-status">
+                            <span class="status-dot"></span>
+                            <span class="label-mono">AVAILABLE FOR 2026</span>
+                        </div>
+                    </div>
                 </div>
             </section>
 
