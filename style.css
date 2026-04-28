@@ -118,19 +118,57 @@ a:hover { color: var(--accent); }
    HERO & BENTO GRID
    ========================================================================== */
 .hero-detroit {
-    height: 100vh; display: flex; align-items: center;
-    padding: 0 var(--padding-x); position: relative; overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #000; /* Fallback jika gif gagal load */
 }
 
-.hero-gif {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; z-index: 1; filter: grayscale(0.2) contrast(1.1);
-    transform: scale(1.1);
+.hero-main-content {
+    position: relative;
+    z-index: 100; /* Pastikan jauh di atas overlay & gif */
+    width: 100%;
+    pointer-events: none; /* Agar tidak ganggu interaksi mouse ke bg jika perlu */
+}
+
+.side-title {
+    color: var(--text-main);
+    font-size: clamp(3.5rem, 12vw, 9rem); /* Ukuran lebih besar & bold */
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.8;
+    letter-spacing: -0.04em;
+    margin-left: -5px; /* Kompensasi kerning font Inter 900 */
+}
+
+.side-title.outline {
+    -webkit-text-stroke: 1.5px var(--text-main);
+    color: transparent;
+    opacity: 0.8;
 }
 
 .hero-overlay {
-    position: absolute; inset: 0; z-index: 2;
-    background: linear-gradient(90deg, var(--bg-color) 0%, rgba(8,8,8,0.4) 50%, transparent 100%);
+    position: absolute;
+    inset: 0;
+    z-index: 5; /* Di bawah teks, di atas gif */
+    background: linear-gradient(
+        to right, 
+        rgba(8, 8, 8, 0.9) 0%, 
+        rgba(8, 8, 8, 0.4) 50%, 
+        transparent 100%
+    );
+}
+
+.hero-gif {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Paling dasar */
+    filter: grayscale(0.3) brightness(0.7); /* Redupkan sedikit agar teks "pop out" */
 }
 
 .side-title {
