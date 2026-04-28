@@ -91,32 +91,53 @@ class PortfolioEngine {
         });
     }
 
-    // --- 4. SMART SCROLL (HIDE/SHOW + PROGRESS) ---
-    initSmartScroll() {
-        const nav = document.querySelector('.navbar');
-        const btt = document.getElementById('backToTop');
+    // --- 4. SMART SCROLL (ULTRA-SMOOTH VERSION) ---
+initSmartScroll() {
+    const nav = document.querySelector('.navbar');
+    let isTicking = false; // Flag untuk optimasi performa
 
-        window.addEventListener('scroll', () => {
-            const st = window.pageYOffset;
-            
-            // Navbar Hide/Show
-            if (st > this.lastScroll && st > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
+    window.addEventListener('scroll', () => {
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                const st = window.pageYOffset;
 
-            // Glassmorphism Trigger
-            nav.classList.toggle('scrolled', st > 50);
-            
-            // Back to Top Logic
-            if (btt) btt.classList.toggle('show', st > 600);
+                // 1. Cegah angka negatif (iOS bounce)
+                if (st < 0) {
+                    isTicking = false;
+                    return;
+                }
 
-            this.lastScroll = st;
-        }, { passive: true });
+                // 2. Logika Sembunyikan/Tampilkan dengan Buffer
+                // Kita beri jarak minimal 10px agar tidak terlalu sensitif terhadap getaran scroll
+                if (Math.abs(this.lastScroll - st) <= 10) {
+                    isTicking = false;
+                    return;
+                }
 
-        btt?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
+                if (st > this.lastScroll && st > 150) {
+                    // Scroll Down: Sembunyikan nav
+                    nav.style.transform = 'translate3d(0, -100%, 0)';
+                } else {
+                    // Scroll Up: Munculkan nav
+                    nav.style.transform = 'translate3d(0, 0, 0)';
+                }
+
+                // 3. Logika Scrolled State (Efek Kaca)
+                // Threshold 50 agar transisinya terasa lebih awal dan halus
+                if (st > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+
+                this.lastScroll = st;
+                isTicking = false;
+            });
+
+            isTicking = true;
+        }
+    }, { passive: true });
+}
 
     // --- 5. REVEAL ANIMATION (BLUR + SLIDE) ---
     initIntersectionObserver() {
