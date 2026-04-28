@@ -115,62 +115,97 @@ a:hover { color: var(--accent); }
 }
 
 /* ==========================================================================
-   HERO & BENTO GRID
+   HERO DETROIT - VISIBILITY & LAYOUT FIX
    ========================================================================== */
 .hero-detroit {
     height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    background-color: #000; /* Fallback jika gif gagal load */
+    padding: 0 var(--padding-x);
+    background: #000; /* Warna dasar jika gif belum load */
 }
 
-.hero-main-content {
-    position: relative;
-    z-index: 100; /* Pastikan jauh di atas overlay & gif */
+/* Container Background */
+.hero-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1; /* Paling belakang */
+}
+
+.hero-gif {
     width: 100%;
-    pointer-events: none; /* Agar tidak ganggu interaksi mouse ke bg jika perlu */
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.4) brightness(0.6); /* Redupkan sedikit agar teks putih kontras */
+    transform: scale(1.1); /* Untuk parallax safety */
 }
 
-.side-title {
-    color: var(--text-main);
-    font-size: clamp(3.5rem, 12vw, 9rem); /* Ukuran lebih besar & bold */
-    font-weight: 900;
-    text-transform: uppercase;
-    line-height: 0.8;
-    letter-spacing: -0.04em;
-    margin-left: -5px; /* Kompensasi kerning font Inter 900 */
-}
-
-.side-title.outline {
-    -webkit-text-stroke: 1.5px var(--text-main);
-    color: transparent;
-    opacity: 0.8;
-}
-
+/* Overlay di atas Gif, di bawah Teks */
 .hero-overlay {
     position: absolute;
     inset: 0;
-    z-index: 5; /* Di bawah teks, di atas gif */
+    z-index: 2;
     background: linear-gradient(
-        to right, 
-        rgba(8, 8, 8, 0.9) 0%, 
-        rgba(8, 8, 8, 0.4) 50%, 
+        90deg, 
+        var(--bg-color) 0%, 
+        rgba(10, 10, 10, 0.4) 60%, 
         transparent 100%
     );
 }
 
-.hero-gif {
-    position: absolute;
-    inset: 0;
+/* Konten Utama (Teks) */
+.hero-main-content {
+    position: relative;
+    z-index: 10; /* Pastikan di atas overlay */
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1; /* Paling dasar */
-    filter: grayscale(0.3) brightness(0.7); /* Redupkan sedikit agar teks "pop out" */
 }
 
+.side-title {
+    color: var(--text-main); /* Paksa warna teks putih */
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 900;
+    line-height: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+/* Fix untuk Outline agar tidak transparan total */
+.side-title.outline {
+    -webkit-text-stroke: 1.5px var(--text-main);
+    color: transparent;
+}
+
+/* Footer Info di Hero */
+.hero-info-footer {
+    position: absolute;
+    bottom: 3rem;
+    left: var(--padding-x);
+    right: var(--padding-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 10; /* Pastikan di atas overlay */
+}
+
+/* Status Dot Animation */
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #00ff00; /* Hijau tersedia */
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
 .side-title {
     position: relative; z-index: 10; font-size: clamp(3rem, 10vw, 7.5rem);
     font-weight: 900; text-transform: uppercase; line-height: 0.85;
