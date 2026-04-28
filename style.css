@@ -212,56 +212,74 @@ a:hover {
 } /* <--- Kurung penutup ini tadi hilang */
 
 /* ==========================================================================
-   4. HERO SECTION
+   4. HERO DETROIT STYLE REFINEMENT
    ========================================================================== */
-.hero {
-    min-height: 100vh;
+.hero-detroit {
+    height: 100vh;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    position: relative;
-    padding: 100px var(--padding-x) 0;
+    padding: 0 var(--padding-x);
+    overflow: hidden;
 }
 
-#canvas-3d-container {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-    opacity: 0.6;
+.hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 2;
+}
+
+.hero-line {
+    overflow: hidden; /* Penting untuk animasi reveal teks kamu nanti */
+    display: flex;
+    justify-content: center;
 }
 
 .main-title {
-    font-size: clamp(4rem, 15vw, 12rem);
+    font-size: clamp(5rem, 16vw, 15rem); /* Sangat besar ala Detroit */
     line-height: 0.85;
-    font-weight: 800;
+    margin: 0;
     text-transform: uppercase;
+    font-weight: 800;
     letter-spacing: -0.04em;
+    transition: transform 0.8s var(--ease);
 }
 
 .main-title.outline {
-    -webkit-text-stroke: 1px var(--text-main);
+    -webkit-text-stroke: 1.5px var(--text-main);
     color: transparent;
 }
 
-.hero-bottom {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: flex-end;
-    margin-top: 4rem;
-    border-top: 1px solid var(--border-color);
-    padding-top: 2rem;
+.main-title.italic {
+    font-style: italic;
+    font-weight: 300; /* Tipis dan miring memberikan kontras desain yang kuat */
 }
 
-.hero-description {
-    font-size: 1.25rem;
-    max-width: 450px;
-    color: var(--text-dim);
-}
-
-.hero-cta-group {
+/* Hero Footer Info */
+.hero-info-footer {
+    position: absolute;
+    bottom: 3rem;
+    left: 0;
+    width: 100%;
+    padding: 0 var(--padding-x);
     display: flex;
-    gap: 1.5rem;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
 }
 
 /* ==========================================================================
