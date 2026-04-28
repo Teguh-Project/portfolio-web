@@ -1,19 +1,28 @@
-/* ==========================================================================
-   1. VARIABLES & FOUNDATION
-   ========================================================================== */
+/* 
+   ==========================================================================
+   PORTFOLIO - DETROIT & SSSCRIPT THEME (OPTIMIZED V2)
+   Creative: Teguh Perwira Putra
+   ========================================================================== 
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&family=JetBrains+Mono:wght@300;400&display=swap');
+
 :root {
+    /* Color Palette */
     --bg-color: #080808;
     --bg-secondary: #0e0e0e;
     --text-main: #ffffff;
     --text-dim: #909090;
     --accent: #ff3e3e; 
     --border-color: rgba(255, 255, 255, 0.05);
-    --nav-bg: rgba(8, 8, 8, 0.7); /* Tambahan variabel untuk glassmorphism */
+    --nav-bg: rgba(8, 8, 8, 0.85);
 
+    /* Spacing & Motion */
     --padding-x: 6vw;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition: 0.4s var(--ease);
 }
 
 [data-theme="light"] {
@@ -22,22 +31,21 @@
     --text-main: #080808;
     --text-dim: #666666;
     --border-color: rgba(0, 0, 0, 0.08);
-    --nav-bg: rgba(255, 255, 255, 0.7);
+    --nav-bg: rgba(255, 255, 255, 0.85);
 }
 
 /* ==========================================================================
-   2. GLOBAL RESET & BASE STYLES
+   BASE STYLES
    ========================================================================== */
 * {
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
 }
 
-html {
-    scroll-behavior: smooth;
-    background-color: var(--bg-color);
+html { 
+    scroll-behavior: smooth; 
+    background-color: var(--bg-color); 
 }
 
 body {
@@ -45,42 +53,33 @@ body {
     color: var(--text-main);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    line-height: 1.5;
-    transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+    line-height: 1.4;
+    transition: background-color var(--transition), color var(--transition);
 }
 
-/* Links & Selection */
-a, a:visited, a:active, a:focus {
-    color: inherit !important;
-    text-decoration: none !important;
-    outline: none !important;
-    transition: 0.3s var(--ease);
-    -webkit-tap-highlight-color: transparent;
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: none; /* Cursor handle by JS */
 }
 
-a:hover {
-    color: var(--accent) !important;
-}
+a:hover { color: var(--accent); }
 
-::selection {
-    background: var(--accent);
-    color: #ffffff;
-}
+::selection { background: var(--accent); color: #fff; }
 
 /* ==========================================================================
-   3. CORE UI COMPONENTS (NAV, CURSOR, OVERLAYS)
+   CORE UI (OVERLAYS & CURSOR)
    ========================================================================== */
-/* Noise Texture */
 .noise-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background-image: url('https://grainy-gradients.vercel.app/noise.svg');
     opacity: 0.03;
-    z-index: 9999;
+    z-index: 500; /* Di bawah navbar (1000) */
     pointer-events: none;
 }
 
-/* Custom Cursor */
 .custom-cursor {
     width: 8px; height: 8px; 
     background: var(--accent);
@@ -92,244 +91,187 @@ a:hover {
     mix-blend-mode: difference;
 }
 
-.theme-toggle { left: var(--padding-x); }
-.back-to-top { 
-    right: var(--padding-x); 
-    opacity: 0; 
-    pointer-events: none; 
-}
-.back-to-top.show { opacity: 1; pointer-events: auto; }
-
-.theme-toggle:hover, .back-to-top:hover {
-    background: var(--accent);
-    color: white;
-}
-
 /* ==========================================================================
-   UPDATED NAVBAR (REFINED & FIXED)
+   NAVBAR (REFINED GLASSMORPHISM)
    ========================================================================== */
 .navbar {
     position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%;
-    z-index: 1000;
+    top: 0; left: 0; width: 100%;
     height: 80px;
+    z-index: 1000;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--border-color);
-    background-color: transparent; /* Pastikan awal transparan */
-    transition: background-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
 }
 
-/* Efek saat scroll (Pastikan class 'scrolled' ditambah via JS) */
 .navbar.scrolled {
     background-color: var(--nav-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    height: 70px;
 }
 
 .nav-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 var(--padding-x);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    padding: 0 var(--padding-x);
-    max-width: 1400px;
-    margin: 0 auto;
-    position: relative; /* Penting untuk posisi absolute menu */
+    position: relative;
 }
 
-/* Nav Menu (Icomat Style: Absolute Center) */
 .nav-menu {
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem; /* Beri jarak antar elemen di kanan */
+.nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.6;
 }
 
-/* Theme Toggle Button */
+.nav-link:hover { opacity: 1; }
+
 .theme-toggle-nav {
-    background: transparent;
+    background: none;
     border: 1px solid var(--border-color);
     color: var(--text-main);
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    padding: 0.5rem 0.8rem;
-    cursor: pointer;
+    font-size: 0.6rem;
+    padding: 0.6rem 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    transition: 0.3s var(--ease);
+    transition: var(--transition);
 }
 
 .theme-toggle-nav:hover {
     background: var(--text-main);
     color: var(--bg-color);
-    border-color: var(--text-main);
 }
-
-/* Mobile Toggle */
-.mobile-menu-toggle {
-    display: none; /* Sembunyikan di desktop */
-    flex-direction: column;
-    gap: 6px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
-
-.mobile-menu-toggle .line {
-    width: 22px;
-    height: 1px;
-    background: var(--text-main);
-    transition: 0.3s var(--ease);
-}
-
-/* Responsif Fix */
-.noise-overlay {
-    z-index: 999; /* Di bawah navbar */
-}
-
-/* --- MEDIA QUERIES (FIXED BRACKETS) --- */
-@media (max-width: 992px) {
-    .nav-menu { 
-        display: none; 
-    }
-    .mobile-menu-toggle { 
-        display: flex; 
-    }
-    .nav-status { 
-        display: none; 
-    }
-} /* <--- Kurung penutup ini tadi hilang */
 
 /* ==========================================================================
-   4. HERO DETROIT STYLE REFINEMENT
+   HERO DETROIT (THE MASSIVE TYPE)
    ========================================================================== */
 .hero-detroit {
     height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 0 var(--padding-x);
+    position: relative;
     overflow: hidden;
+    padding: 0 var(--padding-x);
 }
 
-.hero-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.hero-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-gif {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+    filter: grayscale(1);
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent, var(--bg-color) 95%);
     z-index: 2;
 }
 
-.hero-line {
-    overflow: hidden; /* Penting untuk animasi reveal teks kamu nanti */
+.hero-wrapper {
+    position: relative;
+    z-index: 5;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-title {
-    font-size: clamp(5rem, 16vw, 15rem); /* Sangat besar ala Detroit */
-    line-height: 0.85;
-    margin: 0;
-    text-transform: uppercase;
+    font-size: clamp(4rem, 18vw, 18rem);
+    line-height: 0.8;
     font-weight: 800;
-    letter-spacing: -0.04em;
-    transition: transform 0.8s var(--ease);
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    text-align: center;
 }
 
 .main-title.outline {
-    -webkit-text-stroke: 1.5px var(--text-main);
+    -webkit-text-stroke: 1px var(--text-main);
     color: transparent;
 }
 
 .main-title.italic {
     font-style: italic;
-    font-weight: 300; /* Tipis dan miring memberikan kontras desain yang kuat */
+    font-weight: 300;
 }
 
-/* Hero Footer Info */
 .hero-info-footer {
     position: absolute;
     bottom: 3rem;
-    left: 0;
-    width: 100%;
+    left: 0; width: 100%;
     padding: 0 var(--padding-x);
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.info-text {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
+    z-index: 5;
 }
 
 /* ==========================================================================
-   5. BENTO WORK GRID & SECTIONS
+   WORK & BENTO GRID
    ========================================================================== */
 .section {
-    padding: 10rem var(--padding-x);
+    padding: 8rem var(--padding-x);
     border-top: 1px solid var(--border-color);
 }
 
 .section-header {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
     margin-bottom: 5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
 }
 
-.section-index { font-family: var(--font-mono); color: var(--accent); }
-
-.section-title {
-    font-size: clamp(2rem, 5vw, 4rem);
-    text-transform: uppercase;
-    font-weight: 800;
-}
+.section-index { color: var(--accent); font-family: var(--font-mono); font-size: 0.9rem; }
+.section-title { font-size: clamp(2.5rem, 6vw, 5rem); text-transform: uppercase; font-weight: 800; }
 
 .work-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .project-card {
     background: var(--bg-secondary);
-    overflow: hidden;
     position: relative;
 }
 
 .project-card.featured { grid-column: span 2; }
 
 .work-img-wrapper {
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/10;
     overflow: hidden;
-    position: relative;
 }
 
-.project-card img {
+.work-img-wrapper img {
     width: 100%; height: 100%;
     object-fit: cover;
     filter: grayscale(1);
-    transition: 0.8s var(--ease);
+    transition: transform 1s var(--ease), filter 0.8s var(--ease);
 }
 
 .project-card:hover img {
@@ -338,246 +280,96 @@ a:hover {
 }
 
 .project-meta {
-    padding: 1.5rem;
+    padding: 2rem 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* ==========================================================================
-   6. SERVICES (LIST STYLE)
-   ========================================================================== */
-.service-item {
-    border-top: 1px solid var(--border-color);
-    padding: 3rem 0;
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr;
-    align-items: center;
-    transition: 0.4s var(--ease);
-}
-
-.service-item:hover {
-    padding-left: 1.5rem;
-    color: var(--accent);
-}
-
-.service-num { font-family: var(--font-mono); font-size: 0.8rem; }
-.service-item h3 { font-size: 2rem; text-transform: uppercase; }
-.service-item p { color: var(--text-dim); }
-
-/* ==========================================================================
-   FOOTER (MINIMALIST REFINEMENT)
-   ========================================================================== */
-.footer {
-    padding: 3rem 0;
-    background-color: var(--bg-color);
-    border-top: 1px solid var(--border-color);
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.footer-nav-minimal {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-nav-minimal a {
-    color: var(--text-dim) !important;
-    transition: color 0.3s var(--ease);
-}
-
-.footer-nav-minimal a:hover {
-    color: var(--text-main) !important;
-}
-
-.hover-underline {
-    position: relative;
-    padding-bottom: 2px;
-}
-
-.hover-underline::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--accent);
-    transition: width 0.4s var(--ease);
-}
-
-.hover-underline:hover::after {
-    width: 100%;
-}
-
-.opacity-50 {
-    opacity: 0.5;
-}
-
-/* Responsive Footer */
-@media (max-width: 992px) {
-    .footer-content {
-        flex-direction: column;
-        gap: 2rem;
-        text-align: center;
-    }
-    
-    .footer-center {
-        display: none; /* Sembunyikan slogan di mobile agar tidak penuh */
-    }
-}
-/* ==========================================================================
-   8. UTILITIES & RESPONSIVE
-   ========================================================================== */
-.label-mono {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-    text-transform: uppercase;
-}
-
-@media (max-width: 992px) {
-    .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-cta-group { justify-content: flex-start; }
-    .service-item { grid-template-columns: 1fr; gap: 1rem; }
-    .work-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: span 1; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .nav-menu { display: none; }
-}
-
-@media (max-width: 768px) {
-    .section { padding: 6rem var(--padding-x); }
-    .main-title { font-size: 4rem; }
-}
-.back-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: var(--padding-x); /* Mengikuti padding layar yang kamu buat */
-    padding: 0.8rem 1.2rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    background: var(--text-main);
-    color: var(--bg-color);
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-    opacity: 0; /* Awalnya tidak terlihat */
-    pointer-events: none;
-    transition: 0.3s var(--ease);
-}
-
-/* Class ini akan dipicu oleh JavaScript saat user scroll ke bawah */
-.back-to-top.show {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.back-to-top:hover {
-    background: var(--accent);
-    color: white;
-}
-
-/* ==========================================================================
-   CONTACT SECTION (SSSCRIPT INSPIRED)
+   CONTACT (SSSCRIPT STYLE)
    ========================================================================== */
 .contact-section {
-    padding: 10rem var(--padding-x) 5rem;
-    background-color: var(--bg-color);
-    border-top: 1px solid var(--border-color);
+    padding: 10rem var(--padding-x) 4rem;
 }
 
-.contact-header {
-    margin-bottom: 2rem;
-}
-
-.contact-header .massive-type {
-    font-size: clamp(3rem, 12vw, 10rem);
-    line-height: 0.9;
-    margin-top: 1.5rem;
+.massive-type {
+    font-size: clamp(3.5rem, 14vw, 12rem);
+    line-height: 0.85;
     font-weight: 800;
-}
-
-.contact-main {
-    margin: 4rem 0 8rem;
+    text-transform: uppercase;
+    letter-spacing: -0.04em;
 }
 
 .giant-email-link {
-    font-size: clamp(2rem, 8vw, 7rem);
-    font-family: var(--font-sans);
-    font-weight: 800;
-    color: var(--text-main);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 2rem;
-    transition: var(--ease) 0.4s;
-    border-bottom: 2px solid transparent;
-    width: fit-content;
-}
-
-.giant-email-link .arrow-icon {
-    font-weight: 300;
-    transition: transform 0.4s var(--ease);
+    font-size: clamp(1.5rem, 6vw, 6rem);
+    font-weight: 800;
+    margin: 4rem 0 8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--border-color);
 }
 
 .giant-email-link:hover {
-    color: var(--accent) !important;
     border-bottom-color: var(--accent);
 }
 
-.giant-email-link:hover .arrow-icon {
-    transform: translate(15px, -15px);
-}
-
-.contact-footer {
+/* ==========================================================================
+   FOOTER & UTILITIES
+   ========================================================================== */
+.footer-info-row {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--border-color);
-    padding-top: 3rem;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-color);
 }
 
-.footer-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.info-value {
+.label-mono {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
 }
 
-.social-links {
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: var(--padding-x);
+    width: 50px; height: 50px;
+    background: var(--text-main);
+    color: var(--bg-color);
+    border: none;
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
 }
 
-.social-link {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    opacity: 0.6;
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { background: var(--accent); color: #fff; transform: translateY(-5px); }
+
+/* ==========================================================================
+   RESPONSIVE FIXES
+   ========================================================================== */
+@media (max-width: 992px) {
+    .nav-menu { display: none; }
+    .work-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .footer-info-row { grid-template-columns: 1fr; }
+    .hero-info-footer { flex-direction: column; align-items: flex-start; gap: 2rem; }
 }
 
-.social-link:hover {
-    opacity: 1;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-    .contact-footer {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    
-    .giant-email-link {
-        gap: 1rem;
-    }
+    :root { --padding-x: 5vw; }
+    .main-title { font-size: 15vw; } /* Tetap besar tapi proporsional */
+    .section { padding: 5rem var(--padding-x); }
+    .giant-email-link { gap: 1rem; }
 }
