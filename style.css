@@ -1,44 +1,31 @@
 /* ----------------------------------------------------------------
-   1. VARIABLES & RESET
+   1. VARIABLES & RESET - UPDATED
 ------------------------------------------------------------------- */
 :root {
     --bg-color: #0a0a0a;
-    --text-color: #ffffff;
+    --text-main: #ffffff;      /* Digunakan di Footer */
+    --text-color: #ffffff;     /* Digunakan di Body */
+    --accent: #e0e0e0;         /* Digunakan di Footer hover */
     --accent-color: #e0e0e0;
     --secondary-text: rgba(255, 255, 255, 0.6);
     --nav-bg: rgba(10, 10, 10, 0.8);
     --border-color: rgba(255, 255, 255, 0.1);
     --font-main: 'Inter', sans-serif;
+    --font-sans: 'Inter', sans-serif; /* Alias untuk Hero */
     --font-mono: 'JetBrains Mono', monospace;
-    --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --padding-x: 5%;           /* Penting untuk Hero & Footer */
+    --ease: cubic-bezier(0.16, 1, 0.3, 1); /* Digunakan di semua animasi */
+    --transition: all 0.5s var(--ease);
 }
 
-/* Light Mode Variables */
+/* Light Mode Variables - UPDATED */
 [data-theme="light"] {
     --bg-color: #f5f5f5;
+    --text-main: #0a0a0a;      /* Agar teks footer jadi hitam di mode terang */
     --text-color: #0a0a0a;
     --secondary-text: rgba(10, 10, 10, 0.6);
     --nav-bg: rgba(245, 245, 245, 0.8);
     --border-color: rgba(0, 0, 0, 0.1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: var(--font-main);
-    line-height: 1.5;
-    overflow-x: hidden;
-    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* ----------------------------------------------------------------
@@ -350,30 +337,117 @@ body {
     font-size: 12px;
 }
 
-/* ----------------------------------------------------------------
-   8. FOOTER & UI ELEMENTS
-------------------------------------------------------------------- */
-.footer { padding: 40px 5%; border-top: 1px solid var(--border-color); }
-.footer-content { display: flex; justify-content: space-between; align-items: center; }
+/* 
+   ==========================================================================
+   FOOTER — MINIMALIST & CLEAN
+   ========================================================================== 
+*/
+
+.footer {
+    width: 100%;
+    padding: 60px 0 40px; /* Ruang napas yang cukup di bawah */
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.6s var(--ease);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--padding-x);
+}
+
+/* Typography Footer */
+.footer .label-mono {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.opacity-50 {
+    opacity: 0.5;
+}
+
+/* Hover Effect Back to Top */
+.hover-underline {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent);
+    transform-origin: bottom right;
+    transition: transform 0.4s var(--ease);
+}
+
+.hover-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* 
+   ==========================================================================
+   FLOATING ELEMENTS (BACK TO TOP BUTTON)
+   ========================================================================== 
+*/
 
 .back-to-top {
     position: fixed;
-    bottom: 30px; right: 30px;
-    width: 50px; height: 50px;
-    background: var(--text-color);
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    background-color: var(--text-main);
     color: var(--bg-color);
     border: none;
     border-radius: 50%;
-    cursor: pointer;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    z-index: 999;
+    cursor: none; /* Tetap pakai cursor custom kamu */
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition);
+    transform: translateY(20px);
+    transition: all 0.4s var(--ease);
 }
 
-.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: var(--accent);
+    transform: scale(1.1);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .desktop-only {
+        display: none;
+    }
+}
 
 /* ----------------------------------------------------------------
    9. RESPONSIVE
