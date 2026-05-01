@@ -113,7 +113,43 @@ a:hover { color: var(--accent); }
     color: var(--text-main); font-family: var(--font-mono); font-size: 0.65rem;
     padding: 0.6rem 1.2rem; cursor: pointer; transition: all 0.4s var(--ease);
 }
+/* ==========================================================================
+   NAVBAR LOGO STYLING
+   ========================================================================== */
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
 
+.logo-img {
+    height: 32px; /* Sesuaikan tinggi logo kamu */
+    width: auto;  /* Biar tidak gepeng */
+    object-fit: contain;
+    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+
+/* Hover Effect: Logo sedikit membesar */
+.logo:hover .logo-img {
+    transform: scale(1.05);
+}
+
+/* LOGO THEME SWITCHING LOGIC */
+/* Default: Sembunyikan logo light saat di dark mode */
+.logo-light { display: none; }
+.logo-dark { display: block; }
+
+/* Saat data-theme="light", tukar logonya */
+[data-theme="light"] .logo-dark { display: none; }
+[data-theme="light"] .logo-light { display: block; }
+
+/* Filter Alternatif: Jika kamu cuma punya 1 logo putih, 
+   tapi ingin jadi hitam otomatis saat light mode tanpa ganti file gambar */
+/*
+[data-theme="light"] .logo-img {
+    filter: invert(1);
+}
+*/
 /* ==========================================================================
    HERO DETROIT - VISIBILITY & LAYOUT FIX
    ========================================================================== */
