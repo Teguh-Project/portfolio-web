@@ -89,30 +89,45 @@ class PortfolioEngine {
         });
     }
 
-    // 3. NAVIGATION: Efek Scroll & Hilang Saat Scroll Bawah
-    initNavigation() {
-        const nav = document.querySelector('.navbar');
-        let lastScroll = 0;
+   // Ganti atau update fungsi initNavigation di dalam class PortfolioEngine:
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
+initNavigation() {
+    const nav = document.querySelector('.navbar');
+    const btnUp = document.getElementById('backToTop');
+    let lastScroll = 0;
 
-            // Efek background saat scroll
-            if (currentScroll > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
 
-            // Sembunyikan navbar saat scroll ke bawah, munculkan saat ke atas
-            if (currentScroll > lastScroll && currentScroll > 200) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            lastScroll = currentScroll;
-        }, { passive: true });
-    }
+        // 1. Navbar Effect
+        if (currentScroll > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+
+        // 2. Hide/Show Navbar on Scroll
+        if (currentScroll > lastScroll && currentScroll > 500) {
+            nav.style.transform = 'translateY(-100%)';
+        } else {
+            nav.style.transform = 'translateY(0)';
+        }
+
+        // 3. Back to Top Button Logic
+        if (currentScroll > 800) {
+            btnUp?.classList.add('show');
+        } else {
+            btnUp?.classList.remove('show');
+        }
+
+        lastScroll = currentScroll;
+    }, { passive: true });
+
+    // Event Klik Back to Top
+    btnUp?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
     // 4. REVEAL: Animasi Muncul Saat Scroll (Intersection Observer)
     initReveal() {
