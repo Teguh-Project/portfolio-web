@@ -105,45 +105,98 @@ a {
     color: var(--bg-color); 
 }
 
-/* 5. HERO SECTION */
-.hero-editorial {
-    min-height: 100vh; padding: 140px var(--padding-x) 60px;
-    display: flex; flex-direction: column; justify-content: space-between;
+/* HERO BRUTAL — SPORTY STYLE */
+.hero-brutal {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0 var(--padding-x);
 }
 
-.hero-main-content {
-    display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;
+/* GIF Background Fullscreen */
+.hero-bg-visual {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
 }
 
-.side-title {
-    font-family: var(--font-serif); 
-    font-size: clamp(3.5rem, 10vw, 8.5rem);
-    line-height: 0.85; 
-    text-transform: uppercase; 
+.hero-gif-bg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(1) brightness(0.4); /* Memberi kesan dramatis & manly */
+}
+
+.hero-vignette {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+}
+
+/* Top Bar Info */
+.hero-top-info {
+    position: absolute;
+    top: 120px; /* Di bawah navbar */
+    left: 0; width: 100%;
+    padding: 0 var(--padding-x);
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.label-mono-bold {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+/* Typography Sporty & Tough */
+.sporty-title {
+    font-family: var(--font-sans); /* Pakai Inter agar lebih tegas */
+    font-size: clamp(4rem, 15vw, 12rem);
+    font-weight: 900; /* Super Bold */
+    line-height: 0.8;
+    letter-spacing: -0.05em; /* Rapat agar terlihat solid */
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.sporty-title.outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-main);
+}
+
+/* Memastikan teks tetap terbaca di atas GIF */
+[data-theme="dark"] .sporty-title { color: #ffffff; }
+[data-theme="dark"] .sporty-title.outline { -webkit-text-stroke: 2px #ffffff; }
+/* Update sedikit bagian ini agar kontras di kedua tema */
+.sporty-title {
+    font-family: var(--font-sans);
+    font-size: clamp(4rem, 15vw, 12rem);
     font-weight: 900;
-    transition: color 0.6s var(--ease), -webkit-text-stroke 0.6s var(--ease);
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    /* Tambahkan ini: */
+    color: #ffffff; 
 }
 
-.side-title.outline { -webkit-text-stroke: 1px var(--text-main); color: transparent; }
-.side-title.italic { font-style: italic; font-weight: 400; }
-
-.hero-visual-layer { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; border-radius: 2px; }
-.hero-gif { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 1s var(--ease); }
-.hero-visual-layer:hover .hero-gif { filter: grayscale(0); transform: scale(1.05); }
-
-/* 6. WORK GRID & CARDS */
-.section { padding: 10rem var(--padding-x); border-top: 1px solid var(--border-color); }
-
-.work-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4rem 2rem; }
-.project-card { grid-column: span 6; transition: transform 0.6s var(--ease); }
-.project-card.featured { grid-column: span 12; }
-
-.work-img-wrapper { 
-    aspect-ratio: 16/10; overflow: hidden; 
-    background: var(--border-color); margin-bottom: 1.5rem;
+/* Dan pastikan outline-nya juga konsisten di atas background gelap */
+.sporty-title.outline {
+    color: transparent;
+    -webkit-text-stroke: 2px #ffffff;
 }
-.work-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s var(--ease); }
-
 /* 7. CONTACT & FOOTER */
 .massive-type { 
     font-family: var(--font-serif); 
@@ -204,4 +257,26 @@ a {
     .hero-main-content { grid-template-columns: 1fr; gap: 2rem; }
     .project-card { grid-column: span 12; }
     .massive-type { margin-bottom: 2rem; }
+}
+/* ANIMASI TITIK KEDIP (STATUS) */
+.status-dot-blink {
+    color: #00ff00; /* Warna hijau neon agar standout */
+    margin-right: 5px;
+    animation: pulse-blink 1.5s infinite ease-in-out;
+    display: inline-block;
+}
+
+@keyframes pulse-blink {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
