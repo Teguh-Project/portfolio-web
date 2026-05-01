@@ -1,11 +1,12 @@
 /* 
    ==========================================================================
-   TEGUH P. — FINAL EDITORIAL CSS v3.1
-   Focus: Zero Blue Links, Stable Layout, Perfect Alignment
+   TEGUH P. — ULTIMATE SYNC CSS v4.0
+   Fix: Reliable Theme Switching & Back-to-Top Stability
    ========================================================================== 
 */
 
-:root {
+/* 1. DEFINE VARIABLES FOR BOTH THEMES */
+:root, [data-theme="light"] {
     --bg-color: #f9f7f2;
     --text-main: #1a1a1a;
     --text-dim: #6b6b6b;
@@ -28,7 +29,7 @@
     --border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* BASE RESET */
+/* 2. BASE RESET & GLOBAL TRANSITION */
 html { scroll-behavior: smooth; }
 * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
@@ -36,16 +37,17 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-sans);
-    transition: background 0.6s var(--ease);
+    /* Transisi hanya pada properti warna agar performa tetap ringan */
+    transition: background-color 0.6s var(--ease), color 0.6s var(--ease);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
-/* LINK GLOBAL RESET (SOLUSI SCREENSHOT BIRU) */
+/* 3. LINK & INTERACTIVE ELEMENTS */
 a {
     color: inherit;
     text-decoration: none;
-    transition: color 0.3s var(--ease), opacity 0.3s var(--ease);
+    transition: 0.3s var(--ease);
 }
 
 /* CUSTOM CURSOR */
@@ -57,20 +59,22 @@ a {
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    transform: translate(-50%, -50%); /* Menjaga titik di tengah mouse */
+    transform: translate(-50%, -50%);
     transition: width 0.3s, height 0.3s, background 0.3s;
 }
 
-/* NAVBAR */
+/* 4. NAVBAR */
 .navbar {
     position: fixed; top: 0; width: 100%; height: 90px;
     z-index: 1000; display: flex; align-items: center;
-    transition: all 0.5s var(--ease);
+    transition: transform 0.5s var(--ease), background 0.5s var(--ease), height 0.5s var(--ease);
 }
 
 .navbar.scrolled {
-    height: 70px; background: var(--nav-bg); 
-    backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color);
+    height: 70px; 
+    background: var(--nav-bg); 
+    backdrop-filter: blur(15px); 
+    border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
@@ -78,19 +82,30 @@ a {
     display: flex; justify-content: space-between; align-items: center;
 }
 
-.logo-img { height: 24px; width: auto; z-index: 1001; }
+.logo-img { height: 24px; width: auto; z-index: 1001; transition: filter 0.6s var(--ease); }
+
+/* Logo Inversion Logic */
 [data-theme="light"] .logo-img { filter: invert(1); }
+[data-theme="dark"] .logo-img { filter: invert(0); }
 
 .theme-toggle-nav {
-    background: transparent; border: 1px solid var(--border-color);
-    color: var(--text-main); font-family: var(--font-mono);
-    font-size: 0.6rem; padding: 5px 12px; border-radius: 20px;
-    cursor: none; transition: 0.3s;
+    background: transparent; 
+    border: 1px solid var(--border-color);
+    color: var(--text-main); 
+    font-family: var(--font-mono);
+    font-size: 0.6rem; 
+    padding: 6px 14px; 
+    border-radius: 20px;
+    cursor: none; 
+    transition: all 0.3s;
 }
 
-.theme-toggle-nav:hover { background: var(--text-main); color: var(--bg-color); }
+.theme-toggle-nav:hover { 
+    background: var(--text-main); 
+    color: var(--bg-color); 
+}
 
-/* HERO SECTION */
+/* 5. HERO SECTION */
 .hero-editorial {
     min-height: 100vh; padding: 140px var(--padding-x) 60px;
     display: flex; flex-direction: column; justify-content: space-between;
@@ -101,9 +116,12 @@ a {
 }
 
 .side-title {
-    font-family: var(--font-serif); font-size: clamp(3.5rem, 10vw, 8.5rem);
-    line-height: 0.85; text-transform: uppercase; font-weight: 900;
-    margin-bottom: 0.5rem;
+    font-family: var(--font-serif); 
+    font-size: clamp(3.5rem, 10vw, 8.5rem);
+    line-height: 0.85; 
+    text-transform: uppercase; 
+    font-weight: 900;
+    transition: color 0.6s var(--ease), -webkit-text-stroke 0.6s var(--ease);
 }
 
 .side-title.outline { -webkit-text-stroke: 1px var(--text-main); color: transparent; }
@@ -113,11 +131,11 @@ a {
 .hero-gif { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 1s var(--ease); }
 .hero-visual-layer:hover .hero-gif { filter: grayscale(0); transform: scale(1.05); }
 
-/* WORK GRID */
+/* 6. WORK GRID & CARDS */
 .section { padding: 10rem var(--padding-x); border-top: 1px solid var(--border-color); }
 
 .work-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4rem 2rem; }
-.project-card { grid-column: span 6; }
+.project-card { grid-column: span 6; transition: transform 0.6s var(--ease); }
 .project-card.featured { grid-column: span 12; }
 
 .work-img-wrapper { 
@@ -125,9 +143,8 @@ a {
     background: var(--border-color); margin-bottom: 1.5rem;
 }
 .work-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s var(--ease); }
-.project-card:hover img { transform: scale(1.03); }
 
-/* CONTACT SECTION (SOLUSI WARNA BIRU) */
+/* 7. CONTACT & FOOTER */
 .massive-type { 
     font-family: var(--font-serif); 
     font-size: clamp(4rem, 15vw, 11rem); 
@@ -147,25 +164,7 @@ a {
     border-bottom-color: var(--accent);
 }
 
-.contact-footer {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-top: 10rem; padding-bottom: 2rem;
-}
-
-/* UTILITIES */
-.label-mono { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
-.reveal-init { opacity: 0; transform: translateY(30px); transition: 1.2s var(--ease); }
-.reveal-init.is-visible { opacity: 1; transform: translateY(0); }
-
-/* RESPONSIVE FIXES */
-@media (max-width: 992px) {
-    :root { --padding-x: 5vw; }
-    .hero-main-content { grid-template-columns: 1fr; gap: 2rem; }
-    .project-card { grid-column: span 12; }
-    .nav-menu.desktop-only { display: none; }
-    .massive-type { margin-bottom: 2rem; }
-}
-/* BACK TO TOP BUTTON */
+/* 8. BACK TO TOP BUTTON */
 .back-to-top {
     position: fixed;
     bottom: 40px;
@@ -180,7 +179,7 @@ a {
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.5s var(--ease);
-    cursor: none; /* Tetap gunakan kursor custom */
+    cursor: none;
 }
 
 .back-to-top.show {
@@ -189,7 +188,20 @@ a {
     transform: translateY(0);
 }
 
-/* Memastikan transisi warna ke seluruh elemen saat ganti tema */
-body, section, nav, div, h1, h2, h3, p, span, a {
-    transition: background-color 0.6s var(--ease), color 0.6s var(--ease), border-color 0.6s var(--ease);
+/* 9. UTILITIES & ANIMATIONS */
+.label-mono { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+.reveal-init { 
+    opacity: 0; 
+    transform: translateY(30px); 
+    transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); 
+}
+.reveal-init.is-visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    :root { --padding-x: 5vw; }
+    .hero-main-content { grid-template-columns: 1fr; gap: 2rem; }
+    .project-card { grid-column: span 12; }
+    .massive-type { margin-bottom: 2rem; }
 }
