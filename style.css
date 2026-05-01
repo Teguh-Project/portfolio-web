@@ -1,48 +1,49 @@
 /* 
    ==========================================================================
-   PORTFOLIO FINAL - DETROIT & SSSCRIPT THEME (OPTIMIZED)
+   PORTFOLIO REDESIGN - NEEDNAP INSPIRED (2026)
    Creative: Teguh Perwira Putra
-   Update: Fix Layout Shift & Asset 404
+   Style: High-End Editorial, Minimalist, Serif Contrast
    ========================================================================== 
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Import Font: Playfair Display (Serif) & Inter (Sans) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap');
 
 :root {
-    /* Color Palette - Dark Mode (Default) */
-    --bg-color: #080808;
-    --bg-secondary: #121212;
-    --text-main: #ffffff;
-    --text-dim: #909090;
-    --accent: #ff3e3e; 
-    --nav-bg: rgba(8, 8, 8, 0.85);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --overlay-color: rgba(8, 8, 8, 0.8);
-
-    /* System */
-    --padding-x: 6vw;
+    /* Neednap Inspired Palette - Cream & Ink */
+    --bg-color: #f9f7f2; /* Warm Cream */
+    --bg-secondary: #f1eee6;
+    --text-main: #1a1a1a; /* Soft Ink Black */
+    --text-dim: #6b6b6b;
+    --accent: #c5a38d; /* Muted Bronze/Gold */
+    --nav-bg: rgba(249, 247, 242, 0.85);
+    --border-color: rgba(26, 26, 26, 0.08);
+    
+    /* Typography */
+    --font-serif: 'Playfair Display', serif;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --transition: 0.5s var(--ease);
+    
+    /* System */
+    --padding-x: 8vw;
+    --ease: cubic-bezier(0.2, 1, 0.3, 1);
+    --transition: 0.6s var(--ease);
 }
 
-[data-theme="light"] {
-    --bg-color: #ffffff;
-    --bg-secondary: #f4f4f4;
-    --text-main: #080808;
-    --text-dim: #606060;
-    --nav-bg: rgba(255, 255, 255, 0.85);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --overlay-color: rgba(255, 255, 255, 0.75);
+[data-theme="dark"] {
+    --bg-color: #0d0d0d;
+    --bg-secondary: #141414;
+    --text-main: #e5e5e5;
+    --text-dim: #888888;
+    --nav-bg: rgba(13, 13, 13, 0.85);
+    --border-color: rgba(255, 255, 255, 0.08);
 }
 
 /* ==========================================================================
-   BASE STYLES (THE FIX)
+   BASE STYLES
    ========================================================================== */
 * {
-    margin: 0; padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -50,45 +51,30 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-sans);
+    line-height: 1.6;
     overflow-x: hidden;
-    line-height: 1.4;
     transition: background-color var(--transition), color var(--transition);
 }
 
-/* Mencegah link menjadi biru secara global */
-a {
-    color: var(--text-main);
-    text-decoration: none;
-    transition: var(--transition);
-    cursor: none; /* Karena kita pakai custom cursor */
-}
-
-a:hover { color: var(--accent); }
-
-/* Grain Overlay Tanpa File Eksternal */
-.noise-overlay {
-    position: fixed; inset: 0; z-index: 9999; opacity: 0.04; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
+/* Custom Cursor - Refined */
 .custom-cursor {
-    position: fixed; width: 10px; height: 10px; background: var(--accent);
+    position: fixed; width: 8px; height: 8px; background: var(--text-main);
     border-radius: 50%; pointer-events: none; z-index: 10000;
-    mix-blend-mode: difference; transition: width 0.3s var(--ease), height 0.3s var(--ease);
+    transition: transform 0.2s var(--ease);
 }
 
 /* ==========================================================================
-   NAVBAR (FIXED LAYOUT SHIFT)
+   NAVBAR - MINIMALIST EDITORIAL
    ========================================================================== */
 .navbar {
-    position: fixed; top: 0; left: 0; width: 100%; height: 90px;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100px;
     display: flex; align-items: center; z-index: 1000;
-    transition: all 0.5s var(--ease);
+    transition: height 0.4s var(--ease), background 0.4s var(--ease);
 }
 
 .navbar.scrolled {
-    height: 70px; background: var(--nav-bg); backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color);
+    height: 80px; background: var(--nav-bg); 
+    backdrop-filter: blur(20px); border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
@@ -96,210 +82,123 @@ a:hover { color: var(--accent); }
     display: flex; justify-content: space-between; align-items: center;
 }
 
-.nav-menu {
-    position: absolute; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 3rem;
-}
-
 .nav-link {
-    font-family: var(--font-mono); font-size: 0.7rem;
-    letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6;
+    font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-main);
+    opacity: 0.5; margin-left: 2.5rem; transition: opacity 0.3s var(--ease);
 }
 
 .nav-link:hover { opacity: 1; }
 
-.theme-toggle-nav {
-    background: transparent; border: 1px solid var(--border-color);
-    color: var(--text-main); font-family: var(--font-mono); font-size: 0.65rem;
-    padding: 0.6rem 1.2rem; cursor: pointer; transition: all 0.4s var(--ease);
-}
 /* ==========================================================================
-   NAVBAR LOGO STYLING
-   ========================================================================== */
-.logo {
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.logo-img {
-    height: 32px; /* Sesuaikan tinggi logo kamu */
-    width: auto;  /* Biar tidak gepeng */
-    object-fit: contain;
-    transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
-}
-
-/* Hover Effect: Logo sedikit membesar */
-.logo:hover .logo-img {
-    transform: scale(1.05);
-}
-
-/* LOGO THEME SWITCHING LOGIC */
-/* Default: Sembunyikan logo light saat di dark mode */
-.logo-light { display: none; }
-.logo-dark { display: block; }
-
-/* Saat data-theme="light", tukar logonya */
-[data-theme="light"] .logo-dark { display: none; }
-[data-theme="light"] .logo-light { display: block; }
-
-/* Filter Alternatif: Jika kamu cuma punya 1 logo putih, 
-   tapi ingin jadi hitam otomatis saat light mode tanpa ganti file gambar */
-/*
-[data-theme="light"] .logo-img {
-    filter: invert(1);
-}
-*/
-/* ==========================================================================
-   HERO DETROIT - VISIBILITY & LAYOUT FIX
+   HERO - EDITORIAL STYLE
    ========================================================================== */
 .hero-detroit {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    padding: 0 var(--padding-x);
-    background: #000; /* Warna dasar jika gif belum load */
+    height: 100vh; display: flex; align-items: center;
+    padding: 0 var(--padding-x); background: var(--bg-color);
 }
 
-/* Container Background */
+.hero-main-content { position: relative; z-index: 10; width: 100%; }
+
+.side-title {
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 12vw, 10rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-style: italic; /* Signature Neednap style */
+}
+
+.side-title.outline {
+    font-style: normal;
+    font-weight: 400;
+    -webkit-text-stroke: 1px var(--text-main);
+    color: transparent;
+    opacity: 0.3;
+}
+
+.hero-description {
+    max-width: 400px; margin-top: 2rem;
+    font-size: 0.9rem; color: var(--text-dim);
+    text-transform: none; letter-spacing: 0;
+}
+
+/* Hero Background (Gif as subtle element) */
 .hero-bg-wrapper {
-    position: absolute;
-    inset: 0;
-    z-index: 1; /* Paling belakang */
+    position: absolute; right: var(--padding-x); top: 50%;
+    transform: translateY(-50%);
+    width: 35vw; height: 50vh;
+    z-index: 1; overflow: hidden;
 }
 
 .hero-gif {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(0.4) brightness(0.6); /* Redupkan sedikit agar teks putih kontras */
-    transform: scale(1.1); /* Untuk parallax safety */
+    width: 100%; height: 100%; object-fit: cover;
+    filter: sepia(0.2) contrast(1.1);
 }
 
-/* Overlay di atas Gif, di bawah Teks */
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(
-        90deg, 
-        var(--bg-color) 0%, 
-        rgba(10, 10, 10, 0.4) 60%, 
-        transparent 100%
-    );
-}
-
-/* Konten Utama (Teks) */
-.hero-main-content {
-    position: relative;
-    z-index: 10; /* Pastikan di atas overlay */
-    width: 100%;
-}
-
-.side-title {
-    color: var(--text-main); /* Paksa warna teks putih */
-    font-size: clamp(3rem, 10vw, 7.5rem);
-    font-weight: 900;
-    line-height: 0.85;
-    text-transform: uppercase;
-    margin-bottom: 0.2rem;
-}
-
-/* Fix untuk Outline agar tidak transparan total */
-.side-title.outline {
-    -webkit-text-stroke: 1.5px var(--text-main);
-    color: transparent;
-}
-
-/* Footer Info di Hero */
-.hero-info-footer {
-    position: absolute;
-    bottom: 3rem;
-    left: var(--padding-x);
-    right: var(--padding-x);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    z-index: 10; /* Pastikan di atas overlay */
-}
-
-/* Status Dot Animation */
-.status-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: #00ff00; /* Hijau tersedia */
-    border-radius: 50%;
-    margin-right: 8px;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-    animation: blink 2s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-.side-title {
-    position: relative; z-index: 10; font-size: clamp(3rem, 10vw, 7.5rem);
-    font-weight: 900; text-transform: uppercase; line-height: 0.85;
-}
-
-.side-title.outline { -webkit-text-stroke: 1px var(--text-main); color: transparent; }
-
-/* Bento Grid System */
-.section { padding: 10rem var(--padding-x); border-top: 1px solid var(--border-color); }
+/* ==========================================================================
+   WORK GRID - ASYMMETRIC
+   ========================================================================== */
+.section { padding: 12rem var(--padding-x); }
 
 .work-grid {
-    display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem;
+    display: grid; grid-template-columns: repeat(12, 1fr); gap: 4rem 2rem;
 }
 
 .project-card {
-    grid-column: span 6; background: var(--bg-secondary);
-    border: 1px solid var(--border-color); overflow: hidden;
+    grid-column: span 6; background: transparent;
+    border: none; position: relative;
 }
 
-.project-card.featured { grid-column: span 12; }
+/* Membuat grid selang-seling ala Editorial */
+.project-card:nth-child(even) { margin-top: 8rem; }
 
 .work-img-wrapper {
-    aspect-ratio: 16/9; background: #1a1a1a; overflow: hidden;
+    aspect-ratio: 4/5; /* Portrait ala Majalah */
+    background: var(--bg-secondary); overflow: hidden;
+    margin-bottom: 1.5rem;
 }
 
 .work-img-wrapper img {
     width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(1); transition: 1s var(--ease);
+    transition: transform 1.2s var(--ease);
 }
 
-.project-card:hover img { filter: grayscale(0); transform: scale(1.05); }
+.project-card:hover img { transform: scale(1.05); }
 
-/* ==========================================================================
-   BACK TO TOP (REQUIRED)
-   ========================================================================== */
-.back-to-top {
-    position: fixed; bottom: 2rem; right: 2rem; width: 50px; height: 50px;
-    background: var(--text-main); color: var(--bg-color);
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%; opacity: 0; transform: translateY(20px);
-    transition: all 0.4s var(--ease); z-index: 1001; cursor: pointer;
+.project-meta h3 {
+    font-family: var(--font-serif); font-size: 1.8rem;
+    font-weight: 400; margin-bottom: 0.5rem;
 }
 
-.back-to-top.show { opacity: 1; transform: translateY(0); }
+.label-mono {
+    font-family: var(--font-mono); font-size: 0.65rem;
+    color: var(--accent); letter-spacing: 0.2em;
+}
 
 /* ==========================================================================
-   ANIMATIONS
+   REVEAL & SCROLL
    ========================================================================== */
 .reveal-init {
-    opacity: 0; transform: translateY(30px); filter: blur(10px);
-    transition: all 1s var(--ease);
+    opacity: 0; transform: translateY(50px);
+    transition: opacity 1.5s var(--ease), transform 1.5s var(--ease);
 }
 
 .reveal-init.is-visible {
-    opacity: 1; transform: translateY(0); filter: blur(0);
+    opacity: 1; transform: translateY(0);
 }
 
-@media (max-width: 992px) {
-    .nav-menu { display: none; }
+/* Back to Top - Subtle */
+.back-to-top {
+    position: fixed; bottom: 3rem; right: var(--padding-x);
+    background: transparent; color: var(--text-main);
+    border: 1px solid var(--border-color);
+    width: 45px; height: 45px; border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .project-card:nth-child(even) { margin-top: 0; }
     .project-card { grid-column: span 12; }
+    .hero-bg-wrapper { position: relative; width: 100%; height: 300px; right: 0; margin-top: 2rem; }
+    .hero-detroit { flex-direction: column; justify-content: center; padding-top: 120px; }
 }
