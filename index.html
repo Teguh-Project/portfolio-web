@@ -4,284 +4,148 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teguh Perwira Putra — Fullstack Creative Portfolio</title>
-    
-    <!-- Meta Tags SEO & Modern Web -->
-    <meta name="description" content="Portfolio of Teguh Perwira Putra, a Fullstack Creative Designer based in Malang.">
-    <meta name="theme-color" content="#0a0a0a">
-
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Typography: Inter & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body data-theme="dark">
 
-    <!-- 1. GLOBAL OVERLAYS -->
     <div class="custom-cursor"></div>
     <div class="noise-overlay"></div>
     
-    <!-- 2. NAVIGATION -->
     <nav class="navbar">
-            <div class="nav-left">
-        <a href="#home" class="logo">
-            <!-- Logo untuk Dark Mode -->
-            <img src="assets/images/logo.png" alt="Teguh Logo" class="logo-img logo-dark">
-            <!-- Logo untuk Light Mode (Opsional jika ingin beda warna) -->
-            <img src="assets/images/logo2.png" alt="Teguh Logo" class="logo-img logo-light">
-        </a>
-    </div>
+        <div class="nav-left">
+            <a href="#home" class="logo">
+                <img src="assets/images/logo.png" alt="Teguh Logo" class="logo-img">
+            </a>
+        </div>
 
-            <div class="nav-menu">
-                <a href="#work" class="nav-link"><span>01</span> WORK</a>
-                <a href="#services" class="nav-link"><span>02</span> EXPERTISE</a>
-                <a href="#about" class="nav-link"><span>03</span> IDENTITY</a>
-                <a href="#contact" class="nav-link"><span>04</span> CONNECT</a>
-            </div>
+        <div class="nav-menu">
+            <a href="#work" class="nav-link"><span>01</span> WORK</a>
+            <a href="#services" class="nav-link"><span>02</span> EXPERTISE</a>
+            <a href="#about" class="nav-link"><span>03</span> IDENTITY</a>
+            <a href="#contact" class="nav-link"><span>04</span> CONNECT</a>
+            <button id="themeToggle" class="theme-toggle-nav">LIGHT</button>
+        </div>
 
-            <div class="nav-right">
-                <button id="themeToggle" class="theme-toggle-nav" aria-label="Toggle Theme">
-                    <span class="mode-text">LIGHT</span>
-                </button>
-                
-                <!-- Hamburger for Mobile (Hidden on Desktop) -->
-                <button class="mobile-menu-toggle" aria-label="Toggle Menu">
-                    <span class="line"></span>
-                    <span class="line"></span>
-                </button>
-            </div>
+        <div class="nav-right desktop-only">
+             <span class="label-mono">AVAILABLE FOR 2026</span>
         </div>
     </nav>
 
-    <!-- 3. SCROLL CONTENT CONTAINER -->
-    <div id="scroll-content">
-        <main>
-            
-            <!-- SECTION: HERO (DETROIT STYLE) -->
-            <section id="home" class="hero hero-detroit">
-                <div class="hero-bg-wrapper">
-                    <img src="assets/images/giff.gif" alt="Atmospheric Visual" class="hero-gif">
-                    <div class="hero-overlay"></div>
+    <main>
+        <!-- HERO -->
+        <section id="home" class="hero-detroit">
+            <div class="hero-bg-wrapper">
+                <img src="assets/images/giff.gif" alt="Atmospheric Visual" class="hero-gif">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-main-content">
+                <h1 class="side-title">FULLSTACK</h1>
+                <h1 class="side-title outline italic">CREATIVE</h1>
+                <h1 class="side-title">DESIGNER</h1>
+                <p class="hero-description">
+                    Crafting cinematic digital experiences through code and visual storytelling.
+                </p>
+            </div>
+            <div class="hero-info-footer">
+                <div class="info-item">
+                    <span class="label-mono opacity-50">BASED IN</span>
+                    <span class="label-mono">MALANG, IDN</span>
                 </div>
-            
-                <div class="hero-main-content">
-                    <div class="hero-text-side">
-                        <h1 class="side-title">FULLSTACK</h1>
-                        <h1 class="side-title outline italic">CREATIVE</h1>
-                        <h1 class="side-title">DESIGNER</h1>
-                        
-                        <p class="hero-description label-mono">
-                            Crafting cinematic digital experiences <br> 
-                            through code and visual storytelling.
-                        </p>
-                    </div>
+                <div class="info-item desktop-only">
+                    <span class="label-mono opacity-50">SCROLL</span>
+                    <div class="scroll-line"></div>
                 </div>
-
-                <div class="hero-info-footer">
-                    <div class="info-item">
-                        <span class="label-mono opacity-50">BASED IN</span>
-                        <span class="label-mono">MALANG, IDN</span>
-                    </div>
-                    
-                    <div class="info-item desktop-only">
-                        <span class="label-mono opacity-50">SCROLL TO EXPLORE</span>
-                        <div class="scroll-line"></div>
-                    </div>
-
-                    <div class="info-item text-right">
-                        <span class="label-mono opacity-50">STATUS</span>
-                        <div class="nav-status">
-                            <span class="status-dot"></span>
-                            <span class="label-mono">AVAILABLE FOR 2026</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION: SELECTED WORKS -->
-            <section id="work" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <span class="section-index">01</span>
-                        <h2 class="section-title">Selected Works</h2>
-                    </div>
-
-                    <div class="work-grid">
-                        <!-- Project 01 (Featured) -->
-                        <div class="project-card featured" data-category="UI/UX">
-                            <div class="work-img-wrapper">
-                                <img src="assets/images/project1.webp" alt="Digital Identity Project">
-                                <div class="project-overlay">
-                                    <span class="label-mono">View Case Study ↗</span>
-                                </div>
-                            </div>
-                            <div class="project-meta">
-                                <h3>Digital Identity System</h3>
-                                <span class="label-mono">Visual Strategy — 2025</span>
-                            </div>
-                        </div>
-
-                        <!-- Project 02 -->
-                        <div class="project-card" data-category="Content">
-                            <div class="work-img-wrapper">
-                                <img src="assets/images/project2.webp" alt="Social Ecosystem Project">
-                            </div>
-                            <div class="project-meta">
-                                <h3>Brand Social Ecosystem</h3>
-                                <span class="label-mono">Content Creation</span>
-                            </div>
-                        </div>
-
-                        <!-- Project 03 -->
-                        <div class="project-card" data-category="3D Design">
-                            <div class="work-img-wrapper">
-                                <img src="assets/images/project1.webp" alt="WebGL Animation Project">
-                            </div>
-                            <div class="project-meta">
-                                <h3>Interactive 3D Motion</h3>
-                                <span class="label-mono">Three.js / WebGL</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION: EXPERTISE (SERVICES) -->
-            <section id="services" class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <span class="section-index">02</span>
-                        <h2 class="section-title">Expertise</h2>
-                    </div>
-
-                    <div class="services-list">
-                        <div class="service-item">
-                            <span class="service-num">/01</span>
-                            <div class="service-content">
-                                <h3>UI/UX Architecture</h3>
-                                <p>Designing seamless digital journeys focused on user behavior and aesthetic functionality.</p>
-                            </div>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-num">/02</span>
-                            <div class="service-content">
-                                <h3>3D Visuals & Motion</h3>
-                                <p>Creating immersive experiences using GLTF, Three.js, and advanced motion graphics.</p>
-                            </div>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-num">/03</span>
-                            <div class="service-content">
-                                <h3>Content Strategy</h3>
-                                <p>Data-driven visual storytelling to scale brand presence on digital platforms.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION: IDENTITY (ABOUT) -->
-            <section id="about" class="section">
-                <div class="container grid-2">
-                    <div class="about-visual">
-                        <div class="image-wrapper">
-                            <!-- Placeholder untuk foto profil atau visual artistik -->
-                            <div class="image-placeholder"></div>
-                        </div>
-                    </div>
-                    <div class="about-text">
-                        <div class="section-header">
-                            <span class="section-index">03</span>
-                            <h2 class="section-title">Identity</h2>
-                        </div>
-                        <p class="large-text">
-                            Teguh P.P Seorang praktisi kreatif yang percaya bahwa desain bukan hanya tentang terlihat bagus, tapi tentang bagaimana ia bekerja.
-                        </p>
-                        <p class="sub-text">
-                            Dengan latar belakang Fine Arts, saya membawa sentuhan artistik ke dalam fungsionalitas teknologi digital. Berbasis di Malang, tersedia untuk kolaborasi global.
-                        </p>
-                        <div class="experience-stats">
-                            <div class="stat">
-                                <h4>02+</h4>
-                                <p class="label-mono">Years Exp.</p>
-                            </div>
-                            <div class="stat">
-                                <h4>50+</h4>
-                                <p class="label-mono">Projects</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION: CONNECT (CONTACT) -->
-            <section id="contact" class="section contact-section">
-                <div class="container">
-                    <div class="contact-header">
-                        <span class="label-mono">LET'S CONNECT</span>
-                        <h2 class="massive-type">HAVE AN IDEA?</h2>
-                    </div>
-                    
-                    <div class="contact-main">
-                        <a href="mailto:halo@teguh.com" class="giant-email-link">
-                            HALO@TEGUH.COM
-                            <span class="arrow-icon">↗</span>
-                        </a>
-                    </div>
-
-                    <div class="contact-footer">
-                        <div class="footer-info">
-                            <span class="label-mono opacity-50">LOCAL TIME</span>
-                            <span id="local-time" class="info-value">00:00:00 MALANG, ID</span>
-                        </div>
-                        <div class="footer-info">
-                            <span class="label-mono opacity-50">SOCIALS</span>
-                            <div class="social-links">
-                                <a href="#" class="social-link">INSTAGRAM</a>
-                                <a href="#" class="social-link">LINKEDIN</a>
-                                <a href="#" class="social-link">BEHANCE</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- FOOTER -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-left">
-                        <span class="label-mono">© 2026 TEGUH P.P.</span>
-                    </div>
-                    
-                    <div class="footer-center desktop-only">
-                        <span class="label-mono opacity-50">DESIGNED TO ELEVATE DIGITAL STANDARDS</span>
-                    </div>
-
-                    <div class="footer-right">
-                        <div class="footer-nav-minimal">
-                            <a href="#home" class="label-mono hover-underline">BACK TO TOP</a>
-                        </div>
+                <div class="info-item">
+                    <span class="label-mono opacity-50">STATUS</span>
+                    <div class="nav-status">
+                        <span class="status-dot"></span>
+                        <span class="label-mono">AVAILABLE</span>
                     </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </section>
 
-    <!-- 4. FLOATING ELEMENTS -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to Top">
-        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-    </button>
+        <!-- WORKS -->
+        <section id="work" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-index">01</span>
+                    <h2 class="section-title">Selected Works</h2>
+                </div>
+                <div class="work-grid">
+                    <div class="project-card featured">
+                        <div class="work-img-wrapper"><img src="assets/images/project1.webp" alt="Project"></div>
+                        <div class="project-meta"><h3>Digital Identity System</h3><span class="label-mono">2025</span></div>
+                    </div>
+                    <div class="project-card">
+                        <div class="work-img-wrapper"><img src="assets/images/project2.webp" alt="Project"></div>
+                        <div class="project-meta"><h3>Social Ecosystem</h3><span class="label-mono">Branding</span></div>
+                    </div>
+                    <div class="project-card">
+                        <div class="work-img-wrapper"><img src="assets/images/project1.webp" alt="Project"></div>
+                        <div class="project-meta"><h3>Interactive Motion</h3><span class="label-mono">WebGL</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- 5. SCRIPTS -->
-    <!-- Load Three.js first if using 3D elements -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+        <!-- EXPERTISE -->
+        <section id="services" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-index">02</span>
+                    <h2 class="section-title">Expertise</h2>
+                </div>
+                <div class="services-list">
+                    <div class="service-item">
+                        <span class="service-num">/01</span>
+                        <div class="service-content"><h3>UI/UX Architecture</h3><p>Designing seamless digital journeys.</p></div>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-num">/02</span>
+                        <div class="service-content"><h3>3D Visuals & Motion</h3><p>Immersive experiences with Three.js.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IDENTITY -->
+        <section id="about" class="section">
+            <div class="container grid-2">
+                <div class="image-placeholder"></div>
+                <div class="about-text">
+                    <div class="section-header"><span class="section-index">03</span><h2 class="section-title">Identity</h2></div>
+                    <p class="large-text">Teguh P.P Seorang praktisi kreatif berbasis di Malang.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONNECT -->
+        <section id="contact" class="section">
+            <div class="container">
+                <span class="label-mono">LET'S CONNECT</span>
+                <h2 class="massive-type">HAVE AN IDEA?</h2>
+                <a href="mailto:halo@teguh.com" class="giant-email-link">HALO@TEGUH.COM ↗</a>
+                <div class="social-links">
+                    <a href="#" class="social-link">INSTAGRAM</a>
+                    <a href="#" class="social-link">LINKEDIN</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <span class="label-mono">© 2026 TEGUH P.P.</span>
+            <a href="#home" class="label-mono hover-underline">BACK TO TOP</a>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top">↑</button>
+
     <script src="script.js"></script>
 </body>
 </html>
