@@ -55,7 +55,7 @@
 @media (min-width: 1024px) { .custom-cursor { display: block; } }
 
 /* ----------------------------------------------------------------
-   3. NAVIGATION
+   3. NAVIGATION - FIXED THEME TOGGLE VISIBILITY
 ------------------------------------------------------------------- */
 .navbar {
     position: fixed;
@@ -67,44 +67,49 @@
     padding: 0 5%;
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
-    z-index: 1000;
+    z-index: 2000; /* Naikkan z-index agar tidak tertutup noise atau hero */
     border-bottom: 1px solid var(--border-color);
 }
-
-.logo-img { height: 32px; width: auto; }
-.logo-light { display: none; }
-[data-theme="light"] .logo-dark { display: none; }
-[data-theme="light"] .logo-light { display: block; }
 
 .nav-menu {
     display: flex;
     gap: 40px;
+    align-items: center; /* Pastikan sejajar secara vertikal */
 }
 
-.nav-link {
-    text-decoration: none;
-    color: var(--text-color);
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 2px;
-    transition: var(--transition);
-}
-
-.nav-link span { opacity: 0.4; margin-right: 8px; }
-.nav-link:hover { opacity: 0.6; }
-
+/* Pastikan Tombol Toggle Kelihatan */
 .theme-toggle-nav {
-    background: none;
+    background: transparent;
     border: 1px solid var(--border-color);
-    color: var(--text-color);
-    padding: 8px 16px;
+    color: var(--text-color) !important; /* Paksa warna teks muncul */
+    padding: 8px 20px;
     font-family: var(--font-mono);
     font-size: 10px;
-    cursor: pointer;
-    transition: var(--transition);
+    font-weight: 700;
+    cursor: none; /* Pakai cursor custom kamu */
+    transition: all 0.3s var(--ease);
+    display: inline-block;
+    position: relative;
+    z-index: 2001;
 }
 
-.theme-toggle-nav:hover { background: var(--text-color); color: var(--bg-color); }
+/* Efek Hover agar tahu kalau itu tombol */
+.theme-toggle-nav:hover {
+    background: var(--text-color);
+    color: var(--bg-color) !important;
+}
+
+/* Perbaikan Logo agar tidak hilang */
+.logo-img { 
+    height: 32px; 
+    width: auto; 
+    transition: filter 0.5s var(--ease);
+}
+
+/* Logika Invert Logo yang lebih simpel */
+[data-theme="light"] .logo-img {
+    filter: invert(1); /* Jika logo aslinya putih, di light mode jadi hitam */
+}
 
 /* 
    ==========================================================================
