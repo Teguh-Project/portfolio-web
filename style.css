@@ -1,220 +1,118 @@
 /* 
    ==========================================================================
-   PORTFOLIO REDESIGN - NEEDNAP INSPIRED (2026)
-   Creative: Teguh Perwira Putra
-   Style: High-End Editorial, Minimalist, Serif Contrast
+   NEEDNAP STYLE CSS - THE ULTIMATE SYNC
    ========================================================================== 
 */
 
-/* Import Font: Playfair Display (Serif) & Inter (Sans) */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap');
-
 :root {
-    /* Neednap Inspired Palette - Cream & Ink */
-    --bg-color: #f9f7f2; /* Warm Cream */
-    --bg-secondary: #f1eee6;
-    --text-main: #1a1a1a; /* Soft Ink Black */
+    --bg-color: #f9f7f2; /* Cream */
+    --text-main: #1a1a1a;
     --text-dim: #6b6b6b;
-    --accent: #c5a38d; /* Muted Bronze/Gold */
-    --nav-bg: rgba(249, 247, 242, 0.85);
-    --border-color: rgba(26, 26, 26, 0.08);
+    --accent: #ff3e3e;
+    --nav-bg: rgba(249, 247, 242, 0.9);
+    --border-color: rgba(26, 26, 26, 0.1);
     
-    /* Typography */
     --font-serif: 'Playfair Display', serif;
     --font-sans: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
-    
-    /* System */
-    --padding-x: 8vw;
+    --padding-x: 7vw;
     --ease: cubic-bezier(0.2, 1, 0.3, 1);
-    --transition: 0.6s var(--ease);
 }
 
 [data-theme="dark"] {
-    --bg-color: #0d0d0d;
-    --bg-secondary: #141414;
-    --text-main: #e5e5e5;
+    --bg-color: #0a0a0a;
+    --text-main: #f0f0f0;
     --text-dim: #888888;
-    --nav-bg: rgba(13, 13, 13, 0.85);
-    --border-color: rgba(255, 255, 255, 0.08);
+    --nav-bg: rgba(10, 10, 10, 0.9);
+    --border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* ==========================================================================
-   BASE STYLES
-   ========================================================================== */
-* {
-    margin: 0; padding: 0; box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    transition: background 0.5s var(--ease);
     overflow-x: hidden;
-    transition: background-color var(--transition), color var(--transition);
 }
 
-/* Custom Cursor - Refined */
-.custom-cursor {
-    position: fixed; width: 8px; height: 8px; background: var(--text-main);
-    border-radius: 50%; pointer-events: none; z-index: 10000;
-    transition: transform 0.2s var(--ease);
-}
-
-/* ==========================================================================
-   FIX: NAVBAR & LOGO VISIBILITY
-   ========================================================================== */
+/* NAVBAR - FIXED TOP LAYER */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    z-index: 9999; /* Pastikan angka ini paling tinggi di seluruh CSS */
-    background: transparent; /* Awalnya transparan */
+    position: fixed; top: 0; width: 100%; height: 90px;
+    z-index: 1000; display: flex; align-items: center;
     transition: all 0.5s var(--ease);
 }
 
-/* Saat di-scroll, berikan background agar logo tetap terbaca */
 .navbar.scrolled {
-    height: 80px;
-    background: var(--nav-bg); 
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-color);
+    height: 70px; background: var(--nav-bg); 
+    backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color);
 }
 
-.nav-left {
-    display: flex;
-    align-items: center;
-    z-index: 10000;
+.nav-container {
+    width: 100%; padding: 0 var(--padding-x);
+    display: flex; justify-content: space-between; align-items: center;
 }
 
-.logo-img {
-    height: 30px; /* Ukuran proporsional gaya editorial */
-    width: auto;
-    display: block;
+.logo-img { height: 28px; width: auto; z-index: 1001; }
+[data-theme="light"] .logo-img { filter: invert(1); } /* Otomatis jadi hitam di light mode */
+
+.nav-link {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    margin-left: 2rem; opacity: 0.5; transition: 0.3s;
+}
+.nav-link:hover { opacity: 1; color: var(--accent); }
+
+/* HERO - EDITORIAL ASYMMETRIC */
+.hero-editorial {
+    min-height: 100vh; padding: 120px var(--padding-x) 60px;
+    display: flex; flex-direction: column; justify-content: space-between;
     position: relative;
-    z-index: 10001;
 }
 
-/* Memastikan konten hero tidak naik ke atas navbar */
-.hero-detroit {
-    margin-top: 0;
-    padding-top: 100px; /* Memberikan ruang untuk navbar */
+.hero-main-content {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center;
 }
-/* ==========================================================================
-   HERO - EDITORIAL STYLE
-   ========================================================================== */
-.hero-detroit {
-    height: 100vh; display: flex; align-items: center;
-    padding: 0 var(--padding-x); background: var(--bg-color);
-}
-
-.hero-main-content { position: relative; z-index: 10; width: 100%; }
 
 .side-title {
-    font-family: var(--font-serif);
-    font-size: clamp(3.5rem, 12vw, 10rem);
-    font-weight: 400;
-    line-height: 0.9;
-    letter-spacing: -0.02em;
-    font-style: italic; /* Signature Neednap style */
+    font-family: var(--font-serif); font-size: clamp(3rem, 10vw, 8.5rem);
+    line-height: 0.85; text-transform: uppercase; font-weight: 900;
 }
 
-.side-title.outline {
-    font-style: normal;
-    font-weight: 400;
-    -webkit-text-stroke: 1px var(--text-main);
-    color: transparent;
-    opacity: 0.3;
-}
+.side-title.outline { -webkit-text-stroke: 1px var(--text-main); color: transparent; }
+.side-title.italic { font-style: italic; font-weight: 400; }
 
-.hero-description {
-    max-width: 400px; margin-top: 2rem;
-    font-size: 0.9rem; color: var(--text-dim);
-    text-transform: none; letter-spacing: 0;
-}
+.hero-visual-layer { position: relative; width: 100%; aspect-ratio: 4/5; overflow: hidden; }
+.hero-bg-wrapper { width: 100%; height: 100%; }
+.hero-gif { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.5); transition: 0.5s; }
+.hero-visual-layer:hover .hero-gif { filter: grayscale(0); }
 
-/* Hero Background (Gif as subtle element) */
-.hero-bg-wrapper {
-    position: absolute; right: var(--padding-x); top: 50%;
-    transform: translateY(-50%);
-    width: 35vw; height: 50vh;
-    z-index: 1; overflow: hidden;
-}
+/* SECTIONS & GRID */
+.section { padding: 8rem var(--padding-x); border-top: 1px solid var(--border-color); }
 
-.hero-gif {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: sepia(0.2) contrast(1.1);
-}
+.work-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; }
+.project-card { grid-column: span 6; margin-bottom: 4rem; }
+.project-card.featured { grid-column: span 12; }
 
-/* ==========================================================================
-   WORK GRID - ASYMMETRIC
-   ========================================================================== */
-.section { padding: 12rem var(--padding-x); }
-
-.work-grid {
-    display: grid; grid-template-columns: repeat(12, 1fr); gap: 4rem 2rem;
-}
-
-.project-card {
-    grid-column: span 6; background: transparent;
-    border: none; position: relative;
-}
-
-/* Membuat grid selang-seling ala Editorial */
-.project-card:nth-child(even) { margin-top: 8rem; }
-
-.work-img-wrapper {
-    aspect-ratio: 4/5; /* Portrait ala Majalah */
-    background: var(--bg-secondary); overflow: hidden;
-    margin-bottom: 1.5rem;
-}
-
-.work-img-wrapper img {
-    width: 100%; height: 100%; object-fit: cover;
-    transition: transform 1.2s var(--ease);
-}
-
+.work-img-wrapper { aspect-ratio: 16/9; overflow: hidden; background: var(--border-color); margin-bottom: 1.5rem; }
+.work-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s var(--ease); }
 .project-card:hover img { transform: scale(1.05); }
 
-.project-meta h3 {
-    font-family: var(--font-serif); font-size: 1.8rem;
-    font-weight: 400; margin-bottom: 0.5rem;
+/* CONTACT */
+.massive-type { font-family: var(--font-serif); font-size: clamp(4rem, 15vw, 12rem); line-height: 0.8; margin-bottom: 4rem; }
+.giant-email-link { font-size: clamp(1.5rem, 5vw, 4rem); font-weight: 700; border-bottom: 2px solid var(--text-main); }
+
+/* UTILITIES */
+.label-mono { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.reveal-init { opacity: 0; transform: translateY(40px); transition: 1.2s var(--ease); }
+.reveal-init.is-visible { opacity: 1; transform: translateY(0); }
+
+.custom-cursor {
+    position: fixed; width: 10px; height: 10px; background: var(--accent);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
 }
 
-.label-mono {
-    font-family: var(--font-mono); font-size: 0.65rem;
-    color: var(--accent); letter-spacing: 0.2em;
-}
-
-/* ==========================================================================
-   REVEAL & SCROLL
-   ========================================================================== */
-.reveal-init {
-    opacity: 0; transform: translateY(50px);
-    transition: opacity 1.5s var(--ease), transform 1.5s var(--ease);
-}
-
-.reveal-init.is-visible {
-    opacity: 1; transform: translateY(0);
-}
-
-/* Back to Top - Subtle */
-.back-to-top {
-    position: fixed; bottom: 3rem; right: var(--padding-x);
-    background: transparent; color: var(--text-main);
-    border: 1px solid var(--border-color);
-    width: 45px; height: 45px; border-radius: 50%;
-}
-
-@media (max-width: 768px) {
-    .project-card:nth-child(even) { margin-top: 0; }
-    .project-card { grid-column: span 12; }
-    .hero-bg-wrapper { position: relative; width: 100%; height: 300px; right: 0; margin-top: 2rem; }
-    .hero-detroit { flex-direction: column; justify-content: center; padding-top: 120px; }
+@media (max-width: 992px) {
+    .hero-main-content { grid-template-columns: 1fr; }
+    .desktop-only { display: none; }
 }
