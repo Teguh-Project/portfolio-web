@@ -116,7 +116,7 @@ body {
 @media (min-width: 1024px) { .custom-cursor { display: block; } }
 
 /* ----------------------------------------------------------------
-   HERO SECTION (FIXED GIF VISIBILITY)
+   HERO SECTION (FINAL REPAIR)
 ------------------------------------------------------------------- */
 .hero {
     position: relative;
@@ -127,22 +127,21 @@ body {
     justify-content: center;
     padding: 0 var(--padding-x);
     overflow: hidden;
-    /* Hilangkan background abu-abu, gunakan warna dasar tema */
+    /* Pastikan background hero transparan atau sama dengan body agar abu-abu hilang */
     background-color: var(--bg-color); 
 }
 
-/* Pastikan wrapper ini berada di lapisan paling bawah */
 .hero-bg-wrapper {
     position: absolute;
     inset: 0;
-    z-index: 1; /* Berada di atas background body, tapi di bawah content */
+    z-index: 0; /* Ubah ke 0 agar berada tepat di atas background body */
 }
 
 .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Jangan grayscale(1) kalau mau warna asli GIF muncul */
+    /* Naikkan brightness ke 0.5 atau 0.6 agar GIF lebih terlihat */
     filter: brightness(0.5); 
     transition: filter 0.5s var(--ease);
 }
@@ -150,16 +149,16 @@ body {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    /* Gradient ini memastikan teks tetap terbaca di atas GIF */
+    /* Gradient ini membuat transisi halus ke warna background utama */
     background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 100%);
-    z-index: 2;
+    z-index: 1;
 }
 
-/* Konten harus punya z-index lebih tinggi dari background */
 .hero-content {
     position: relative;
-    z-index: 10; 
+    z-index: 10; /* Pastikan teks berada di lapisan paling depan */
 }
+
 /* ----------------------------------------------------------------
    UTILITIES & FOOTER
 ------------------------------------------------------------------- */
