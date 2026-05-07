@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>TEGUH P.P | Fullstack Creative Designer</title>
     
-    <link rel="icon" type="image/png" href="https://img.icons8.com/ios-filled/50/ffffff/t.png">
+    <link rel="icon" type="assets/images/favicon.png" href="https://img.icons8.com/ios-filled/50/ffffff/t.png">
     
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 </head>
+
 <body data-theme="dark">
     
     <div class="noise-overlay"></div>
     <div class="custom-cursor"></div>
 
     <nav class="navbar">
-        <div class="logo">TEGUH<span>P.P</span></div>
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/images/logo.png" alt="Teguh P.P Logo" class="logo-img">
+        </a>
+    </div>
+    </nav>
+        
         <div class="nav-menu">
             <a href="#work" class="nav-link"><span>01</span> WORK</a>
             <a href="#about" class="nav-link"><span>02</span> IDENTITY</a>
@@ -24,29 +32,42 @@
         </div>
     </nav>
 
-    <header class="hero">
+    <section class="hero">
+        
         <div class="hero-bg-wrapper">
-            <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070" alt="background" class="hero-img">
+            <img src="assets/images/giff.gif" 
+                 alt="hero background" 
+                 class="hero-img">
             <div class="hero-overlay"></div>
         </div>
         
         <div class="hero-content">
-            
-            <h1 class="side-title">FULLSTACK</h1>
-            <h1 class="side-title italic">CREATIVE</h1>
-            <h1 class="side-title">DESIGNER</h1>
+            <div class="title-group">
+                <h1 class="side-title">FULLSTACK</h1>
+                <h1 class="side-title italic">CREATIVE</h1>
+                <h1 class="side-title">DESIGNER</h1>
+            </div>
             
             <div class="hero-bottom">
-                <div class="label-mono">BASED IN MALANG, IDN</div>
-                <div class="hero-description">Crafting cinematic digital experiences through visual storytelling and technical precision.</div>
+                <div class="hero-meta">
+                    <span class="label-mono">BASED IN MALANG, IDN</span>
+                </div>
+                
+                <div class="hero-description">
+                    <p>Crafting cinematic digital experiences through visual storytelling and technical precision.</p>
+                </div>
+                
                 <div class="status-box">
-                    <span class="status-dot"></span>
-                    <span class="label-mono">AVAILABLE FOR 2026 PROJECTS</span>
+                    <div class="status-indicator">
+                        <span class="status-dot"></span>
+                        <span class="label-mono">AVAILABLE FOR 2026 PROJECTS</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </header>
 
+    </section>
+    
     <main class="container">
         <section id="work" class="section">
             <div class="section-header">
