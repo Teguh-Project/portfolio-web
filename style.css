@@ -71,6 +71,25 @@ body {
     font-size: 10px; cursor: pointer;
 }
 
+.logo-img {
+    height: 32px; /* Sesuaikan tinggi logo agar pas dengan navbar */
+    width: auto;  /* Menjaga rasio gambar tetap proporsional */
+    display: block;
+    transition: opacity 0.3s var(--ease);
+}
+
+/* Efek saat di-hover (opsional) */
+.logo-img:hover {
+    opacity: 0.7;
+}
+
+/* Penyesuaian untuk Mobile jika diperlukan */
+@media (max-width: 768px) {
+    .logo-img {
+        height: 28px; 
+    }
+}
+
 /* ----------------------------------------------------------------
    HERO SECTION (RIG.AI INSPIRED)
 ------------------------------------------------------------------- */
