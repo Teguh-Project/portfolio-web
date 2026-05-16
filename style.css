@@ -1,31 +1,30 @@
 :root {
     --bg-color: #0a0a0a;
     --text-color: #ffffff;
-    --accent: #e0e0e0;
-    --nav-bg: rgba(10, 10, 10, 0.8);
-    --border-color: rgba(255, 255, 255, 0.1);
+    --accent: #00ff66; /* Warna indikator hijau neon khas industri/energi */
+    --nav-bg: rgba(10, 10, 10, 0.85);
+    --border-color: rgba(255, 255, 255, 0.08); /* Garis grid tipis */
     --font-main: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --padding-x: 5%;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* VARIABEL DINAMIS UNTUK VISUAL GIF (DARK MODE) */
-    /* Brightness dinaikkan sedikit ke 0.55 agar detail animasi GIF terlihat menembus */
-    --hero-img-brightness: brightness(0.55) grayscale(0.1);
-    /* Mengubah sebaran radial-gradient agar bagian tengah jauh lebih transparan (0.05) */
-    --hero-overlay-gradient: radial-gradient(circle at center, rgba(10, 10, 10, 0.05) 0%, rgba(10, 10, 10, 0.6) 70%, var(--bg-color) 100%);
+    /* VISUAL GIF BACKGROUND CONTROLS (DARK MODE) */
+    --hero-img-brightness: brightness(0.6) contrast(1.1);
+    --hero-overlay-gradient: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 0%, rgba(10, 10, 10, 0.4) 60%, var(--bg-color) 100%);
     --logo-invert: invert(0);
 }
 
 [data-theme="light"] {
-    --bg-color: #f5f5f5;
-    --text-color: #0a0a0a;
-    --nav-bg: rgba(245, 245, 245, 0.8);
-    --border-color: rgba(0, 0, 0, 0.1);
+    --bg-color: #fcfcfc;
+    --text-color: #0b0b0b;
+    --accent: #00aa44;
+    --nav-bg: rgba(252, 252, 252, 0.85);
+    --border-color: rgba(0, 0, 0, 0.08);
     
-    /* VARIABEL DINAMIS UNTUK VISUAL GIF (LIGHT MODE) */
-    --hero-img-brightness: brightness(0.9) grayscale(0.3) opacity(0.2);
-    --hero-overlay-gradient: radial-gradient(circle at center, rgba(245, 245, 245, 0.05) 0%, rgba(245, 245, 245, 0.5) 70%, var(--bg-color) 100%);
+    /* VISUAL GIF BACKGROUND CONTROLS (LIGHT MODE) */
+    --hero-img-brightness: brightness(0.95) opacity(0.15);
+    --hero-overlay-gradient: linear-gradient(to bottom, rgba(252, 252, 252, 0.1) 0%, rgba(252, 252, 252, 0.5) 60%, var(--bg-color) 100%);
     --logo-invert: invert(1);
 }
 
@@ -35,56 +34,66 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-main);
-    transition: background-color 0.5s var(--ease), color 0.5s var(--ease);
+    transition: background-color 0.6s var(--ease), color 0.6s var(--ease);
     overflow-x: hidden;
     cursor: none; 
     -webkit-font-smoothing: antialiased;
 }
 
 /* ----------------------------------------------------------------
-   NAVIGATION (FIXED & TOP LAYER)
+   STRUCTURE & LAYOUT CELLS (ENERBLOCK CONCEPT)
+------------------------------------------------------------------- */
+.container { 
+    width: 100%;
+    /* Membuat border tepi kiri dan kanan membungkus seluruh halaman */
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    max-width: calc(100vw - (var(--padding-x) * 2));
+    margin: 0 auto;
+}
+
+/* ----------------------------------------------------------------
+   GLOBAL NAVIGATION (NAVBAR)
 ------------------------------------------------------------------- */
 .navbar {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
+    left: var(--padding-x);
+    width: calc(100% - (var(--padding-x) * 2));
+    height: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 var(--padding-x);
     background: var(--nav-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 10000;
     border-bottom: 1px solid var(--border-color);
     transition: background 0.5s var(--ease), border-bottom 0.5s var(--ease);
 }
 
 .logo { 
-    font-weight: 900; 
-    letter-spacing: -1px; 
-    font-size: 1.2rem; 
-    z-index: 10001;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    /* Memberi batasan kolom vertikal kokoh di sebelah kanan logo */
+    border-right: 1px solid var(--border-color); 
 }
 
 .logo-img {
-    height: 32px;
+    height: 28px;
     width: auto;
     display: block;
     filter: var(--logo-invert);
     transition: opacity 0.3s var(--ease), filter 0.5s var(--ease);
 }
 
-.logo-img:hover {
-    opacity: 0.7;
-}
-
 .nav-menu { 
     display: flex; 
-    gap: 30px; 
-    align-items: center; 
+    height: 100%;
+    align-items: center;
+    margin-left: auto;
 }
 
 .nav-link { 
@@ -92,81 +101,64 @@ body {
     color: var(--text-color); 
     font-family: var(--font-mono); 
     font-size: 11px;
-    transition: color 0.5s var(--ease), opacity 0.3s var(--ease);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 35px;
+    border-left: 1px solid var(--border-color);
+    transition: color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+
+.nav-link:hover {
+    background-color: var(--border-color);
 }
 
 .nav-link span {
-    opacity: 0.4;
-    margin-right: 5px;
+    color: var(--accent);
+    margin-right: 8px;
+    font-weight: bold;
 }
 
 .theme-toggle-nav {
     background: transparent;
-    border: 1px solid var(--border-color);
+    border: none;
+    border-left: 1px solid var(--border-color);
     color: var(--text-color);
-    padding: 8px 15px;
+    height: 100%;
+    padding: 0 35px;
     font-family: var(--font-mono);
     font-size: 10px;
+    letter-spacing: 0.1em;
     cursor: pointer;
-    transition: all 0.5s var(--ease);
+    transition: all 0.3s var(--ease);
 }
 
 .theme-toggle-nav:hover {
-    background: var(--text-color);
+    background-color: var(--text-color);
     color: var(--bg-color);
 }
 
 /* ----------------------------------------------------------------
-   OVERLAYS & CURSOR (MIDDLE LAYER)
-------------------------------------------------------------------- */
-.noise-overlay {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.05; 
-    pointer-events: none; 
-    z-index: 9000;
-}
-
-.custom-cursor {
-    width: 20px; 
-    height: 20px; 
-    border: 1px solid var(--text-color);
-    border-radius: 50%; 
-    position: fixed; 
-    pointer-events: none;
-    z-index: 11000;
-    display: none;
-    transition: width 0.3s var(--ease), height 0.3s var(--ease), background-color 0.3s var(--ease), border 0.3s var(--ease);
-}
-@media (min-width: 1024px) { .custom-cursor { display: block; } }
-
-/* ----------------------------------------------------------------
-   HERO SECTION (FIXED WIDTH & OVERFLOW)
+   HERO SECTION
 ------------------------------------------------------------------- */
 .hero {
     position: relative;
     height: 100vh;
     width: 100%;
-    max-width: 100vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0 var(--padding-x);
+    justify-content: flex-end; /* Layout Enerblock meletakkan teks berat di area bawah */
+    padding: 120px 40px 60px 40px;
     overflow: hidden;
-    background-color: var(--bg-color); 
-    transition: background-color 0.5s var(--ease);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .hero-bg-wrapper {
     position: absolute;
     inset: 0;
-    z-index: 0; 
-    width: 100%;
-    height: 100%;
+    z-index: 0;
     pointer-events: none;
 }
 
@@ -174,78 +166,79 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: var(--hero-img-brightness); 
+    filter: var(--hero-img-brightness);
     transition: filter 0.5s var(--ease);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: var(--hero-overlay-gradient); 
+    background: var(--hero-overlay-gradient);
     z-index: 1;
-    transition: background 0.5s var(--ease);
 }
 
 .hero-content {
     position: relative;
-    z-index: 10; 
+    z-index: 10;
     width: 100%;
-    max-width: 100%;
 }
 
 .title-group {
-    max-width: 100%;
-    overflow: hidden;
+    width: 100%;
+    margin-bottom: 40px;
 }
 
 .side-title {
     font-family: var(--font-main);
-    font-size: clamp(3rem, 12vw, 10rem);
+    font-size: clamp(2.5rem, 9vw, 7.5rem); /* Lebih presisi dan sleek layaknya layout teknik */
     font-weight: 900;
-    line-height: 0.85;
-    letter-spacing: -0.04em;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
     text-transform: uppercase;
     color: var(--text-color);
     margin: 0;
-    white-space: nowrap;
-    transition: color 0.5s var(--ease);
 }
 
-.side-title.italic { 
-    font-style: italic; 
+.side-title.italic {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-color); /* Efek teks berongga/outline di situs Enerblock */
 }
 
 .hero-bottom {
-    margin-top: clamp(2rem, 8vh, 5rem);
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    align-items: flex-end;
-    width: 100%;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 20px;
+    padding-top: 30px;
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
 }
 
 .hero-description {
     font-size: 0.85rem;
-    max-width: 320px;
     line-height: 1.6;
-    opacity: 0.8;
-}
-
-.hero-description p {
-    color: var(--text-color);
-    transition: color 0.5s var(--ease);
+    opacity: 0.7;
+    padding-right: 20px;
 }
 
 /* ----------------------------------------------------------------
-   UTILITIES & CONTENT GRID
+   UTILITIES & STRUCTURAL COMPONENTS
 ------------------------------------------------------------------- */
 .label-mono {
     font-family: var(--font-mono);
     font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    transition: color 0.5s var(--ease);
+    background: var(--border-color); /* Kotak penanda industrial */
+    padding: 6px 12px;
+    border-radius: 2px;
+    display: inline-block;
 }
 
 .status-box {
@@ -257,165 +250,193 @@ body {
 .status-indicator {
     display: flex;
     align-items: center;
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 20px;
 }
 
 .status-dot {
-    width: 6px; 
-    height: 6px;
-    background-color: #00ff00;
+    width: 6px; height: 6px;
+    background-color: var(--accent);
     border-radius: 50%;
     margin-right: 10px;
-    box-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
+    box-shadow: 0 0 8px var(--accent);
     animation: status-pulse 2s infinite;
 }
 
 @keyframes status-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.9); }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
 }
 
-.section { padding: 100px 0; }
-.container { width: 100%; }
+/* ----------------------------------------------------------------
+   OVERLAYS & CUSTOM CURSOR
+------------------------------------------------------------------- */
+.noise-overlay {
+    position: fixed; inset: 0;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04; pointer-events: none; z-index: 9000;
+}
+
+.custom-cursor {
+    width: 16px; height: 16px;
+    border: 1px solid var(--text-color);
+    border-radius: 50%; position: fixed; pointer-events: none;
+    z-index: 11000; display: none;
+    transition: width 0.3s var(--ease), height 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+@media (min-width: 1024px) { .custom-cursor { display: block; } }
+
+/* ----------------------------------------------------------------
+   SECTIONS & WORK GRID
+------------------------------------------------------------------- */
+.section { 
+    padding: 120px 40px; 
+    border-bottom: 1px solid var(--border-color); /* Pembatas horizontal antar blok */
+}
 
 .section-header {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 40px;
-    padding: 0 var(--padding-x);
+    gap: 15px;
+    margin-bottom: 60px;
 }
 
 .section-index {
     font-family: var(--font-mono);
-    opacity: 0.3;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: bold;
 }
 
 .section-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 900;
-    letter-spacing: -1px;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
 }
 
 .work-grid { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
     gap: 40px;
-    padding: 0 var(--padding-x);
 }
 
-.project-card.featured {
-    grid-column: span 2;
-}
+.project-card.featured { grid-column: span 2; }
 
 .work-img-wrapper {
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    background: #1a1a1a;
+    border: 1px solid var(--border-color);
 }
 
 .work-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(1);
-    transition: transform 1s var(--ease), filter 1s var(--ease);
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(0.5);
+    transition: transform 0.8s var(--ease), filter 0.8s var(--ease);
 }
 
 .project-card:hover .work-img-wrapper img {
-    transform: scale(1.03);
+    transform: scale(1.02);
     filter: grayscale(0);
 }
 
-.project-meta {
-    margin-top: 20px;
-}
-
+.project-meta { margin-top: 20px; }
 .project-meta h3 {
-    font-size: 1.5rem;
-    margin-top: 5px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+    font-size: 1.3rem; margin-top: 8px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: -0.01em;
 }
 
 /* ----------------------------------------------------------------
-   FOOTER SECTION (FIXED & FULL REPAIR)
+   GLOBAL FOOTER (INDUSTRIAL CELL STRUCTURE)
 ------------------------------------------------------------------- */
 .footer { 
     position: relative;
     width: 100%;
-    padding: 60px var(--padding-x); 
-    border-top: 1px solid var(--border-color); 
+    padding: 0; /* Mengandalkan padding dari cell di dalamnya */
     background-color: var(--bg-color);
-    margin-top: 100px;
     z-index: 10;
-    transition: border-top 0.5s var(--ease), background-color 0.5s var(--ease);
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* Membagi kolom sama persis seperti hero-bottom */
     width: 100%;
 }
 
 .footer-left, .footer-center, .footer-right {
+    padding: 50px 40px;
+    height: 100px;
     display: flex;
     align-items: center;
 }
 
-.footer-right .nav-link {
-    text-decoration: none;
-    color: var(--text-color);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    transition: opacity 0.3s var(--ease), color 0.5s var(--ease);
+.footer-center {
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    justify-content: center;
 }
 
-.footer-right .nav-link:hover {
-    opacity: 0.6;
+.footer-right {
+    justify-content: flex-end;
+}
+
+.footer-right .nav-link {
+    border: none;
+    padding: 0;
+    height: auto;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 /* ----------------------------------------------------------------
-   BACK TO TOP BUTTON UI (FIXED VISIBILITY)
+   BACK TO TOP BUTTON
 ------------------------------------------------------------------- */
 #backToTop {
     position: fixed; 
-    bottom: 30px; 
-    right: 30px; 
-    width: 50px; 
-    height: 50px;
+    bottom: 40px; right: 40px; 
+    width: 45px; height: 45px;
     background: var(--text-color); 
     color: var(--bg-color);
-    border: none; 
-    border-radius: 50%; 
+    border: 1px solid var(--border-color); 
+    border-radius: 0px; /* Bentuk kotak kaku berkarakter arsitektur */
     font-family: var(--font-mono);
-    font-size: 10px; 
-    font-weight: bold; 
-    opacity: 0; 
-    visibility: hidden;
-    transform: translateY(20px);
-    z-index: 9999; /* Berada tepat di bawah custom cursor */
-    cursor: pointer;
-    transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease), transform 0.4s var(--ease), background-color 0.5s var(--ease), color 0.5s var(--ease);
+    font-size: 10px; font-weight: bold; 
+    opacity: 0; visibility: hidden;
+    transform: translateY(10px);
+    z-index: 9999; cursor: pointer;
+    transition: all 0.4s var(--ease);
 }
 
-#backToTop.show { 
-    opacity: 1; 
-    visibility: visible; 
-    transform: translateY(0);
-}
+#backToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
+#backToTop:hover { background: var(--accent); color: #000; }
 
 /* ----------------------------------------------------------------
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE DESIGN (TABLET & MOBILE)
 ------------------------------------------------------------------- */
-@media (max-width: 768px) {
-    .navbar { height: 70px; }
-    .hero-bottom { grid-template-columns: 1fr; gap: 25px; align-items: flex-start; }
-    .status-box { justify-content: flex-start; }
+@media (max-width: 992px) {
+    .container { max-width: 100%; border-left: none; border-right: none; }
+    .navbar { left: 0; width: 100%; }
+    .hero-bottom, .footer-content { grid-template-columns: 1fr; }
+    .footer-left, .footer-center, .footer-right { 
+        border-left: none; border-right: none; 
+        border-bottom: 1px solid var(--border-color);
+        justify-content: flex-start; padding: 30px 40px; height: auto;
+    }
+    .footer-right { justify-content: flex-start; border-bottom: none; }
+    .status-box { justify-content: flex-start; margin-top: 15px; }
     .work-grid { grid-template-columns: 1fr; }
     .project-card.featured { grid-column: auto; }
-    .logo-img { height: 26px; }
-    .footer-content { flex-direction: column; gap: 20px; text-align: center; justify-content: center; }
-    #backToTop { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+}
+
+@media (max-width: 768px) {
+    .navbar { height: 80px; }
+    .logo { padding-right: 20px; }
+    .nav-link, .theme-toggle-nav { padding: 0 15px; font-size: 10px; }
+    .hero { padding: 120px 20px 40px 20px; }
+    .section { padding: 80px 20px; }
+    .footer-left, .footer-center, .footer-right { padding: 30px 20px; }
+    #backToTop { bottom: 20px; right: 20px; }
+    .side-title { font-size: clamp(2.2rem, 10vw, 4.5rem); }
 }
