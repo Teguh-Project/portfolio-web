@@ -1,31 +1,28 @@
 :root {
     --bg-color: #0a0a0a;
     --text-color: #ffffff;
-    --accent: #00ff66; /* Warna indikator hijau neon khas industri/energi */
+    --accent: #00ff66; 
     --nav-bg: rgba(10, 10, 10, 0.85);
-    --border-color: rgba(255, 255, 255, 0.08); /* Garis grid tipis */
+    --border-color: rgba(255, 255, 255, 0.08);
     --font-main: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --padding-x: 5%;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* VISUAL GIF BACKGROUND CONTROLS (DARK MODE) */
     --hero-img-brightness: brightness(0.6) contrast(1.1);
-    --hero-overlay-gradient: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 0%, rgba(10, 10, 10, 0.4) 60%, var(--bg-color) 100%);
-    --logo-invert: invert(0);
+    --hero-overlay-gradient: linear-gradient(to bottom, rgba(10, 10, 10, 0.1) 0%, var(--bg-color) 100%);
 }
 
+/* ATURAN BERUBAH TOTAL SAAT MODE LIGHT AKTIF (BACKGROUND MERAH RADIKAL) */
 [data-theme="light"] {
-    --bg-color: #fcfcfc;
-    --text-color: #0b0b0b;
-    --accent: #00aa44;
-    --nav-bg: rgba(252, 252, 252, 0.85);
-    --border-color: rgba(0, 0, 0, 0.08);
+    --bg-color: #ff3b30; /* Merah pekat industrial Enerblock */
+    --text-color: #000000; /* Font berubah hitam pekat */
+    --accent: #ffffff; /* Indikator/Aksen menjadi putih bersih */
+    --nav-bg: rgba(255, 59, 48, 0.9);
+    --border-color: rgba(255, 255, 255, 0.25); /* Garis pembatas grid menjadi putih transparan murni */
     
-    /* VISUAL GIF BACKGROUND CONTROLS (LIGHT MODE) */
-    --hero-img-brightness: brightness(0.95) opacity(0.15);
-    --hero-overlay-gradient: linear-gradient(to bottom, rgba(252, 252, 252, 0.1) 0%, rgba(252, 252, 252, 0.5) 60%, var(--bg-color) 100%);
-    --logo-invert: invert(1);
+    --hero-img-brightness: brightness(1) opacity(0.15);
+    --hero-overlay-gradient: linear-gradient(to bottom, rgba(255, 59, 48, 0.1) 0%, var(--bg-color) 100%);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,24 +33,20 @@ body {
     font-family: var(--font-main);
     transition: background-color 0.6s var(--ease), color 0.6s var(--ease);
     overflow-x: hidden;
-    cursor: none; 
     -webkit-font-smoothing: antialiased;
 }
 
-/* ----------------------------------------------------------------
-   STRUCTURE & LAYOUT CELLS (ENERBLOCK CONCEPT)
-------------------------------------------------------------------- */
 .container { 
     width: 100%;
-    /* Membuat border tepi kiri dan kanan membungkus seluruh halaman */
     border-left: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
     max-width: calc(100vw - (var(--padding-x) * 2));
     margin: 0 auto;
+    transition: border-color 0.6s var(--ease);
 }
 
 /* ----------------------------------------------------------------
-   GLOBAL NAVIGATION (NAVBAR)
+   NAVBAR & HERO
 ------------------------------------------------------------------- */
 .navbar {
     position: fixed;
@@ -69,7 +62,7 @@ body {
     -webkit-backdrop-filter: blur(20px);
     z-index: 10000;
     border-bottom: 1px solid var(--border-color);
-    transition: background 0.5s var(--ease), border-bottom 0.5s var(--ease);
+    transition: all 0.6s var(--ease);
 }
 
 .logo { 
@@ -77,24 +70,14 @@ body {
     display: flex;
     align-items: center;
     padding-right: 40px;
-    /* Memberi batasan kolom vertikal kokoh di sebelah kanan logo */
     border-right: 1px solid var(--border-color); 
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
 }
 
-.logo-img {
-    height: 28px;
-    width: auto;
-    display: block;
-    filter: var(--logo-invert);
-    transition: opacity 0.3s var(--ease), filter 0.5s var(--ease);
-}
-
-.nav-menu { 
-    display: flex; 
-    height: 100%;
-    align-items: center;
-    margin-left: auto;
-}
+.nav-menu { display: flex; height: 100%; align-items: center; margin-left: auto; }
 
 .nav-link { 
     text-decoration: none; 
@@ -102,24 +85,15 @@ body {
     font-family: var(--font-mono); 
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.05em;
     height: 100%;
     display: flex;
     align-items: center;
     padding: 0 35px;
     border-left: 1px solid var(--border-color);
-    transition: color 0.3s var(--ease), background-color 0.3s var(--ease);
+    transition: all 0.3s var(--ease);
 }
-
-.nav-link:hover {
-    background-color: var(--border-color);
-}
-
-.nav-link span {
-    color: var(--accent);
-    margin-right: 8px;
-    font-weight: bold;
-}
+.nav-link:hover { background-color: var(--border-color); }
+.nav-link span { color: var(--accent); margin-right: 8px; font-weight: bold; }
 
 .theme-toggle-nav {
     background: transparent;
@@ -129,314 +103,246 @@ body {
     height: 100%;
     padding: 0 35px;
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.3s var(--ease);
 }
+.theme-toggle-nav:hover { background-color: var(--text-color); color: var(--bg-color); }
 
-.theme-toggle-nav:hover {
-    background-color: var(--text-color);
-    color: var(--bg-color);
-}
-
-/* ----------------------------------------------------------------
-   HERO SECTION
-------------------------------------------------------------------- */
 .hero {
     position: relative;
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Layout Enerblock meletakkan teks berat di area bawah */
+    justify-content: flex-end; 
     padding: 120px 40px 60px 40px;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
 }
-
-.hero-bg-wrapper {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: var(--hero-img-brightness);
-    transition: filter 0.5s var(--ease);
-}
-
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: var(--hero-overlay-gradient);
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-}
-
-.title-group {
-    width: 100%;
-    margin-bottom: 40px;
-}
-
+.hero-overlay { position: absolute; inset: 0; background: var(--hero-overlay-gradient); z-index: 1; }
+.hero-content { position: relative; z-index: 10; width: 100%; }
+.title-group { width: 100%; margin-bottom: 40px; }
 .side-title {
     font-family: var(--font-main);
-    font-size: clamp(2.5rem, 9vw, 7.5rem); /* Lebih presisi dan sleek layaknya layout teknik */
+    font-size: clamp(2.5rem, 9vw, 7.5rem); 
     font-weight: 900;
     line-height: 0.9;
     letter-spacing: -0.03em;
     text-transform: uppercase;
     color: var(--text-color);
-    margin: 0;
 }
-
 .side-title.italic {
     font-style: normal;
     color: transparent;
-    -webkit-text-stroke: 1px var(--text-color); /* Efek teks berongga/outline di situs Enerblock */
+    -webkit-text-stroke: 1px var(--text-color); 
 }
 
 .hero-bottom {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
-    gap: 0;
     border-top: 1px solid var(--border-color);
     margin-top: 20px;
     padding-top: 30px;
 }
-
-.hero-meta {
-    display: flex;
-    align-items: center;
-}
-
-.hero-description {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    opacity: 0.7;
-    padding-right: 20px;
-}
+.hero-description { font-size: 0.85rem; line-height: 1.6; opacity: 0.8; padding-right: 20px; }
 
 /* ----------------------------------------------------------------
-   UTILITIES & STRUCTURAL COMPONENTS
+   WORK CONTENT UTILITIES
 ------------------------------------------------------------------- */
+.section { padding: 120px 40px; border-bottom: 1px solid var(--border-color); }
+.section-header { display: flex; align-items: center; gap: 15px; margin-bottom: 60px; }
+.section-index { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+.section-title { font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 800; text-transform: uppercase; }
+.work-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+.work-img-wrapper { aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--border-color); }
+.work-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.project-meta { margin-top: 20px; }
+.project-meta h3 { font-size: 1.3rem; margin-top: 8px; font-weight: 700; text-transform: uppercase; }
+
 .label-mono {
     font-family: var(--font-mono);
     font-size: 10px;
-    font-weight: 500;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--border-color); /* Kotak penanda industrial */
+    background: var(--border-color);
     padding: 6px 12px;
-    border-radius: 2px;
+    display: inline-block;
+}
+.status-box { display: flex; align-items: center; justify-content: flex-end; }
+.status-indicator { display: flex; align-items: center; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; }
+.status-dot { width: 6px; height: 6px; background-color: var(--accent); border-radius: 50%; margin-right: 10px; }
+
+/* ----------------------------------------------------------------
+   BRUTALIST INDUSTRIAL FOOTER (ENERBLOCK EXACT REPLICA)
+------------------------------------------------------------------- */
+.footer {
+    position: relative;
+    width: 100%;
+    background-color: var(--bg-color);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.6s var(--ease);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.footer-cell {
+    padding: 40px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Pembatas garis vertikal kolom seperti lembaran dokumen arsitek */
+.footer-cell:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
+
+.cell-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+}
+
+.cell-dot {
+    color: var(--text-color);
+    font-size: 10px;
+}
+
+.cell-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.cell-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-size: 15px;
+    font-weight: 500;
+    transition: transform 0.3s var(--ease), opacity 0.3s;
+}
+
+.cell-links a:hover {
+    opacity: 0.6;
+    transform: translateX(4px);
+}
+
+/* Gaya Tampilan Live Clock */
+.live-clock-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.clock-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+}
+
+.clock-time {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+/* Bagian Logo Masif Tengah Footer */
+.footer-brand-wrap {
+    width: 100%;
+    padding: 40px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    overflow: hidden;
+}
+
+.footer-brand-text {
+    font-family: var(--font-main);
+    font-size: clamp(4rem, 16vw, 15rem); /* Ukuran teks ekstra besar di dasar halaman */
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin: 0;
     display: inline-block;
 }
 
-.status-box {
+.footer-brand-text span {
+    font-size: 0.25em;
+    vertical-align: super;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+/* Baris Info Meta Terbawah */
+.footer-meta-bar {
+    width: 100%;
+    padding: 30px 40px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-end;
-}
-
-.status-indicator {
-    display: flex;
-    align-items: center;
-    border: 1px solid var(--border-color);
-    padding: 6px 14px;
-    border-radius: 20px;
-}
-
-.status-dot {
-    width: 6px; height: 6px;
-    background-color: var(--accent);
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: 0 0 8px var(--accent);
-    animation: status-pulse 2s infinite;
-}
-
-@keyframes status-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* ----------------------------------------------------------------
-   OVERLAYS & CUSTOM CURSOR
-------------------------------------------------------------------- */
-.noise-overlay {
-    position: fixed; inset: 0;
-    background: url('https://grainy-gradients.vercel.app/noise.svg');
-    opacity: 0.04; pointer-events: none; z-index: 9000;
-}
-
-.custom-cursor {
-    width: 16px; height: 16px;
-    border: 1px solid var(--text-color);
-    border-radius: 50%; position: fixed; pointer-events: none;
-    z-index: 11000; display: none;
-    transition: width 0.3s var(--ease), height 0.3s var(--ease), background-color 0.3s var(--ease);
-}
-@media (min-width: 1024px) { .custom-cursor { display: block; } }
-
-/* ----------------------------------------------------------------
-   SECTIONS & WORK GRID
-------------------------------------------------------------------- */
-.section { 
-    padding: 120px 40px; 
-    border-bottom: 1px solid var(--border-color); /* Pembatas horizontal antar blok */
-}
-
-.section-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 60px;
-}
-
-.section-index {
     font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--accent);
-    font-weight: bold;
-}
-
-.section-title {
-    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    text-transform: uppercase;
-}
-
-.work-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 40px;
-}
-
-.project-card.featured { grid-column: span 2; }
-
-.work-img-wrapper {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-}
-
-.work-img-wrapper img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(0.5);
-    transition: transform 0.8s var(--ease), filter 0.8s var(--ease);
-}
-
-.project-card:hover .work-img-wrapper img {
-    transform: scale(1.02);
-    filter: grayscale(0);
-}
-
-.project-meta { margin-top: 20px; }
-.project-meta h3 {
-    font-size: 1.3rem; margin-top: 8px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: -0.01em;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    font-weight: 500;
 }
 
 /* ----------------------------------------------------------------
-   GLOBAL FOOTER (INDUSTRIAL CELL STRUCTURE)
-------------------------------------------------------------------- */
-.footer { 
-    position: relative;
-    width: 100%;
-    padding: 0; /* Mengandalkan padding dari cell di dalamnya */
-    background-color: var(--bg-color);
-    z-index: 10;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr; /* Membagi kolom sama persis seperti hero-bottom */
-    width: 100%;
-}
-
-.footer-left, .footer-center, .footer-right {
-    padding: 50px 40px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-}
-
-.footer-center {
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
-    justify-content: center;
-}
-
-.footer-right {
-    justify-content: flex-end;
-}
-
-.footer-right .nav-link {
-    border: none;
-    padding: 0;
-    height: auto;
-    font-size: 11px;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-/* ----------------------------------------------------------------
-   BACK TO TOP BUTTON
+   BACK TO TOP BUTTON (INTELLIGENT SCROLL BLOCK)
 ------------------------------------------------------------------- */
 #backToTop {
     position: fixed; 
-    bottom: 40px; right: 40px; 
-    width: 45px; height: 45px;
+    bottom: 40px; 
+    right: 40px; 
+    width: 45px; 
+    height: 45px;
     background: var(--text-color); 
     color: var(--bg-color);
     border: 1px solid var(--border-color); 
-    border-radius: 0px; /* Bentuk kotak kaku berkarakter arsitektur */
+    border-radius: 0px; /* Desain kotak kaku khas industrial */
     font-family: var(--font-mono);
-    font-size: 10px; font-weight: bold; 
-    opacity: 0; visibility: hidden;
-    transform: translateY(10px);
-    z-index: 9999; cursor: pointer;
-    transition: all 0.4s var(--ease);
+    font-size: 10px; 
+    font-weight: bold; 
+    opacity: 0; 
+    visibility: hidden;
+    z-index: 9999; 
+    cursor: pointer;
+    transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease), background-color 0.4s, color 0.4s;
 }
 
-#backToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
-#backToTop:hover { background: var(--accent); color: #000; }
+#backToTop.show { opacity: 1; visibility: visible; }
+#backToTop:hover { background: var(--accent); color: #000000; }
 
 /* ----------------------------------------------------------------
-   RESPONSIVE DESIGN (TABLET & MOBILE)
+   RESPONSIVE (MOBILE ADJUSTMENTS)
 ------------------------------------------------------------------- */
 @media (max-width: 992px) {
     .container { max-width: 100%; border-left: none; border-right: none; }
     .navbar { left: 0; width: 100%; }
-    .hero-bottom, .footer-content { grid-template-columns: 1fr; }
-    .footer-left, .footer-center, .footer-right { 
-        border-left: none; border-right: none; 
-        border-bottom: 1px solid var(--border-color);
-        justify-content: flex-start; padding: 30px 40px; height: auto;
-    }
-    .footer-right { justify-content: flex-start; border-bottom: none; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 20px; }
     .status-box { justify-content: flex-start; margin-top: 15px; }
-    .work-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: auto; }
-}
-
-@media (max-width: 768px) {
-    .navbar { height: 80px; }
-    .logo { padding-right: 20px; }
-    .nav-link, .theme-toggle-nav { padding: 0 15px; font-size: 10px; }
-    .hero { padding: 120px 20px 40px 20px; }
-    .section { padding: 80px 20px; }
-    .footer-left, .footer-center, .footer-right { padding: 30px 20px; }
-    #backToTop { bottom: 20px; right: 20px; }
-    .side-title { font-size: clamp(2.2rem, 10vw, 4.5rem); }
+    
+    /* Footer berubah menjadi tumpukan baris vertikal di mobile */
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-cell { min-height: auto; gap: 30px; border-bottom: 1px solid var(--border-color); padding: 30px 20px; }
+    .footer-cell:not(:last-child) { border-right: none; }
+    .footer-brand-wrap { padding: 30px 20px; }
+    .footer-meta-bar { flex-direction: column; align-items: flex-start; gap: 12px; padding: 30px 20px; }
 }
