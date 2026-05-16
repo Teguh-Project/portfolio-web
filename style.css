@@ -10,9 +10,11 @@
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     
     /* VARIABEL DINAMIS UNTUK VISUAL GIF (DARK MODE) */
-    --hero-img-brightness: brightness(0.45) grayscale(0.2);
-    --hero-overlay-gradient: radial-gradient(circle at center, rgba(10, 10, 10, 0.2) 0%, var(--bg-color) 100%);
-    --logo-invert: invert(0); /* Tetap normal */
+    /* Brightness dinaikkan sedikit ke 0.55 agar detail animasi GIF terlihat menembus */
+    --hero-img-brightness: brightness(0.55) grayscale(0.1);
+    /* Mengubah sebaran radial-gradient agar bagian tengah jauh lebih transparan (0.05) */
+    --hero-overlay-gradient: radial-gradient(circle at center, rgba(10, 10, 10, 0.05) 0%, rgba(10, 10, 10, 0.6) 70%, var(--bg-color) 100%);
+    --logo-invert: invert(0);
 }
 
 [data-theme="light"] {
@@ -22,10 +24,9 @@
     --border-color: rgba(0, 0, 0, 0.1);
     
     /* VARIABEL DINAMIS UNTUK VISUAL GIF (LIGHT MODE) */
-    /* Membuat GIF sedikit lebih transparan dan terang agar menyatu dengan warna putih/abu terang */
-    --hero-img-brightness: brightness(0.85) grayscale(0.4) opacity(0.25);
-    --hero-overlay-gradient: radial-gradient(circle at center, rgba(245, 245, 245, 0.1) 0%, var(--bg-color) 100%);
-    --logo-invert: invert(1); /* Membalik warna logo aset gambar jika warnanya putih solid */
+    --hero-img-brightness: brightness(0.9) grayscale(0.3) opacity(0.2);
+    --hero-overlay-gradient: radial-gradient(circle at center, rgba(245, 245, 245, 0.05) 0%, rgba(245, 245, 245, 0.5) 70%, var(--bg-color) 100%);
+    --logo-invert: invert(1);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -72,7 +73,7 @@ body {
     height: 32px;
     width: auto;
     display: block;
-    filter: var(--logo-invert); /* Otomatis menyesuaikan tema terang/gelap */
+    filter: var(--logo-invert);
     transition: opacity 0.3s var(--ease), filter 0.5s var(--ease);
 }
 
@@ -150,12 +151,12 @@ body {
     position: relative;
     height: 100vh;
     width: 100%;
-    max-width: 100vw; /* Mengunci lebar maksimal agar tidak melebar/lewat batas screen */
+    max-width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 var(--padding-x);
-    overflow: hidden; /* Memotong konten yang keluar dari area hero */
+    overflow: hidden;
     background-color: var(--bg-color); 
     transition: background-color 0.5s var(--ease);
 }
@@ -166,7 +167,7 @@ body {
     z-index: 0; 
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Mencegah background mengganggu klik pada teks/tombol */
+    pointer-events: none;
 }
 
 .hero-img {
@@ -188,25 +189,25 @@ body {
 .hero-content {
     position: relative;
     z-index: 10; 
-    width: 100%; /* Memastikan konten teks tetap selebar area padding aman */
+    width: 100%;
     max-width: 100%;
 }
 
 .title-group {
     max-width: 100%;
-    overflow: hidden; /* Mencegah huruf berukuran besar membuat halaman melebar ke kanan */
+    overflow: hidden;
 }
 
 .side-title {
     font-family: var(--font-main);
-    font-size: clamp(3rem, 12vw, 10rem); /* Sedikit disesuaikan agar pas di layar mobile dan desktop */
+    font-size: clamp(3rem, 12vw, 10rem);
     font-weight: 900;
     line-height: 0.85;
     letter-spacing: -0.04em;
     text-transform: uppercase;
     color: var(--text-color);
     margin: 0;
-    white-space: nowrap; /* Mencegah teks patah baris berantakan */
+    white-space: nowrap;
     transition: color 0.5s var(--ease);
 }
 
@@ -235,18 +236,118 @@ body {
     transition: color 0.5s var(--ease);
 }
 
+/* ----------------------------------------------------------------
+   UTILITIES & CONTENT GRID
+------------------------------------------------------------------- */
+.label-mono {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.5s var(--ease);
+}
+
+.status-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+}
+
+.status-dot {
+    width: 6px; 
+    height: 6px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
+    animation: status-pulse 2s infinite;
+}
+
+@keyframes status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.section { padding: 100px 0; }
+.container { width: 100%; }
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    padding: 0 var(--padding-x);
+}
+
+.section-index {
+    font-family: var(--font-mono);
+    opacity: 0.3;
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.work-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px;
+    padding: 0 var(--padding-x);
+}
+
+.project-card.featured {
+    grid-column: span 2;
+}
+
+.work-img-wrapper {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #1a1a1a;
+}
+
+.work-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    transition: transform 1s var(--ease), filter 1s var(--ease);
+}
+
+.project-card:hover .work-img-wrapper img {
+    transform: scale(1.03);
+    filter: grayscale(0);
+}
+
+.project-meta {
+    margin-top: 20px;
+}
+
+.project-meta h3 {
+    font-size: 1.5rem;
+    margin-top: 5px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
 
 /* ----------------------------------------------------------------
-   FOOTER SECTION (ADDED & OPTIMIZED)
+   FOOTER SECTION (FIXED & FULL REPAIR)
 ------------------------------------------------------------------- */
 .footer { 
     position: relative;
     width: 100%;
     padding: 60px var(--padding-x); 
     border-top: 1px solid var(--border-color); 
-    background-color: var(--bg-color); /* Memastikan footer memiliki dasar warna solid */
+    background-color: var(--bg-color);
     margin-top: 100px;
-    z-index: 10; /* Berada di atas layer background efek global */
+    z-index: 10;
     transition: border-top 0.5s var(--ease), background-color 0.5s var(--ease);
 }
 
@@ -275,31 +376,46 @@ body {
     opacity: 0.6;
 }
 
+/* ----------------------------------------------------------------
+   BACK TO TOP BUTTON UI (FIXED VISIBILITY)
+------------------------------------------------------------------- */
+#backToTop {
+    position: fixed; 
+    bottom: 30px; 
+    right: 30px; 
+    width: 50px; 
+    height: 50px;
+    background: var(--text-color); 
+    color: var(--bg-color);
+    border: none; 
+    border-radius: 50%; 
+    font-family: var(--font-mono);
+    font-size: 10px; 
+    font-weight: bold; 
+    opacity: 0; 
+    visibility: hidden;
+    transform: translateY(20px);
+    z-index: 9999; /* Berada tepat di bawah custom cursor */
+    cursor: pointer;
+    transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease), transform 0.4s var(--ease), background-color 0.5s var(--ease), color 0.5s var(--ease);
+}
+
+#backToTop.show { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0);
+}
 
 /* ----------------------------------------------------------------
-   RESPONSIVE ADJUSTMENTS (HERO & FOOTER MOBILE)
+   RESPONSIVE ADJUSTMENTS
 ------------------------------------------------------------------- */
 @media (max-width: 768px) {
     .navbar { height: 70px; }
-    
-    /* Mengubah susunan grid kolom hero menjadi baris bertumpuk di mobile */
-    .hero-bottom { 
-        grid-template-columns: 1fr; 
-        gap: 25px; 
-        align-items: flex-start;
-    }
-    
-    .status-box { 
-        justify-content: flex-start; 
-    }
-    
-    /* Mengubah susunan footer menjadi satu baris vertikal di mobile */
-    .footer-content { 
-        flex-direction: column; 
-        gap: 20px; 
-        text-align: center; 
-        justify-content: center;
-    }
-    
+    .hero-bottom { grid-template-columns: 1fr; gap: 25px; align-items: flex-start; }
+    .status-box { justify-content: flex-start; }
+    .work-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: auto; }
     .logo-img { height: 26px; }
+    .footer-content { flex-direction: column; gap: 20px; text-align: center; justify-content: center; }
+    #backToTop { bottom: 20px; right: 20px; width: 45px; height: 45px; }
 }
