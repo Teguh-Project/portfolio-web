@@ -1,6 +1,6 @@
 /**
  * TEGUH P.P | Portfolio Engine 2026
- * Core functionality for theme, cursor, clock, and scroll effects.
+ * Core functionality for theme, cursor, clock, and intelligent scroll effects.
  */
 
 class PortfolioEngine {
@@ -14,29 +14,29 @@ class PortfolioEngine {
         this.initTheme();
         this.initSmartCursor();
         this.initClock();
-        this.initScrollEffects();
         this.initNavigation();
+        this.initScrollEffects();
     }
 
     initTheme() {
         const btn = document.getElementById('themeToggle');
-        const body = document.body;
+        const root = document.documentElement; // Mengontrol atribut di tingkat HTML root
         
-        // Cek preferensi tersimpan atau gunakan dark sebagai default
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        body.setAttribute('data-theme', currentTheme);
+        // Memuat preferensi tersimpan atau gunakan dark mode sebagai setelan bawaan
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        root.setAttribute('data-theme', savedTheme);
         
         const updateBtnText = (theme) => {
-            if(btn) btn.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
+            if (btn) btn.textContent = theme === 'dark' ? 'LIGHT' : 'DARK';
         };
         
-        updateBtnText(currentTheme);
+        updateBtnText(savedTheme);
 
         btn?.addEventListener('click', () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
+            const isDark = root.getAttribute('data-theme') === 'dark';
             const nextTheme = isDark ? 'light' : 'dark';
             
-            body.setAttribute('data-theme', nextTheme);
+            root.setAttribute('data-theme', nextTheme);
             localStorage.setItem('theme', nextTheme);
             updateBtnText(nextTheme);
         });
@@ -52,7 +52,7 @@ class PortfolioEngine {
         });
 
         const render = () => {
-            // LERP (Linear Interpolation) untuk gerakan smooth
+            // LERP (Linear Interpolation) untuk menghasilkan pergerakan kursor yang smooth/halus
             this.cursorPos.x += (this.mousePos.x - this.cursorPos.x) * 0.15;
             this.cursorPos.y += (this.mousePos.y - this.cursorPos.y) * 0.15;
             
@@ -61,8 +61,9 @@ class PortfolioEngine {
         };
         render();
 
-        // Cursor Hover Effects
-        const hoverElements = document.querySelectorAll('a, button, .project-card, .logo-img');
+        // Mengamati interaksi hover pada elemen-elemen interaktif
+        // Menambahkan selector .cell-links a agar tautan di dalam footer ikut merespon kursor
+        const hoverElements = document.querySelectorAll('a, button, .project-card, .logo-img, .cell-links a');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.style.width = '60px';
@@ -72,8 +73,8 @@ class PortfolioEngine {
                 cursor.style.border = 'none';
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.width = '20px';
-                cursor.style.height = '20px';
+                cursor.style.width = '16px'; // Disesuaikan dengan diameter CSS baru (16px)
+                cursor.style.height = '16px';
                 cursor.style.backgroundColor = 'transparent';
                 cursor.style.mixBlendMode = 'normal';
                 cursor.style.border = '1px solid var(--text-color)';
@@ -82,7 +83,10 @@ class PortfolioEngine {
     }
 
     initClock() {
-        const clockEl = document.getElementById('local-time');
+        // Disinkronkan dengan ID 'liveClock' dari struktur komponen HTML yang baru
+        const clockEl = document.getElementById('liveClock');
+        if (!clockEl) return;
+
         const update = () => {
             const now = new Date();
             const time = now.toLocaleTimeString('en-GB', { 
@@ -91,20 +95,42 @@ class PortfolioEngine {
                 minute: '2-digit', 
                 second: '2-digit' 
             });
-            if(clockEl) clockEl.textContent = `${time} MALANG, IDN`;
+            clockEl.textContent = time;
         };
         setInterval(update, 1000);
-        update();
+        update(); // Eksekusi langsung tanpa menunggu delay interval pertama
     }
 
     initNavigation() {
         const btnUp = document.getElementById('backToTop');
+        const footerElement = document.querySelector('.footer');
         
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 600) {
-                btnUp?.classList.add('show');
+            if (!btnUp) return;
+
+            // A. Kontrol Visibilitas Tombol Berdasarkan Jarak Scroll Jauh Halaman
+            if (window.scrollY > 400) {
+                btnUp.classList.add('show');
             } else {
-                btnUp?.classList.remove('show');
+                btnUp.classList.remove('show');
+            }
+
+            // B. Perhitungan Batas Tabrakan Grid Footer (Stop & Lock Position)
+            if (footerElement) {
+                const footerRect = footerElement.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                // Jika batas atas kontainer footer mulai menembus dasar batas layar browser
+                if (footerRect.top < windowHeight) {
+                    const overlapDistance = windowHeight - footerRect.top;
+                    btnUp.style.position = 'absolute';
+                    // Tombol dikunci presisi di atas garis batas grid footer (ditambah offset space 40px)
+                    btnUp.style.bottom = `${overlapDistance + 40}px`; 
+                } else {
+                    // Kembalikan ke posisi fixed melayang reguler jika posisi footer masih di bawah jauh
+                    btnUp.style.position = 'fixed';
+                    btnUp.style.bottom = '40px';
+                }
             }
         });
 
@@ -115,8 +141,8 @@ class PortfolioEngine {
 
     initScrollEffects() {
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
+            threshold: 0.05,
+            rootMargin: "0px 0px -40px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -124,22 +150,22 @@ class PortfolioEngine {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = "1";
                     entry.target.style.transform = "translateY(0)";
-                    // Berhenti mengamati setelah elemen muncul
-                    observer.unobserve(entry.target); 
+                    observer.unobserve(entry.target); // Mematikan pengamatan pasca elemen sukses direveal
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.project-card, .side-title, .hero-bottom').forEach(el => {
+        // Menambahkan .footer-cell agar blok modular menu bawah memudar halus saat discroll masuk
+        document.querySelectorAll('.project-card, .side-title, .hero-bottom, .footer-cell').forEach(el => {
             el.style.opacity = "0";
             el.style.transform = "translateY(30px)";
-            el.style.transition = "all 1s cubic-bezier(0.16, 1, 0.3, 1)";
+            el.style.transition = "all 1.2s cubic-bezier(0.16, 1, 0.3, 1)";
             observer.observe(el);
         });
     }
 }
 
-// Inisialisasi saat DOM siap
+// Booting engine utama begitu seluruh elemen DOM selesai dimuat
 document.addEventListener('DOMContentLoaded', () => {
     new PortfolioEngine();
 });
