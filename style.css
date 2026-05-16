@@ -144,17 +144,18 @@ body {
 @media (min-width: 1024px) { .custom-cursor { display: block; } }
 
 /* ----------------------------------------------------------------
-   HERO SECTION
+   HERO SECTION (FIXED WIDTH & OVERFLOW)
 ------------------------------------------------------------------- */
 .hero {
     position: relative;
     height: 100vh;
     width: 100%;
+    max-width: 100vw; /* Mengunci lebar maksimal agar tidak melebar/lewat batas screen */
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 var(--padding-x);
-    overflow: hidden;
+    overflow: hidden; /* Memotong konten yang keluar dari area hero */
     background-color: var(--bg-color); 
     transition: background-color 0.5s var(--ease);
 }
@@ -162,31 +163,143 @@ body {
 .hero-bg-wrapper {
     position: absolute;
     inset: 0;
-    z-index: 0; /* Berada tepat di atas dasar background */
+    z-index: 0; 
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Mencegah background mengganggu klik pada teks/tombol */
 }
 
 .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: var(--hero-img-brightness); /* Terkontrol lewat variabel tema di atas */
+    filter: var(--hero-img-brightness); 
     transition: filter 0.5s var(--ease);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: var(--hero-overlay-gradient); /* Berubah dinamis agar transisi ke warna dasar mulus */
+    background: var(--hero-overlay-gradient); 
     z-index: 1;
     transition: background 0.5s var(--ease);
 }
 
 .hero-content {
     position: relative;
-    z-index: 10; /* Teks melayang kokoh di atas overlay dan image */
+    z-index: 10; 
+    width: 100%; /* Memastikan konten teks tetap selebar area padding aman */
+    max-width: 100%;
+}
+
+.title-group {
+    max-width: 100%;
+    overflow: hidden; /* Mencegah huruf berukuran besar membuat halaman melebar ke kanan */
 }
 
 .side-title {
     font-family: var(--font-main);
-    font-size: clamp(3rem, 14vw, 11rem);
-    font-weight:
+    font-size: clamp(3rem, 12vw, 10rem); /* Sedikit disesuaikan agar pas di layar mobile dan desktop */
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin: 0;
+    white-space: nowrap; /* Mencegah teks patah baris berantakan */
+    transition: color 0.5s var(--ease);
+}
+
+.side-title.italic { 
+    font-style: italic; 
+}
+
+.hero-bottom {
+    margin-top: clamp(2rem, 8vh, 5rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.hero-description {
+    font-size: 0.85rem;
+    max-width: 320px;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.hero-description p {
+    color: var(--text-color);
+    transition: color 0.5s var(--ease);
+}
+
+
+/* ----------------------------------------------------------------
+   FOOTER SECTION (ADDED & OPTIMIZED)
+------------------------------------------------------------------- */
+.footer { 
+    position: relative;
+    width: 100%;
+    padding: 60px var(--padding-x); 
+    border-top: 1px solid var(--border-color); 
+    background-color: var(--bg-color); /* Memastikan footer memiliki dasar warna solid */
+    margin-top: 100px;
+    z-index: 10; /* Berada di atas layer background efek global */
+    transition: border-top 0.5s var(--ease), background-color 0.5s var(--ease);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-left, .footer-center, .footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.footer-right .nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    transition: opacity 0.3s var(--ease), color 0.5s var(--ease);
+}
+
+.footer-right .nav-link:hover {
+    opacity: 0.6;
+}
+
+
+/* ----------------------------------------------------------------
+   RESPONSIVE ADJUSTMENTS (HERO & FOOTER MOBILE)
+------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .navbar { height: 70px; }
+    
+    /* Mengubah susunan grid kolom hero menjadi baris bertumpuk di mobile */
+    .hero-bottom { 
+        grid-template-columns: 1fr; 
+        gap: 25px; 
+        align-items: flex-start;
+    }
+    
+    .status-box { 
+        justify-content: flex-start; 
+    }
+    
+    /* Mengubah susunan footer menjadi satu baris vertikal di mobile */
+    .footer-content { 
+        flex-direction: column; 
+        gap: 20px; 
+        text-align: center; 
+        justify-content: center;
+    }
+    
+    .logo-img { height: 26px; }
+}
