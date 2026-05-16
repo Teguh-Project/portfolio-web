@@ -1,115 +1,122 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>TEGUH P.P | Fullstack Creative Designer</title>
-    
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    
+    <title>Teguh | Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 </head>
-
-<body data-theme="dark">
-    
+<body>
     <div class="noise-overlay"></div>
     <div class="custom-cursor"></div>
 
-    <nav class="navbar">
-        <div class="logo">
-            <a href="index.html">
-                <img src="assets/images/logo.png" alt="Teguh P.P Logo" class="logo-img">
-            </a>
-        </div>
-        
-        <div class="nav-menu">
-            <a href="#work" class="nav-link"><span>01</span> WORK</a>
-            <a href="#about" class="nav-link"><span>02</span> IDENTITY</a>
-            <button id="themeToggle" class="theme-toggle-nav">LIGHT</button>
-        </div>
-    </nav>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <span class="logo-text">TEGUH.P.P</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#work" class="nav-link"><span>01</span>WORK</a>
+                <a href="#about" class="nav-link"><span>02</span>IDENTITY</a>
+                <button class="theme-toggle-nav" id="themeToggle">LIGHT</button>
+            </div>
+        </nav>
 
-    <main class="container">
-
-        <section id="hero" class="hero">
+        <header class="hero">
             <div class="hero-bg-wrapper">
-                <img src="assets/images/giff.gif" alt="hero background" class="hero-img">
                 <div class="hero-overlay"></div>
             </div>
-            
             <div class="hero-content">
                 <div class="title-group">
-                    <h1 class="side-title">FULLSTACK</h1>
-                    <h1 class="side-title italic">CREATIVE</h1>
-                    <h1 class="side-title">DESIGNER</h1>
+                    <h1 class="side-title">Fullstack</h1>
+                    <h1 class="side-title italic">Creative</h1>
+                    <h1 class="side-title">Designer</h1>
                 </div>
-                
                 <div class="hero-bottom">
                     <div class="hero-meta">
                         <span class="label-mono">BASED IN MALANG, IDN</span>
                     </div>
-                    
                     <div class="hero-description">
                         <p>Crafting cinematic digital experiences through visual storytelling and technical precision.</p>
                     </div>
-                    
                     <div class="status-box">
                         <div class="status-indicator">
-                            <span class="status-dot"></span>
+                            <div class="status-dot"></div>
                             <span class="label-mono">AVAILABLE FOR 2026 PROJECTS</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
 
         <section id="work" class="section">
             <div class="section-header">
-                <span class="section-index">01</span>
-                <h2 class="section-title">SELECTED WORKS</h2>
+                <span class="section-index">01/</span>
+                <h2 class="section-title">Selected Works</h2>
             </div>
-
             <div class="work-grid">
                 <div class="project-card featured">
                     <div class="work-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964" alt="Concerto Audio Rebranding">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&width=1200" alt="Project Featured">
                     </div>
                     <div class="project-meta">
-                        <div class="label-mono">VISUAL DESIGN / 2026</div>
-                        <h3>CONCERTO AUDIO REBRANDING</h3>
+                        <span class="label-mono">REBRANDING / 2026</span>
+                        <h3>Automotive Brand Narrative</h3>
                     </div>
                 </div>
-                
-                </div>
+            </div>
         </section>
 
-        <section id="about" class="section">
-            <div class="section-header">
-                <span class="section-index">02</span>
-                <h2 class="section-title">IDENTITY</h2>
-            </div>
-            
-            <div class="about-content">
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-cell">
+                    <div class="cell-header">
+                        <span class="cell-index">BLCK. 01</span>
+                        <span class="cell-dot">■</span>
+                    </div>
+                    <div class="cell-links">
+                        <a href="#work">Work</a>
+                        <a href="#about">Identity</a>
+                        <a href="mailto:email@kamu.com">Contact</a>
+                    </div>
                 </div>
-        </section>
+                <div class="footer-cell">
+                    <div class="cell-header">
+                        <span class="cell-index">BLCK. 02</span>
+                        <span class="cell-dot">■</span>
+                    </div>
+                    <div class="cell-links">
+                        <div class="live-clock-wrapper">
+                            <span class="clock-label">LOCAL TIME</span>
+                            <span id="liveClock" class="clock-time">00:00:00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-cell">
+                    <div class="cell-header">
+                        <span class="cell-index">BLCK. 03</span>
+                        <span class="cell-dot">■</span>
+                    </div>
+                    <div class="cell-links">
+                        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+                        <a href="https://github.com" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
 
-    </main>
+            <div class="footer-brand-wrap">
+                <h2 class="footer-brand-text">Teguh<span>®</span></h2>
+            </div>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-left">
-                <span class="label-mono">© 2026 TEGUH PERWIRA</span>
+            <div class="footer-meta-bar">
+                <div class="meta-item">©2026 TEGUH PERWIRA</div>
+                <div class="meta-item">TERMS AND CONDITIONS</div>
+                <div class="meta-item">PRIVACY POLICY</div>
+                <div class="meta-item">WEBSITE BY BNL/S & WKHS®</div>
             </div>
-            <div class="footer-center">
-                <span id="local-time" class="label-mono">00:00:00 MALANG, IDN</span>
-            </div>
-            <div class="footer-right">
-                <a href="mailto:hello@teguh.design" class="nav-link">GET IN TOUCH</a>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <button id="backToTop">UP</button>
 
