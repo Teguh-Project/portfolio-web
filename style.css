@@ -43,7 +43,7 @@ body {
 }
 
 /* ==========================================================================
-   2. FIXED NAVBAR
+   2. FIXED NAVBAR (Sesuaikan z-index agar tertutup rapi saat overlay aktif)
    ========================================================================== */
 .navbar {
     position: fixed;
@@ -52,85 +52,11 @@ body {
     width: calc(100% - (var(--padding-x) * 2));
     height: 80px;
     display: flex;
-    z-index: 10000;
+    z-index: 999; /* Diturunkan agar berada di bawah tirai menu overlay */
     border-bottom: 1px solid var(--border-color);
     background: var(--bg-color);
     transition: all 0.5s var(--ease);
 }
-
-.nav-left {
-    width: 35%; 
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 30px;
-    border-right: 1px solid var(--border-color);
-}
-
-.logo-branding {
-    font-family: var(--font-main);
-    font-weight: 900;
-    font-size: 24px;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: var(--text-color);
-    text-decoration: none;
-}
-
-.nav-right {
-    width: 65%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.nav-block-menu {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 35px;
-    border-left: 1px solid var(--border-color);
-    cursor: pointer;
-}
-
-.menu-text {
-    font-family: var(--font-main);
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.burger-icon {
-    width: 24px;
-    height: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.burger-icon span {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: var(--text-color);
-    transition: background-color 0.5s;
-}
-
-.theme-toggle-nav {
-    background: transparent;
-    border: none;
-    border-left: 1px solid var(--border-color);
-    color: var(--text-color);
-    height: 100%;
-    padding: 0 35px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s var(--ease);
-}
-.theme-toggle-nav:hover { background: var(--text-color); color: var(--bg-color); }
 
 /* ==========================================================================
    3. ASIMETRIS SPLIT HERO SECTION
@@ -245,9 +171,13 @@ body {
 }
 
 .status-dot {
-    width: 6px; height: 6px;
+    width: 6px; 
+    height: 6px;
     background-color: var(--accent);
     border-radius: 50%;
+    /* Tambahkan baris di bawah ini: */
+    animation: statusPulse 2s infinite var(--ease);
+    box-shadow: 0 0 8px var(--accent); /* Memberikan efek glow tipis */
 }
 
 /* ==========================================================================
@@ -360,7 +290,7 @@ body {
 }
 
 /* ==========================================================================
-   5. FULL-SCREEN MENU OVERLAY SYSTEM
+   5. FULL-SCREEN MENU OVERLAY SYSTEM (Z-index Utama)
    ========================================================================== */
 .menu-overlay {
     position: fixed;
@@ -369,76 +299,12 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: var(--bg-color);
-    z-index: 20000; 
+    z-index: 99999; /* Dipastikan menjadi lapisan paling atas di layar browser */
     display: flex;
     flex-direction: column;
     transition: top 0.6s cubic-bezier(0.85, 0, 0.15, 1); 
     border-bottom: 1px solid var(--border-color);
 }
-
-.menu-overlay.active {
-    top: 0;
-}
-
-.menu-overlay-header {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.close-menu-btn {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 35px;
-    border-left: 1px solid var(--border-color);
-    cursor: pointer;
-}
-
-.close-icon {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.menu-overlay-content {
-    flex-grow: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    width: 100%;
-}
-
-.overlay-grid-cell {
-    padding: 60px 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; 
-    gap: 20px;
-}
-
-.overlay-grid-cell:not(:last-child) {
-    border-right: 1px solid var(--border-color);
-}
-
-.overlay-menu-link {
-    font-family: var(--font-main);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    color: var(--text-color);
-    text-decoration: none;
-    line-height: 1;
-    transition: opacity 0.3s, transform 0.3s var(--ease);
-}
-
-.overlay-menu-link:hover {
-    opacity: 0.5;
-    transform: translateY(-5px);
-}
-
 /* ==========================================================================
    6. GLOBAL FOOTER
    ========================================================================== */
@@ -458,13 +324,26 @@ body {
 .footer-meta-bar { width: 100%; padding: 30px 40px; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; }
 
 /* ==========================================================================
-   7. BACK TO TOP & UTILITIES
+   7. BACK TO TOP & UTILITIES (Penyesuaian Responsif Posisi Tombol)
    ========================================================================== */
-#backToTop { position: fixed; bottom: 40px; right: 40px; width: 45px; height: 45px; background: var(--text-color); color: var(--bg-color); border: 1px solid var(--border-color); font-family: var(--font-mono); font-size: 10px; font-weight: bold; opacity: 0; visibility: hidden; z-index: 9999; cursor: pointer; transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease); }
-#backToTop.show { opacity: 1; visibility: visible; }
-.noise-overlay { position: fixed; inset: 0; background: url('https://grainy-gradients.vercel.app/noise.svg'); opacity: 0.04; pointer-events: none; z-index: 9000; }
-.custom-cursor { width: 16px; height: 16px; border: 1px solid var(--text-color); border-radius: 50%; position: fixed; pointer-events: none; z-index: 11000; display: none; }
-@media (min-width: 1024px) { .custom-cursor { display: block; } }
+#backToTop { 
+    position: fixed; 
+    bottom: 40px; 
+    right: calc(var(--padding-x) + 20px); /* PERBAIKAN: Mengikuti grid container agar tidak lari pada monitor lebar */
+    width: 45px; 
+    height: 45px; 
+    background: var(--text-color); 
+    color: var(--bg-color); 
+    border: 1px solid var(--border-color); 
+    font-family: var(--font-mono); 
+    font-size: 10px; 
+    font-weight: bold; 
+    opacity: 0; 
+    visibility: hidden; 
+    z-index: 9998; 
+    cursor: pointer; 
+    transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease), bottom 0.3s var(--ease); /* Tambahkan transition bottom untuk efek JS Lock di footer */
+}
 
 /* ==========================================================================
    8. MEDIA QUERIES (RESPONSIVE MOBILE LOGIC) - SATU PINTU UTAMA
