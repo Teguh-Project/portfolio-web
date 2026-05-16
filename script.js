@@ -16,13 +16,13 @@ class PortfolioEngine {
         this.initClock();
         this.initNavigation();
         this.initScrollEffects();
+        this.initMenuOverlay(); // Memanggil inisialisasi menu tirai
     }
 
     initTheme() {
         const btn = document.getElementById('themeToggle');
-        const root = document.documentElement; // Mengontrol atribut di tingkat HTML root
+        const root = document.documentElement; 
         
-        // Memuat preferensi tersimpan atau gunakan dark mode sebagai setelan bawaan
         const savedTheme = localStorage.getItem('theme') || 'dark';
         root.setAttribute('data-theme', savedTheme);
         
@@ -52,7 +52,6 @@ class PortfolioEngine {
         });
 
         const render = () => {
-            // LERP (Linear Interpolation) untuk menghasilkan pergerakan kursor yang smooth/halus
             this.cursorPos.x += (this.mousePos.x - this.cursorPos.x) * 0.15;
             this.cursorPos.y += (this.mousePos.y - this.cursorPos.y) * 0.15;
             
@@ -61,8 +60,6 @@ class PortfolioEngine {
         };
         render();
 
-        // Mengamati interaksi hover pada elemen-elemen interaktif
-        // Menambahkan selector .cell-links a agar tautan di dalam footer ikut merespon kursor
         const hoverElements = document.querySelectorAll('a, button, .project-card, .logo-img, .cell-links a');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
@@ -73,7 +70,7 @@ class PortfolioEngine {
                 cursor.style.border = 'none';
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.width = '16px'; // Disesuaikan dengan diameter CSS baru (16px)
+                cursor.style.width = '16px'; 
                 cursor.style.height = '16px';
                 cursor.style.backgroundColor = 'transparent';
                 cursor.style.mixBlendMode = 'normal';
@@ -83,7 +80,6 @@ class PortfolioEngine {
     }
 
     initClock() {
-        // Disinkronkan dengan ID 'liveClock' dari struktur komponen HTML yang baru
         const clockEl = document.getElementById('liveClock');
         if (!clockEl) return;
 
@@ -98,7 +94,7 @@ class PortfolioEngine {
             clockEl.textContent = time;
         };
         setInterval(update, 1000);
-        update(); // Eksekusi langsung tanpa menunggu delay interval pertama
+        update(); 
     }
 
     initNavigation() {
@@ -108,26 +104,21 @@ class PortfolioEngine {
         window.addEventListener('scroll', () => {
             if (!btnUp) return;
 
-            // A. Kontrol Visibilitas Tombol Berdasarkan Jarak Scroll Jauh Halaman
             if (window.scrollY > 400) {
                 btnUp.classList.add('show');
             } else {
                 btnUp.classList.remove('show');
             }
 
-            // B. Perhitungan Batas Tabrakan Grid Footer (Stop & Lock Position)
             if (footerElement) {
                 const footerRect = footerElement.getBoundingClientRect();
                 const windowHeight = window.innerHeight;
 
-                // Jika batas atas kontainer footer mulai menembus dasar batas layar browser
                 if (footerRect.top < windowHeight) {
                     const overlapDistance = windowHeight - footerRect.top;
                     btnUp.style.position = 'absolute';
-                    // Tombol dikunci presisi di atas garis batas grid footer (ditambah offset space 40px)
                     btnUp.style.bottom = `${overlapDistance + 40}px`; 
                 } else {
-                    // Kembalikan ke posisi fixed melayang reguler jika posisi footer masih di bawah jauh
                     btnUp.style.position = 'fixed';
                     btnUp.style.bottom = '40px';
                 }
@@ -150,20 +141,42 @@ class PortfolioEngine {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = "1";
                     entry.target.style.transform = "translateY(0)";
-                    observer.unobserve(entry.target); // Mematikan pengamatan pasca elemen sukses direveal
+                    observer.unobserve(entry.target); 
                 }
             });
         }, observerOptions);
 
-        // Menambahkan .footer-cell agar blok modular menu bawah memudar halus saat discroll masuk
         document.querySelectorAll('.project-card, .side-title, .hero-bottom, .footer-cell').forEach(el => {
             el.style.opacity = "0";
             el.style.transform = "translateY(30px)";
             el.style.transition = "all 1.2s cubic-bezier(0.16, 1, 0.3, 1)";
             observer.observe(el);
         });
+    } // Kurung kurawal penutup fungsi initScrollEffects() tetap di sini
+
+    initMenuOverlay() { // Fungsi ini sekarang berada di dalam kelas dengan benar
+        const openBtn = document.getElementById('openMenu');
+        const closeBtn = document.getElementById('closeMenu');
+        const overlay = document.querySelector('.menu-overlay');
+        const overlayLinks = document.querySelectorAll('.overlay-menu-link');
+
+        openBtn?.addEventListener('click', () => {
+            overlay?.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        });
+
+        const closeMenuAction = () => {
+            overlay?.classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        };
+
+        closeBtn?.addEventListener('click', closeMenuAction);
+
+        overlayLinks.forEach(link => {
+            link.addEventListener('click', closeMenuAction);
+        });
     }
-}
+} // Kurung kurawal penutup akhir kelas PortfolioEngine
 
 // Booting engine utama begitu seluruh elemen DOM selesai dimuat
 document.addEventListener('DOMContentLoaded', () => {
