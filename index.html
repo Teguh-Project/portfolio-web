@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teguh | Creative Portfolio</title>
+    <title>Teguh.P.P | Portfolio</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,69 +14,61 @@
     <div class="custom-cursor"></div>
 
     <div class="container">
+        
         <nav class="navbar">
-            <div class="logo">
-                <span class="logo-text">TEGUH.P.P</span>
+            <div class="nav-left">
+                <a href="#" class="logo-branding">Teguh.P.P</a>
             </div>
-            <div class="nav-menu">
-                <a href="#work" class="nav-link"><span>01</span>WORK</a>
-                <a href="#about" class="nav-link"><span>02</span>IDENTITY</a>
+            <div class="nav-right">
+                <div class="nav-block-menu">
+                    <span class="menu-text">Menu</span>
+                    <div class="burger-icon">
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
                 <button class="theme-toggle-nav" id="themeToggle">LIGHT</button>
             </div>
         </nav>
 
-        <header class="hero">
-            <div class="hero-bg-wrapper">
-                <div class="hero-overlay"></div>
-            </div>
-            <div class="hero-content">
-                <div class="title-group">
-                    <h1 class="side-title">Fullstack</h1>
-                    <h1 class="side-title italic">Creative</h1>
-                    <h1 class="side-title">Designer</h1>
+        <header class="hero-split">
+            <div class="hero-left-cell">
+                <div class="hero-main-titles">
+                    <h1 class="hero-huge-title">Next-Gen</h1>
+                    <h1 class="hero-huge-title">Creative</h1>
+                    <h1 class="hero-huge-title">Designer</h1>
                 </div>
-                <div class="hero-bottom">
-                    <div class="hero-meta">
-                        <span class="label-mono">BASED IN MALANG, IDN</span>
-                    </div>
-                    <div class="hero-description">
-                        <p>Crafting cinematic digital experiences through visual storytelling and technical precision.</p>
-                    </div>
-                    <div class="status-box">
-                        <div class="status-indicator">
-                            <div class="status-dot"></div>
-                            <span class="label-mono">AVAILABLE FOR 2026 PROJECTS</span>
-                        </div>
+                <div class="hero-left-footer">
+                    <p class="hero-sub-paragraph">
+                        The future of content creation and digital interface is industrialized, structured, and precise.
+                    </p>
+                </div>
+            </div>
+
+            <div class="hero-right-cell">
+                <div class="hero-meta-header">
+                    <span class="meta-label">SYSTEM</span>
+                    <span class="meta-label">EST. 2026</span>
+                </div>
+                
+                <div class="hero-gif-container">
+                    <img src="portfolio-display.gif" alt="Teguh P.P Creative Engine GIF" class="hero-gif-media">
+                </div>
+                
+                <div class="hero-meta-footer">
+                    <div class="meta-info-sub">BASED IN MALANG, IDN</div>
+                    <div class="meta-status-wrap">
+                        <div class="status-dot"></div>
+                        <span class="meta-info-sub">ACTIVE STATUS</span>
                     </div>
                 </div>
             </div>
         </header>
 
-        <section id="work" class="section">
-            <div class="section-header">
-                <span class="section-index">01/</span>
-                <h2 class="section-title">Selected Works</h2>
-            </div>
-            <div class="work-grid">
-                <div class="project-card featured">
-                    <div class="work-img-wrapper">
-                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&width=1200" alt="Project Featured">
-                    </div>
-                    <div class="project-meta">
-                        <span class="label-mono">REBRANDING / 2026</span>
-                        <h3>Automotive Brand Narrative</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <footer class="footer">
             <div class="footer-grid">
                 <div class="footer-cell">
-                    <div class="cell-header">
-                        <span class="cell-index">BLCK. 01</span>
-                        <span class="cell-dot">■</span>
-                    </div>
+                    <div class="cell-header"><span class="cell-index">BLCK. 01</span><span class="cell-dot">■</span></div>
                     <div class="cell-links">
                         <a href="#work">Work</a>
                         <a href="#about">Identity</a>
@@ -82,10 +76,7 @@
                     </div>
                 </div>
                 <div class="footer-cell">
-                    <div class="cell-header">
-                        <span class="cell-index">BLCK. 02</span>
-                        <span class="cell-dot">■</span>
-                    </div>
+                    <div class="cell-header"><span class="cell-index">BLCK. 02</span><span class="cell-dot">■</span></div>
                     <div class="cell-links">
                         <div class="live-clock-wrapper">
                             <span class="clock-label">LOCAL TIME</span>
@@ -94,21 +85,16 @@
                     </div>
                 </div>
                 <div class="footer-cell">
-                    <div class="cell-header">
-                        <span class="cell-index">BLCK. 03</span>
-                        <span class="cell-dot">■</span>
-                    </div>
+                    <div class="cell-header"><span class="cell-index">BLCK. 03</span><span class="cell-dot">■</span></div>
                     <div class="cell-links">
                         <a href="https://linkedin.com" target="_blank">LinkedIn</a>
                         <a href="https://github.com" target="_blank">GitHub</a>
                     </div>
                 </div>
             </div>
-
             <div class="footer-brand-wrap">
                 <h2 class="footer-brand-text">Teguh<span>®</span></h2>
             </div>
-
             <div class="footer-meta-bar">
                 <div class="meta-item">©2026 TEGUH PERWIRA</div>
                 <div class="meta-item">TERMS AND CONDITIONS</div>
@@ -116,6 +102,7 @@
                 <div class="meta-item">WEBSITE BY BNL/S & WKHS®</div>
             </div>
         </footer>
+
     </div>
 
     <button id="backToTop">UP</button>
