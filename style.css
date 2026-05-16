@@ -8,6 +8,11 @@
     --font-mono: 'JetBrains Mono', monospace;
     --padding-x: 5%;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    
+    /* VARIABEL DINAMIS UNTUK VISUAL GIF (DARK MODE) */
+    --hero-img-brightness: brightness(0.45) grayscale(0.2);
+    --hero-overlay-gradient: radial-gradient(circle at center, rgba(10, 10, 10, 0.2) 0%, var(--bg-color) 100%);
+    --logo-invert: invert(0); /* Tetap normal */
 }
 
 [data-theme="light"] {
@@ -15,6 +20,12 @@
     --text-color: #0a0a0a;
     --nav-bg: rgba(245, 245, 245, 0.8);
     --border-color: rgba(0, 0, 0, 0.1);
+    
+    /* VARIABEL DINAMIS UNTUK VISUAL GIF (LIGHT MODE) */
+    /* Membuat GIF sedikit lebih transparan dan terang agar menyatu dengan warna putih/abu terang */
+    --hero-img-brightness: brightness(0.85) grayscale(0.4) opacity(0.25);
+    --hero-overlay-gradient: radial-gradient(circle at center, rgba(245, 245, 245, 0.1) 0%, var(--bg-color) 100%);
+    --logo-invert: invert(1); /* Membalik warna logo aset gambar jika warnanya putih solid */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,8 +56,9 @@ body {
     background: var(--nav-bg);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    z-index: 10000; /* Nilai tertinggi agar tidak ketutupan */
+    z-index: 10000;
     border-bottom: 1px solid var(--border-color);
+    transition: background 0.5s var(--ease), border-bottom 0.5s var(--ease);
 }
 
 .logo { 
@@ -60,7 +72,12 @@ body {
     height: 32px;
     width: auto;
     display: block;
-    transition: opacity 0.3s var(--ease);
+    filter: var(--logo-invert); /* Otomatis menyesuaikan tema terang/gelap */
+    transition: opacity 0.3s var(--ease), filter 0.5s var(--ease);
+}
+
+.logo-img:hover {
+    opacity: 0.7;
 }
 
 .nav-menu { 
@@ -74,7 +91,12 @@ body {
     color: var(--text-color); 
     font-family: var(--font-mono); 
     font-size: 11px;
-    transition: opacity 0.3s var(--ease);
+    transition: color 0.5s var(--ease), opacity 0.3s var(--ease);
+}
+
+.nav-link span {
+    opacity: 0.4;
+    margin-right: 5px;
 }
 
 .theme-toggle-nav {
@@ -85,7 +107,12 @@ body {
     font-family: var(--font-mono);
     font-size: 10px;
     cursor: pointer;
-    transition: all 0.3s var(--ease);
+    transition: all 0.5s var(--ease);
+}
+
+.theme-toggle-nav:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
 }
 
 /* ----------------------------------------------------------------
@@ -100,7 +127,7 @@ body {
     background: url('https://grainy-gradients.vercel.app/noise.svg');
     opacity: 0.05; 
     pointer-events: none; 
-    z-index: 9000; /* Di bawah navbar, di atas hero */
+    z-index: 9000;
 }
 
 .custom-cursor {
@@ -110,13 +137,14 @@ body {
     border-radius: 50%; 
     position: fixed; 
     pointer-events: none;
-    z-index: 11000; /* Paling atas agar selalu terlihat */
+    z-index: 11000;
     display: none;
+    transition: width 0.3s var(--ease), height 0.3s var(--ease), background-color 0.3s var(--ease), border 0.3s var(--ease);
 }
 @media (min-width: 1024px) { .custom-cursor { display: block; } }
 
 /* ----------------------------------------------------------------
-   HERO SECTION (FINAL REPAIR)
+   HERO SECTION
 ------------------------------------------------------------------- */
 .hero {
     position: relative;
@@ -127,100 +155,38 @@ body {
     justify-content: center;
     padding: 0 var(--padding-x);
     overflow: hidden;
-    /* Pastikan background hero transparan atau sama dengan body agar abu-abu hilang */
     background-color: var(--bg-color); 
+    transition: background-color 0.5s var(--ease);
 }
 
 .hero-bg-wrapper {
     position: absolute;
     inset: 0;
-    z-index: 0; /* Ubah ke 0 agar berada tepat di atas background body */
+    z-index: 0; /* Berada tepat di atas dasar background */
 }
 
 .hero-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Naikkan brightness ke 0.5 atau 0.6 agar GIF lebih terlihat */
-    filter: brightness(0.5); 
+    filter: var(--hero-img-brightness); /* Terkontrol lewat variabel tema di atas */
     transition: filter 0.5s var(--ease);
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    /* Gradient ini membuat transisi halus ke warna background utama */
-    background: radial-gradient(circle at center, transparent 0%, var(--bg-color) 100%);
+    background: var(--hero-overlay-gradient); /* Berubah dinamis agar transisi ke warna dasar mulus */
     z-index: 1;
+    transition: background 0.5s var(--ease);
 }
 
 .hero-content {
     position: relative;
-    z-index: 10; /* Pastikan teks berada di lapisan paling depan */
+    z-index: 10; /* Teks melayang kokoh di atas overlay dan image */
 }
 
-/* ----------------------------------------------------------------
-   UTILITIES & FOOTER
-------------------------------------------------------------------- */
-.label-mono {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-}
-
-.status-dot {
-    width: 6px; height: 6px;
-    background-color: #00ff00;
-    border-radius: 50%;
-    margin-right: 10px;
-    box-shadow: 0 0 12px rgba(0, 255, 0, 0.6);
-    animation: status-pulse 2s infinite;
-}
-
-@keyframes status-pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.9); }
-}
-
-.section { padding: 100px 0; }
-.container { padding: 0 var(--padding-x); }
-
-.work-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 40px; 
-}
-
-.footer { 
-    padding: 60px var(--padding-x); 
-    border-top: 1px solid var(--border-color); 
-}
-
-#backToTop {
-    position: fixed; 
-    bottom: 30px; 
-    right: 30px; 
-    width: 50px; 
-    height: 50px;
-    background: var(--text-color); 
-    color: var(--bg-color);
-    border: none; 
-    border-radius: 50%; 
-    font-family: var(--font-mono);
-    font-size: 10px; 
-    font-weight: bold; 
-    opacity: 0; 
-    visibility: hidden;
-    z-index: 9999;
-    transition: 0.4s var(--ease);
-}
-#backToTop.show { opacity: 1; visibility: visible; }
-
-@media (max-width: 768px) {
-    .navbar { height: 70px; }
-    .hero-bottom { grid-template-columns: 1fr; gap: 30px; }
-    .work-grid { grid-template-columns: 1fr; }
-    .logo-img { height: 26px; }
-}
+.side-title {
+    font-family: var(--font-main);
+    font-size: clamp(3rem, 14vw, 11rem);
+    font-weight:
