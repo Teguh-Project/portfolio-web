@@ -43,7 +43,7 @@ body {
 }
 
 /* ==========================================================================
-   2. FIXED NAVBAR
+   2. FIXED NAVBAR (Ganti baris transition saja)
    ========================================================================== */
 .navbar {
     position: fixed;
@@ -55,83 +55,10 @@ body {
     z-index: 10000;
     border-bottom: 1px solid var(--border-color);
     background: var(--bg-color);
-    transition: all 0.5s var(--ease);
+    
+    /* DIUBAH: Mengisolasi transisi agar tidak merusak koordinat render awal HP */
+    transition: background-color 0.5s var(--ease), border-color 0.5s var(--ease); 
 }
-
-.nav-left {
-    width: 35%; 
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-left: 30px;
-    border-right: 1px solid var(--border-color);
-}
-
-.logo-branding {
-    font-family: var(--font-main);
-    font-weight: 900;
-    font-size: 24px;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
-    color: var(--text-color);
-    text-decoration: none;
-}
-
-.nav-right {
-    width: 65%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.nav-block-menu {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 35px;
-    border-left: 1px solid var(--border-color);
-    cursor: pointer;
-}
-
-.menu-text {
-    font-family: var(--font-main);
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.burger-icon {
-    width: 24px;
-    height: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.burger-icon span {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: var(--text-color);
-    transition: background-color 0.5s;
-}
-
-.theme-toggle-nav {
-    background: transparent;
-    border: none;
-    border-left: 1px solid var(--border-color);
-    color: var(--text-color);
-    height: 100%;
-    padding: 0 35px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s var(--ease);
-}
-.theme-toggle-nav:hover { background: var(--text-color); color: var(--bg-color); }
-
 /* ==========================================================================
    3. ASIMETRIS SPLIT HERO SECTION
    ========================================================================== */
@@ -477,53 +404,16 @@ body {
         border-right: none; 
     }
     
-    /* 8.2 Navbar & Atribut (PERBAIKAN TOTAL DI SINI) */
+    /* 8.2 Navbar & Atribut (DIUBAH TOTAL PADA BAGIAN KORDIAT .NAVBAR) */
     .navbar { 
-        left: 0; 
-        width: 100%; 
-        height: 70px; /* Sedikit lebih ramping di mobile */
+        position: fixed !important; /* MEMASTIKAN SIFAT MELAYANG TERKUNCI */
+        top: 0 !important;          /* MEMAKSA KOORDINAT MENEMPEL DI ATAS */
+        left: 0 !important;         /* MEMAKSA KOORDINAT MENEMPEL DI KIRI */
+        width: 100% !important;     /* LEBAR PENUH MEMOTONG PADDING DESKTOP */
+        height: 70px; 
         display: flex;
         align-items: center;
         background: var(--bg-color);
-    }
-    .nav-left { 
-        width: 50%; 
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding-left: 20px; 
-        border-right: 1px solid var(--border-color);
-    } 
-    .logo-branding {
-        font-size: 18px; /* Mengecilkan teks logo agar tidak sesak */
-    }
-    .nav-right { 
-        width: 50%; 
-        height: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-    .nav-block-menu {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 0 15px; /* Mengurangi padding masif desktop (35px) */
-    }
-    .menu-text {
-        font-size: 12px;
-        display: block !important; /* Memaksa teks menu tetap tampil */
-    }
-    .burger-icon {
-        width: 20px;
-        height: 8px;
-    }
-    .theme-toggle-nav {
-        height: 100%;
-        padding: 0 15px;
-        font-size: 11px;
-        border-left: 1px solid var(--border-color);
     }
     
     /* 8.3 Hero Section (Konversi dari Split Samping ke Tumpuk Vertikal) */
