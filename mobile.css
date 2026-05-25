@@ -1,0 +1,167 @@
+/* ==========================================================================
+   MOBILE OPTIMIZATION SYSTEM (mobile.css)
+   ========================================================================== */
+
+/* Layout Utama & Container */
+.container { 
+    max-width: 100%; 
+    border-left: none; 
+    border-right: none; 
+}
+
+/* Navbar Fix (Mengunci posisi mutlak sejak awal halaman dimuat) */
+.navbar { 
+    position: fixed !important; 
+    top: 0 !important;          
+    left: 0 !important;         
+    width: 100% !important;     
+    height: 70px; 
+    display: flex;
+    align-items: center;
+    background: var(--bg-color);
+}
+.nav-left { 
+    width: 50%; 
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px; 
+    border-right: 1px solid var(--border-color);
+} 
+.logo-branding {
+    font-size: 18px; 
+}
+.nav-right { 
+    width: 50%; 
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.nav-block-menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 15px; 
+}
+.menu-text {
+    font-size: 12px;
+    display: block !important; 
+}
+.burger-icon {
+    width: 20px;
+    height: 8px;
+}
+.theme-toggle-nav {
+    height: 100%;
+    padding: 0 15px;
+    font-size: 11px;
+    border-left: 1px solid var(--border-color);
+}
+
+/* Hero Section (Tumpuk Vertikal) */
+.hero-split { 
+    flex-direction: column; 
+    padding-top: 70px; 
+}
+.hero-left-cell { 
+    width: 100%; 
+    border-right: none; 
+    border-bottom: 1px solid var(--border-color); 
+    padding: 40px 20px; 
+}
+.hero-right-cell { 
+    width: 100%; 
+}
+.hero-meta-header {
+    height: 45px;
+    padding: 0 20px;
+    gap: 30px;
+}
+.hero-meta-footer {
+    height: 50px;
+    padding: 0 20px;
+}
+.hero-gif-container {
+    padding: 20px;
+    min-height: 280px; 
+}
+
+/* Content Sections */
+.section { 
+    padding: 60px 20px; 
+}
+.section-header {
+    margin-bottom: 35px;
+}
+.about-split { 
+    flex-direction: column; 
+    gap: 25px; 
+    margin-top: 20px;
+}
+.about-left, .about-right { 
+    width: 100%; 
+}
+
+/* Menu Overlay Tirai */
+.menu-overlay-header {
+    height: 70px; 
+}
+.menu-overlay-header .logo-branding {
+    padding-left: 20px !important; 
+}
+.close-menu-btn {
+    padding: 0 20px;
+}
+.menu-overlay-content { 
+    grid-template-columns: 1fr; 
+}
+.overlay-grid-cell { 
+    padding: 25px 20px; 
+    min-height: auto; 
+    justify-content: center; 
+    gap: 8px;
+}
+.overlay-grid-cell:not(:last-child) { 
+    border-right: none; 
+    border-bottom: 1px solid var(--border-color); 
+}
+.overlay-menu-link {
+    font-size: clamp(1.8rem, 6vw, 2.5rem); 
+}
+
+/* Footer Layout */
+.footer-grid { 
+    grid-template-columns: 1fr; 
+}
+.footer-cell { 
+    min-height: auto; 
+    border-bottom: 1px solid var(--border-color); 
+    padding: 30px 20px; 
+}
+.footer-cell:not(:last-child) { 
+    border-right: none; 
+}
+.cell-links {
+    margin-top: 20px;
+}
+.footer-brand-wrap {
+    padding: 30px 20px;
+}
+.footer-meta-bar { 
+    flex-direction: column; 
+    gap: 12px; 
+    padding: 30px 20px; 
+}
+
+/* Utilities & Back to Top */
+#backToTop {
+    bottom: 20px;
+    right: 20px; 
+    width: 40px;
+    height: 40px;
+}
+.custom-cursor {
+    display: none !important; 
+}
