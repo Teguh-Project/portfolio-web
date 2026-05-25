@@ -101,27 +101,34 @@ class PortfolioEngine {
         const btnUp = document.getElementById('backToTop');
         const footerElement = document.querySelector('.footer');
         
-        window.addEventListener('scroll', () => {
-            if (!btnUp) return;
-
-            if (window.scrollY > 400) {
-                btnUp.classList.add('show');
-            } else {
-                btnUp.classList.remove('show');
-            }
-
-            if (footerElement) {
-                const footerRect = footerElement.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-
-                if (footerRect.top < windowHeight) {
-                    const overlapDistance = windowHeight - footerRect.top;
-                    btnUp.style.position = 'absolute';
-                    btnUp.style.bottom = `${overlapDistance + 40}px`; 
-                } else {
-                    btnUp.style.position = 'fixed';
-                    btnUp.style.bottom = '40px';
+        // PENTING: Ambil element navbar dan buat variabel penampung scroll
+        const navbar = document.querySelector('.navbar');
+        let lastScrollTop = 0;
+        
+        // Cek dulu apakah navbar-nya ada di HTML agar tidak error
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                // Hanya jalankan efek sembunyi/muncul jika layar di atas 992px (Desktop)
+                if (window.innerWidth > 992) {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    if (scrollTop > lastScrollTop) {
+                        navbar.style.transform = 'translateY(-100%)'; 
+                    } else {
+                        navbar.style.transform = 'translateY(0)';
+                    }
+                    lastScrollTop = scrollTop;
                 }
+            });
+        }
+
+        // Efek memunculkan tombol Back to Top (Opsional, bawaan portfolio kamu jika ada)
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 300) {
+                btnUp?.classList.add('show');
+            } else {
+                btnUp?.classList.remove('show');
             }
         });
 
