@@ -9,7 +9,7 @@
     border-right: none; 
 }
 
-/* Navbar Fix (Mengunci posisi mutlak sejak awal halaman dimuat) */
+/* Navbar Fix (Mematikan paksa semua manipulasi script/transform dari JS desktop) */
 .navbar { 
     position: fixed !important; 
     top: 0 !important;          
@@ -18,7 +18,11 @@
     height: 70px; 
     display: flex;
     align-items: center;
-    background: var(--bg-color);
+    background: var(--bg-color) !important;
+    
+    /* TAMBAHKAN DUA BARIS INI: */
+    transform: none !important;  /* Menggagalkan efek translasi/sembunyi dari JS */
+    opacity: 1 !important;       /* Memastikan tidak transparan di awal */
 }
 .nav-left { 
     width: 50%; 
