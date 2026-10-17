@@ -40,10 +40,13 @@
 
   const applyEmail = () => $$('[data-mail]').forEach((a) => { a.href = `mailto:${SITE.email}`; });
 
+  // Tujuan kartu: halaman detail jika ada "slug", jika tidak pakai "link" langsung
+  const projectHref = (p) => (p.slug ? `project.html?p=${encodeURIComponent(p.slug)}` : (p.link || '#'));
+
   const renderProjects = (tag = 'All') => {
     const list = tag === 'All' ? PROJECTS : PROJECTS.filter((p) => p.tag === tag);
     $('#workGrid').innerHTML = list.map((p) => `
-      <a href="${esc(p.link)}" class="project-card" data-reveal>
+      <a href="${esc(projectHref(p))}" class="project-card" data-reveal>
         <div class="work-img-wrapper"><img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy" onerror="this.remove()"></div>
         <div class="project-meta">
           <span class="label-mono">${esc(p.cat)}</span>
