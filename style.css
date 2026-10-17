@@ -120,6 +120,28 @@ img{max-width:100%}
 .project-meta{display:flex;flex-direction:column;gap:10px;padding-top:20px}
 .project-meta h3{font:800 clamp(20px,2.2vw,32px)/1.1 var(--disp);letter-spacing:-.02em}
 
+/* Deskripsi & tombol: hanya tampil pada kartu LEBAR */
+.project-desc,.project-cta{display:none}
+
+/* Kartu LEBAR: otomatis jika kartu sendirian (mis. hasil filter)
+   atau kartu terakhir saat jumlah kartu ganjil. Gambar kiri, teks kanan. */
+.project-card:only-child,
+.project-card:last-child:nth-child(odd){
+  grid-column:1/-1;border-right:0;
+  display:grid;grid-template-columns:1.5fr 1fr;gap:calc(var(--card-pad)*2);align-items:stretch;
+}
+.project-card:only-child .work-img-wrapper,
+.project-card:last-child:nth-child(odd) .work-img-wrapper{aspect-ratio:16/10}
+.project-card:only-child .project-meta,
+.project-card:last-child:nth-child(odd) .project-meta{justify-content:space-between;padding:var(--card-pad) var(--card-pad) var(--card-pad) 0;gap:24px}
+.project-card:only-child .project-meta h3,
+.project-card:last-child:nth-child(odd) .project-meta h3{font-size:clamp(28px,4vw,64px);margin-top:auto}
+.project-card:only-child .project-desc,
+.project-card:last-child:nth-child(odd) .project-desc{display:block;font:400 14px/1.8 var(--mono);color:var(--mut);max-width:46ch}
+.project-card:only-child .project-cta,
+.project-card:last-child:nth-child(odd) .project-cta{display:inline-block;font:700 12px var(--mono);letter-spacing:.1em;border-bottom:2px solid var(--acc);width:fit-content;padding-bottom:4px;transition:padding-left .25s}
+.project-card:hover .project-cta{padding-left:10px}
+
 /* Status "muncul" untuk semua elemen reveal (ditambah oleh script.js) */
 .project-card.in,.about-bold-text.in,.about-description.in{opacity:1;transform:none}
 
@@ -165,6 +187,8 @@ img{max-width:100%}
   .hero-left-cell{min-height:60vh;border-right:0;border-bottom:1px solid var(--line)}
   .work-grid{grid-template-columns:1fr}
   .project-card{border-right:0}
+  .project-card:only-child,.project-card:last-child:nth-child(odd){display:block}
+  .project-card:only-child .project-meta,.project-card:last-child:nth-child(odd) .project-meta{padding:20px 0 0}
   .about-left{border-right:0;padding-bottom:10px}
   .footer-cell,.overlay-grid-cell{border-right:0;border-bottom:1px solid var(--line);min-height:120px}
   .logo-branding{padding:18px var(--pad)}
