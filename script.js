@@ -130,8 +130,19 @@
   /* ---------- 9. BACK TO TOP ---------- */
   const initBackToTop = () => {
     const btn = $('#backToTop');
+    const bar = $('.footer-meta-bar');
     const SHOW_AFTER = 600;                     // px scroll sebelum tombol muncul
-    addEventListener('scroll', () => btn.classList.toggle('show', scrollY > SHOW_AFTER), { passive: true });
+    const BASE = 24;                            // jarak normal dari bawah layar (px)
+    const GAP = 16;                             // jarak di atas garis footer (px)
+    const update = () => {
+      btn.classList.toggle('show', scrollY > SHOW_AFTER);
+      // Jika bar footer masuk layar, naikkan tombol agar tetap di atas garisnya
+      const overlap = innerHeight - bar.getBoundingClientRect().top;
+      btn.style.bottom = (overlap > 0 ? overlap + GAP : BASE) + 'px';
+    };
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    update();
     btn.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
   };
 
