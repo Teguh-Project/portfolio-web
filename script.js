@@ -48,6 +48,8 @@
         <div class="project-meta">
           <span class="label-mono">${esc(p.cat)}</span>
           <h3>${esc(p.title)}</h3>
+          ${p.desc ? `<p class="project-desc">${esc(p.desc)}</p>` : ''}
+          <span class="project-cta">VIEW PROJECT →</span>
         </div>
       </a>`).join('');
     observeReveals();
