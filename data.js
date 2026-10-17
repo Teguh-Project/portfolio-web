@@ -52,7 +52,7 @@ const PROJECTS = [
   },
   {
     cat: 'LAYOUT ARCHITECTURE / 2025',
-    tag: 'Branding',
+    tag: 'LAYOUT ARCHITECTURE',
     title: 'Judul Proyek Keempat',
     img: 'assets/images/project-4.jpg',
     link: '#',
