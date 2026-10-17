@@ -57,7 +57,6 @@ const PROJECTS = [
     img: 'assets/images/project-4.jpg',
     link: '#',
   },
-];
 {
     cat: 'Video Content Sosial Media / 2025',
     tag: 'Video Editor',
