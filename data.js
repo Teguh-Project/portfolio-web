@@ -66,3 +66,21 @@ const PROJECTS = [
     link: '#',
   },
 ];
+{
+  slug: 'automotive-branding',        // WAJIB agar punya halaman detail (huruf kecil, tanpa spasi)
+  cat: 'CREATIVE DIRECTION / 2026',
+  tag: 'Branding',
+  title: 'Automotive Branding & Digital System',
+  desc: 'Sistem identitas visual dan antarmuka digital untuk merek otomotif.',
+  img: 'assets/images/project-1.jpg',   // gambar sampul
+
+  year: '2026',
+  role: 'Creative Direction, UI Design',
+  client: 'Nama Klien',
+  tools: ['Figma', 'After Effects', 'Illustrator'],
+  gallery: [
+    'assets/images/p1-detail-1.jpg',
+    'assets/images/p1-detail-2.jpg',
+  ],
+  url: 'https://www.instagram.com/teguh.tghh/',      // tombol "VISIT LIVE PROJECT" di halaman detail
+},
