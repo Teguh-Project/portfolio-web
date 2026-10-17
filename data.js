@@ -30,12 +30,13 @@ const SITE = {
    --------------------------------------------------------- */
 const PROJECTS = [
   {
-    cat: 'CREATIVE DIRECTION / 2026',
-    tag: 'Branding',
-    title: 'Automotive Branding & Digital System',
-    img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200',
-    link: '#',
-  },
+  cat: 'CREATIVE DIRECTION / 2026',
+  tag: 'Branding',
+  title: 'Automotive Branding & Digital System',
+  desc: 'Sistem identitas visual dan antarmuka digital untuk merek otomotif, dari logo sampai panduan motion.',
+  img: 'assets/images/project-1.jpg',
+  link: '#',
+},
   {
     cat: 'MOTION EDITORIAL / 2026',
     tag: 'Motion',
