@@ -155,7 +155,7 @@ img{max-width:100%}
 .overlay-grid-cell:hover .cell-index{color:var(--on-acc)}
 .overlay-menu-link{font:900 clamp(26px,3.6vw,56px)/1 var(--disp);letter-spacing:-.03em}
 
-#backToTop{position:fixed;right:24px;bottom:24px;width:54px;height:54px;background:var(--acc);color:var(--on-acc);font:700 11px var(--mono);z-index:60;opacity:0;pointer-events:none;transform:translateY(20px);transition:var(--speed)}
+#backToTop{position:fixed;right:24px;bottom:24px;width:54px;height:54px;background:var(--acc);color:var(--on-acc);font:700 11px var(--mono);z-index:60;opacity:0;pointer-events:none;transform:translateY(20px);transition:opacity var(--speed),transform var(--speed)}
 #backToTop.show{opacity:1;pointer-events:auto;transform:none}
 
 /* ===== 11. RESPONSIVE (urut: besar -> kecil) ===== */
