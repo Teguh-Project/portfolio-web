@@ -18,6 +18,26 @@
   btn.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
   setTheme(store.get('theme') || 'dark');
 
+  /* ----- Kursor kustom (hanya perangkat dengan mouse) -----
+     Elemennya dibuat lewat JS, jadi project.html tidak perlu diubah. */
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    cursor.innerHTML = '<span class="cursor-label">VIEW</span>';
+    document.body.appendChild(cursor);
+    const EASE = 0.2;                           // 0-1: makin kecil makin "licin"
+    let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
+    addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; });
+    (function loop() {
+      cx += (mx - cx) * EASE; cy += (my - cy) * EASE;
+      cursor.style.transform = `translate(${cx}px,${cy}px)`;
+      requestAnimationFrame(loop);
+    })();
+    // Membesar + label "VIEW" saat di atas tombol "NEXT PROJECT"
+    document.addEventListener('mouseover', (e) => { if (e.target.closest('.project-next')) cursor.classList.add('is-view'); });
+    document.addEventListener('mouseout',  (e) => { if (e.target.closest('.project-next')) cursor.classList.remove('is-view'); });
+  }
+
   /* ----- Cari proyek berdasarkan ?p=slug ----- */
   const slug = new URLSearchParams(location.search).get('p');
   const list = PROJECTS.filter((p) => p.slug);
