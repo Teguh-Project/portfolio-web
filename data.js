@@ -65,7 +65,6 @@ const PROJECTS = [
     img: 'assets/images/project-4.jpg',
     link: '#',
   },
-];
 {
   slug: 'automotive-branding',        // WAJIB agar punya halaman detail (huruf kecil, tanpa spasi)
   cat: 'CREATIVE DIRECTION / 2026',
