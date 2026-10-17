@@ -180,6 +180,24 @@ img{max-width:100%}
 #backToTop{position:fixed;right:24px;bottom:24px;width:54px;height:54px;background:var(--acc);color:var(--on-acc);font:700 11px var(--mono);z-index:60;opacity:0;pointer-events:none;transform:translateY(20px);transition:opacity var(--speed),transform var(--speed)}
 #backToTop.show{opacity:1;pointer-events:auto;transform:none}
 
+/* ===== 10b. HALAMAN DETAIL PROYEK (project.html) ===== */
+.project-hero{padding:60px var(--pad) 40px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.project-title{font:900 clamp(36px,7vw,110px)/.95 var(--disp);letter-spacing:-.04em;text-transform:uppercase}
+.project-facts{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.project-facts>div{padding:20px var(--pad);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.project-facts>div:last-child{border-right:0}
+.project-facts p{font:700 16px var(--disp)}
+.project-cover,.gallery-item{border-bottom:1px solid var(--line);background:var(--placeholder)}
+.project-cover img,.gallery-item img{width:100%;display:block}
+.gallery-item{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.gallery-item.in{opacity:1;transform:none}
+.project-body{padding:50px var(--pad);border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:30px;align-items:flex-start;max-width:1100px}
+.project-cta{display:inline-block;font:700 12px var(--mono);letter-spacing:.1em;border-bottom:2px solid var(--acc);width:fit-content;padding-bottom:4px}
+.project-next{display:flex;flex-direction:column;gap:14px;padding:50px var(--pad);transition:background var(--speed),color var(--speed)}
+.project-next:hover{background:var(--acc);color:var(--on-acc)}
+.project-next:hover .label-mono{color:var(--on-acc)}
+.project-next-title{font:900 clamp(26px,5vw,72px)/1 var(--disp);letter-spacing:-.03em;text-transform:uppercase}
+
 /* ===== 11. RESPONSIVE (urut: besar -> kecil) ===== */
 @media (max-width:992px){
   :root{--pad:20px;--card-pad:16px}
@@ -187,6 +205,9 @@ img{max-width:100%}
   .hero-left-cell{min-height:60vh;border-right:0;border-bottom:1px solid var(--line)}
   .work-grid{grid-template-columns:1fr}
   .project-card{border-right:0}
+  .project-facts{grid-template-columns:repeat(2,1fr)}
+  .project-facts>div:nth-child(2n){border-right:0}
+  .project-facts>div{border-bottom:1px solid var(--line)}
   .project-card:only-child,.project-card:last-child:nth-child(odd){display:block}
   .project-card:only-child .project-meta,.project-card:last-child:nth-child(odd) .project-meta{padding:20px 0 0}
   .about-left{border-right:0;padding-bottom:10px}
