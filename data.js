@@ -60,7 +60,7 @@ const PROJECTS = [
 {
     cat: 'Video Content Sosial Media / 2025',
     tag: 'Video Editor',
-    title: 'Judul Proyek Keempat',
+    title: 'Judul Proyek Kelima',
     img: 'assets/images/project-4.jpg',
     link: '#',
   },
