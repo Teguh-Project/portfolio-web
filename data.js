@@ -14,7 +14,7 @@ const SITE = {
 
   // Tautan sosial di footer. Tambah baris baru untuk platform lain.
   socials: [
-    { label: 'LinkedIn', url: 'www.linkedin.com/in/teguhperwiraputra' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/teguhperwiraputra/' },
     { label: 'GitHub',   url: 'https://teguh-project.github.io/portfolio-web/' },
     // { label: 'Instagram', url: 'https://instagram.com/username' },
   ],
