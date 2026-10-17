@@ -6,37 +6,51 @@
 
 const SITE = {
   name: 'Teguh Perwira Putra',
-  email: 'teguhperwira.p@gmail.com',          // ganti dengan email asli
+  email: 'teguhperwira.p@gmail.com',
   timezone: 'Asia/Jakarta',         // zona waktu untuk jam di footer
 
   // Teks berjalan (marquee). Tambah/hapus kata sesuka hati.
-  marquee: ['BRANDING', 'MOTION', 'INTERFACE', 'EDITORIAL', 'CREATIVE DEV','VIDEO EDITOR'],
+  marquee: ['BRANDING', 'MOTION', 'INTERFACE', 'EDITORIAL', 'CREATIVE DEV', 'VIDEO EDITOR'],
 
   // Tautan sosial di footer. Tambah baris baru untuk platform lain.
   socials: [
-    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/teguhperwiraputra/' },
-    { label: 'GitHub',   url: 'https://teguh-project.github.io/portfolio-web/' },
-    // { label: 'Instagram', url: 'https://instagram.com/username' },
+    { label: 'LinkedIn',  url: 'https://www.linkedin.com/in/teguhperwiraputra/' },
+    { label: 'GitHub',    url: 'https://github.com/teguh-project' },   // cek: ganti ke profil GitHub Anda
+    { label: 'Instagram', url: 'https://www.instagram.com/teguh.tghh/' },
   ],
 };
 
 /* ---------------------------------------------------------
-   PROYEK  -  1 objek = 1 kartu.
-   cat   : label kecil di atas judul
-   tag   : kategori untuk tombol filter (huruf bebas, tulis konsisten)
-   title : judul proyek
-   img   : path gambar (taruh di assets/images/)
-   link  : halaman/URL detail proyek ('#' kalau belum ada)
+   PROYEK  -  1 objek = 1 kartu.  PENTING: setiap objek diakhiri
+   koma, dan seluruh daftar ditutup dengan  ];  di paling bawah.
+
+   cat    : label kecil di atas judul
+   tag    : kategori untuk tombol filter (tulis konsisten, huruf sama)
+   title  : judul proyek
+   desc   : (opsional) deskripsi singkat
+   img    : gambar sampul (taruh di assets/images/)
+   slug   : (opsional) jika diisi -> kartu membuka halaman detail project.html
+   link   : dipakai jika TIDAK ada slug ('#' kalau belum ada)
+   year, role, client, tools[], gallery[], url : (opsional) isi halaman detail
    --------------------------------------------------------- */
 const PROJECTS = [
   {
-  cat: 'CREATIVE DIRECTION / 2026',
-  tag: 'Branding',
-  title: 'Automotive Branding & Digital System',
-  desc: 'Sistem identitas visual dan antarmuka digital untuk merek otomotif, dari logo sampai panduan motion.',
-  img: 'assets/images/project-1.jpg',
-  link: '#',
-},
+    slug: 'automotive-branding',      // huruf kecil, tanpa spasi, unik
+    cat: 'CREATIVE DIRECTION / 2026',
+    tag: 'Branding',
+    title: 'Automotive Branding & Digital System',
+    desc: 'Sistem identitas visual dan antarmuka digital untuk merek otomotif, dari logo sampai panduan motion.',
+    img: 'assets/images/project-1.jpg',
+    year: '2026',
+    role: 'Creative Direction, UI Design',
+    client: 'Nama Klien',
+    tools: ['Figma', 'After Effects', 'Illustrator'],
+    gallery: [
+      'assets/images/p1-detail-1.jpg',
+      'assets/images/p1-detail-2.jpg',
+    ],
+    url: 'https://www.instagram.com/teguh.tghh/',   // tombol "VISIT LIVE PROJECT"
+  },
   {
     cat: 'MOTION EDITORIAL / 2026',
     tag: 'Motion',
@@ -53,33 +67,16 @@ const PROJECTS = [
   },
   {
     cat: 'LAYOUT ARCHITECTURE / 2025',
-    tag: 'LAYOUT ARCHITECTURE',
+    tag: 'Layout',
     title: 'Judul Proyek Keempat',
     img: 'assets/images/project-4.jpg',
     link: '#',
   },
-{
-    cat: 'Video Content Sosial Media / 2025',
+  {
+    cat: 'VIDEO CONTENT SOSIAL MEDIA / 2025',
     tag: 'Video Editor',
     title: 'Judul Proyek Kelima',
-    img: 'assets/images/project-4.jpg',
+    img: 'assets/images/project-5.jpg',
     link: '#',
   },
-{
-  slug: 'automotive-branding',        // WAJIB agar punya halaman detail (huruf kecil, tanpa spasi)
-  cat: 'CREATIVE DIRECTION / 2026',
-  tag: 'Branding',
-  title: 'Automotive Branding & Digital System',
-  desc: 'Sistem identitas visual dan antarmuka digital untuk merek otomotif.',
-  img: 'assets/images/project-1.jpg',   // gambar sampul
-
-  year: '2026',
-  role: 'Creative Direction, UI Design',
-  client: 'Nama Klien',
-  tools: ['Figma', 'After Effects', 'Illustrator'],
-  gallery: [
-    'assets/images/p1-detail-1.jpg',
-    'assets/images/p1-detail-2.jpg',
-  ],
-  url: 'https://www.instagram.com/teguh.tghh/',      // tombol "VISIT LIVE PROJECT" di halaman detail
-},
+];
