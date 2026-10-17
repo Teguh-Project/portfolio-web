@@ -5,17 +5,17 @@
    ========================================================= */
 
 const SITE = {
-  name: 'Teguh.P.P',
-  email: 'email@kamu.com',          // ganti dengan email asli
+  name: 'Teguh Perwira Putra',
+  email: 'teguhperwira.p@gmail.com',          // ganti dengan email asli
   timezone: 'Asia/Jakarta',         // zona waktu untuk jam di footer
 
   // Teks berjalan (marquee). Tambah/hapus kata sesuka hati.
-  marquee: ['BRANDING', 'MOTION', 'INTERFACE', 'EDITORIAL', 'CREATIVE DEV'],
+  marquee: ['BRANDING', 'MOTION', 'INTERFACE', 'EDITORIAL', 'CREATIVE DEV','VIDEO EDITOR'],
 
   // Tautan sosial di footer. Tambah baris baru untuk platform lain.
   socials: [
-    { label: 'LinkedIn', url: 'https://linkedin.com/in/username' },
-    { label: 'GitHub',   url: 'https://github.com/username' },
+    { label: 'LinkedIn', url: 'https://www.instagram.com/teguh.tghh/' },
+    { label: 'GitHub',   url: 'https://teguh-project.github.io/portfolio-web/' },
     // { label: 'Instagram', url: 'https://instagram.com/username' },
   ],
 };
